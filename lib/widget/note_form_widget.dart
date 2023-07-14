@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 
 class NoteFormWidget extends StatelessWidget {
-  final bool? isImportant;
-  final int? number;
+  final String? domain;
+  final int? priority;
   final String? title;
   final String? description;
-  final ValueChanged<bool> onChangedImportant;
   final ValueChanged<int> onChangedNumber;
   final ValueChanged<String> onChangedTitle;
   final ValueChanged<String> onChangedDescription;
 
   const NoteFormWidget({
     Key? key,
-    this.isImportant = false,
-    this.number = 0,
+    this.domain = '',
+    this.priority = 0,
     this.title = '',
     this.description = '',
-    required this.onChangedImportant,
     required this.onChangedNumber,
     required this.onChangedTitle,
     required this.onChangedDescription,
@@ -34,7 +32,7 @@ class NoteFormWidget extends StatelessWidget {
                   Text("Priority"),
                   Expanded(
                     child: Slider(
-                      value: (number ?? 0).toDouble(),
+                      value: (priority ?? 0).toDouble(),
                       min: 0,
                       max: 3,
                       divisions: 3,

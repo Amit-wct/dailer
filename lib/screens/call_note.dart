@@ -5,9 +5,9 @@ import 'package:two_stage_d/db/notes_database.dart';
 import 'package:two_stage_d/model/note.dart';
 import 'package:two_stage_d/screens/note_detail_page.dart';
 import 'package:two_stage_d/widget/note_card_widget.dart';
-
 import '../components/logout_function.dart';
 import 'login.dart';
+import 'package:http/http.dart' as http;
 
 class CallNotes extends StatefulWidget {
   @override
@@ -17,6 +17,8 @@ class CallNotes extends StatefulWidget {
 class _CallNotesState extends State<CallNotes> {
   late List<Note> notes;
   bool isLoading = false;
+  String _response = '';
+  String url = "";
 
   @override
   void initState() {
@@ -44,10 +46,32 @@ class _CallNotesState extends State<CallNotes> {
     setState(() => isLoading = true);
 
     notes = await NotesDatabase.instance.readAllNotes();
+    print(_response);
+    await fetchData();
+    print(_response);
+
+    print(notes);
     notes = notes.where((note) => note.agent == Username.text).toList();
     notes = notes.reversed.toList();
 
     setState(() => isLoading = false);
+  }
+
+  Future<void> fetchData() async {
+    url =
+        'http://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=fetch_call_notes';
+    print(url);
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      setState(() {
+        _response = response.body;
+        print(_response.runtimeType);
+      });
+    } else {
+      setState(() {
+        _response = 'Error: ${response.statusCode}';
+      });
+    }
   }
 
   @override

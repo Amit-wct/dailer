@@ -7,7 +7,7 @@
 //   final response = await http.get(Uri.parse(url));
 //   if (response.statusCode == 200) {
 //     setState(() {
-//       _response = response.body;
+//       var _response = response.body;
 //       print("type");
 //       print(_response.runtimeType);
 //     });

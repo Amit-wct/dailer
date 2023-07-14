@@ -3,12 +3,12 @@ final String tableNotes = 'notes';
 class NoteFields {
   static final List<String> values = [
     /// Add all fields
-    id, isImportant, number, phone, title, description, time, agent
+    id, priority, domain, phone, title, description, time, agent
   ];
 
   static final String id = '_id';
-  static final String isImportant = 'isImportant';
-  static final String number = 'number';
+  static final String priority = 'priority';
+  static final String domain = 'domain';
   static final String phone = 'phone';
   static final String title = 'title';
   static final String description = 'description';
@@ -18,8 +18,8 @@ class NoteFields {
 
 class Note {
   final int? id;
-  final bool isImportant;
-  final int number;
+  final int priority;
+  final String domain;
   final int phone;
   final String title;
   final String description;
@@ -28,8 +28,8 @@ class Note {
 
   const Note({
     this.id,
-    required this.isImportant,
-    required this.number,
+    required this.priority,
+    required this.domain,
     required this.phone,
     required this.title,
     required this.description,
@@ -39,8 +39,8 @@ class Note {
 
   Note copy({
     int? id,
-    bool? isImportant,
-    int? number,
+    int? priority,
+    String? domain,
     int? phone,
     String? title,
     String? description,
@@ -49,8 +49,8 @@ class Note {
   }) =>
       Note(
         id: id ?? this.id,
-        isImportant: isImportant ?? this.isImportant,
-        number: number ?? this.number,
+        priority: priority ?? this.priority,
+        domain: domain ?? this.domain,
         phone: phone ?? this.phone,
         title: title ?? this.title,
         description: description ?? this.description,
@@ -60,8 +60,8 @@ class Note {
 
   static Note fromJson(Map<String, Object?> json) => Note(
         id: json[NoteFields.id] as int?,
-        isImportant: json[NoteFields.isImportant] == 1,
-        number: json[NoteFields.number] as int,
+        priority: json[NoteFields.priority] as int,
+        domain: json[NoteFields.domain] as String,
         phone: json[NoteFields.phone] as int,
         title: json[NoteFields.title] as String,
         description: json[NoteFields.description] as String,
@@ -72,8 +72,8 @@ class Note {
   Map<String, Object?> toJson() => {
         NoteFields.id: id,
         NoteFields.title: title,
-        NoteFields.isImportant: isImportant ? 1 : 0,
-        NoteFields.number: number,
+        NoteFields.priority: priority,
+        NoteFields.domain: domain,
         NoteFields.phone: phone,
         NoteFields.description: description,
         NoteFields.agent: agent,

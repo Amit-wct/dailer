@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:two_stage_d/model/note.dart';
 
-// ignore: must_be_immutable
 class NoteCardWidget extends StatelessWidget {
   NoteCardWidget({
     Key? key,
@@ -69,7 +68,7 @@ class NoteCardWidget extends StatelessWidget {
               ],
             ),
           ),
-          Positioned(top: 8, right: 8, child: priorityIcons[note.number]),
+          Positioned(top: 8, right: 8, child: priorityIcons[note.priority]),
         ],
       ),
     );

@@ -32,8 +32,8 @@ class NotesDatabase {
     String query1 = '''
                   CREATE TABLE $tableNotes ( 
                   ${NoteFields.id} $idType, 
-                  ${NoteFields.isImportant} $boolType,
-                  ${NoteFields.number} $integerType,
+                  ${NoteFields.priority} $integerType,
+                  ${NoteFields.domain}  $textType,
                   ${NoteFields.phone} $integerType,
                   ${NoteFields.title} $textType,
                   ${NoteFields.description} $textType,

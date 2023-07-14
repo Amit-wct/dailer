@@ -7,6 +7,7 @@ import '../db/notes_database.dart';
 import '../model/note.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:two_stage_d/components/logout_function.dart';
+import 'package:two_stage_d/screens/login.dart';
 
 class MainDialer extends StatefulWidget {
   const MainDialer({super.key});
@@ -33,6 +34,7 @@ class _MainDialerState extends State<MainDialer> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
     _loadValuesFromPreferences();
   }
 
@@ -157,8 +159,8 @@ class _MainDialerState extends State<MainDialer> {
   Future addNote() async {
     final note = Note(
       title: "${number_to_dial.text} -Outgoing call",
-      isImportant: true,
-      number: 0,
+      domain: Url.text,
+      priority: 0,
       phone: int.parse(number_to_dial.text.replaceAll(RegExp(r'[^0-9]'), '')),
       description: "",
       agent: Username.text,

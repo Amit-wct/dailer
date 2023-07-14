@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -150,7 +149,6 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
         onPressed: () async {
           List callbackDateTime = await showDateTimePicker(context);
 
-          print(note.number);
           if (callbackDateTime[0] == 1) {
             sheduleCallback(callbackDateTime[1].replaceAll(' ', '_'));
             if (_response.isNotEmpty) {

@@ -16,8 +16,8 @@ class AddEditNotePage extends StatefulWidget {
 
 class _AddEditNotePageState extends State<AddEditNotePage> {
   final _formKey = GlobalKey<FormState>();
-  late bool isImportant;
-  late int number;
+  late String domain;
+  late int priority;
   late int phone;
 
   late String title;
@@ -28,8 +28,8 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
   void initState() {
     super.initState();
 
-    isImportant = widget.note?.isImportant ?? false;
-    number = widget.note?.number ?? 0;
+    domain = widget.note?.domain ?? "";
+    priority = widget.note?.priority ?? 0;
     title = widget.note?.title ?? '';
     description = widget.note?.description ?? '';
   }
@@ -44,13 +44,11 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
         body: Form(
           key: _formKey,
           child: NoteFormWidget(
-            isImportant: isImportant,
-            number: number,
+            domain: domain,
+            priority: priority,
             title: title,
             description: description,
-            onChangedImportant: (isImportant) =>
-                setState(() => this.isImportant = isImportant),
-            onChangedNumber: (number) => setState(() => this.number = number),
+            onChangedNumber: (number) => setState(() => this.priority = number),
             onChangedTitle: (title) => setState(() => this.title = title),
             onChangedDescription: (description) =>
                 setState(() => this.description = description),
@@ -89,8 +87,8 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
 
   Future updateNote() async {
     final note = widget.note!.copy(
-      isImportant: isImportant,
-      number: number,
+      domain: domain,
+      priority: priority,
       title: title,
       description: description,
     );
@@ -101,8 +99,8 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
   Future addNote() async {
     final note = Note(
       title: title,
-      isImportant: true,
-      number: number,
+      domain: domain,
+      priority: priority,
       phone: phone,
       description: description,
       agent: agent,
