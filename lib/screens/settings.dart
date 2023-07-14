@@ -70,9 +70,9 @@ class _SettingsWidget extends State<SettingsWidget> {
         child: Column(
           children: [
             InputFieldMaker('Enter a fixed number', _number1Controller,
-                TextInputType.phone, context),
-            InputFieldMaker('Enter option', _number2Controller,
-                TextInputType.phone, context),
+                TextInputType.phone),
+            InputFieldMaker(
+                'Enter option', _number2Controller, TextInputType.phone),
             Padding(
               padding: const EdgeInsets.all(32.0),
               child: ElevatedButton(

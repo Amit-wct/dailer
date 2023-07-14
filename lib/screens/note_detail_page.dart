@@ -1,8 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:two_stage_d/db/notes_database.dart';
 import 'package:two_stage_d/model/note.dart';
 import 'package:two_stage_d/screens/edit_note_page.dart';
+import 'package:http/http.dart' as http;
+import './login.dart';
+
+import '../widget/date_time_picker.dart';
 
 class NoteDetailPage extends StatefulWidget {
   final int noteId;
@@ -19,6 +26,21 @@ class NoteDetailPage extends StatefulWidget {
 class _NoteDetailPageState extends State<NoteDetailPage> {
   late Note note;
   bool isLoading = false;
+  String _response = '';
+  String url = "";
+
+  var alertStyle = AlertStyle(
+    animationType: AnimationType.grow,
+    isCloseButton: false,
+    descStyle: TextStyle(fontWeight: FontWeight.w400),
+    // animationDuration: Duration(milliseconds: 200),
+    alertBorder: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(8.0),
+      side: BorderSide(
+        color: Colors.grey,
+      ),
+    ),
+  );
 
   @override
   void initState() {
@@ -35,10 +57,28 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
     setState(() => isLoading = false);
   }
 
+  Future<void> sheduleCallback(String dt) async {
+    url =
+        'http://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=callback&cbn=${note.phone}&dt=$dt';
+    print(url);
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      setState(() {
+        _response = response.body;
+        print("type");
+        print(_response);
+      });
+    } else {
+      setState(() {
+        _response = 'Error: ${response.statusCode}';
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          actions: [editButton(), deleteButton()],
+          actions: [callbackButton(), editButton(), deleteButton()],
           backgroundColor: Colors.blueGrey[900],
           foregroundColor: Colors.white,
         ),
@@ -61,6 +101,7 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
                       DateFormat.yMMMd().format(note.createdTime),
                     ),
                     SizedBox(height: 8),
+                    Divider(color: Colors.black),
                     note.description.isEmpty
                         ? Text(
                             "Click on edit button to add something to this note",
@@ -98,6 +139,37 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
           await NotesDatabase.instance.delete(widget.noteId);
 
           Navigator.of(context).pop();
+        },
+      );
+
+  Widget callbackButton() => IconButton(
+        icon: Icon(
+          Icons.phone_callback,
+          color: Colors.lightGreen,
+        ),
+        onPressed: () async {
+          List callbackDateTime = await showDateTimePicker(context);
+
+          print(note.number);
+          if (callbackDateTime[0] == 1) {
+            sheduleCallback(callbackDateTime[1].replaceAll(' ', '_'));
+            if (_response.isNotEmpty) {
+              _response = _response.replaceAll("'", '"');
+              Map<String, dynamic> mapData = jsonDecode(_response);
+              print(mapData);
+              if (mapData['status'] == "callback scheduled") {
+                print("work");
+                Alert(
+                        // style: alertStyle,
+                        type: AlertType.error,
+                        context: context,
+                        title: "Alert",
+                        desc:
+                            "callback sheduled for no ${note.phone} at $callbackDateTime[1]")
+                    .show();
+              }
+            }
+          }
         },
       );
 }

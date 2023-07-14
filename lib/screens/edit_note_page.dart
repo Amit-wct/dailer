@@ -18,8 +18,11 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
   final _formKey = GlobalKey<FormState>();
   late bool isImportant;
   late int number;
+  late int phone;
+
   late String title;
   late String description;
+  late String agent;
 
   @override
   void initState() {
@@ -102,7 +105,9 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
       title: title,
       isImportant: true,
       number: number,
+      phone: phone,
       description: description,
+      agent: agent,
       createdTime: DateTime.now(),
     );
 

@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttercontactpicker/fluttercontactpicker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:two_stage_d/screens/login.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../components/input_field.dart';
 import '../db/notes_database.dart';
@@ -78,9 +80,8 @@ class _MainDialerState extends State<MainDialer> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             InputFieldMaker(
-                'Enter a fixed number', fixed_no, TextInputType.phone, context),
-            InputFieldMaker(
-                'Enter option', extension, TextInputType.phone, context),
+                'Enter a fixed number', fixed_no, TextInputType.phone),
+            InputFieldMaker('Enter option', extension, TextInputType.phone),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
               child: TextFormField(
@@ -114,14 +115,26 @@ class _MainDialerState extends State<MainDialer> {
                     minimumSize: const Size.fromHeight(50), // NEW
                   ),
                   onPressed: () async {
+                    String did = fixed_no.text;
+                    if (did.length == 12 && did[0] == '9' && did[1] == '1') {
+                      did = "+" + did;
+                    } else if (did.length < 10) {
+                      did = "0" + did;
+                    } else {
+                      print(did.length);
+                      print(did[0]);
+                      print(did[1]);
+                      print("not if");
+                    }
                     final String callnow = "tel:" +
-                        fixed_no.text +
+                        did +
                         ",," +
                         extension.text +
                         ",," +
                         number_to_dial.text +
                         "#";
 
+                    print(callnow);
                     await FlutterPhoneDirectCaller.callNumber(callnow);
                     // print(callnow);
                     // final call = Uri.parse(callnow);
@@ -130,6 +143,9 @@ class _MainDialerState extends State<MainDialer> {
                     // } else {
                     //   throw 'Could not launch $call';
                     // }
+                    int nump = int.parse(
+                        number_to_dial.text.replaceAll(RegExp(r'[^0-9]'), ''));
+                    print(nump);
                     await addNote();
                   },
                   child: const Text('Call'),
@@ -147,7 +163,9 @@ class _MainDialerState extends State<MainDialer> {
       title: "${number_to_dial.text} -Outgoing call",
       isImportant: true,
       number: 0,
+      phone: int.parse(number_to_dial.text.replaceAll(RegExp(r'[^0-9]'), '')),
       description: "",
+      agent: Username.text,
       createdTime: DateTime.now(),
     );
 

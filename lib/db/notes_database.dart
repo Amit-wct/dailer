@@ -29,16 +29,20 @@ class NotesDatabase {
     final boolType = 'BOOLEAN NOT NULL';
     final integerType = 'INTEGER NOT NULL';
 
-    await db.execute('''
-CREATE TABLE $tableNotes ( 
-  ${NoteFields.id} $idType, 
-  ${NoteFields.isImportant} $boolType,
-  ${NoteFields.number} $integerType,
-  ${NoteFields.title} $textType,
-  ${NoteFields.description} $textType,
-  ${NoteFields.time} $textType
-  )
-''');
+    String query1 = '''
+                  CREATE TABLE $tableNotes ( 
+                  ${NoteFields.id} $idType, 
+                  ${NoteFields.isImportant} $boolType,
+                  ${NoteFields.number} $integerType,
+                  ${NoteFields.phone} $integerType,
+                  ${NoteFields.title} $textType,
+                  ${NoteFields.description} $textType,
+                  ${NoteFields.agent} $textType,
+                  ${NoteFields.time} $textType
+                  )''';
+    print(query1);
+
+    await db.execute(query1);
   }
 
   Future<Note> create(Note note) async {

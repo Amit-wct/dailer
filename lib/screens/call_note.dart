@@ -8,6 +8,7 @@ import 'package:two_stage_d/screens/note_detail_page.dart';
 import 'package:two_stage_d/widget/note_card_widget.dart';
 
 import '../components/logout_function.dart';
+import 'login.dart';
 
 class CallNotes extends StatefulWidget {
   @override
@@ -43,8 +44,9 @@ class _CallNotesState extends State<CallNotes> {
   Future refreshNotes() async {
     setState(() => isLoading = true);
 
-    this.notes = await NotesDatabase.instance.readAllNotes();
-    this.notes = notes.reversed.toList();
+    notes = await NotesDatabase.instance.readAllNotes();
+    notes = notes.where((note) => note.agent == Username.text).toList();
+    notes = notes.reversed.toList();
 
     setState(() => isLoading = false);
   }

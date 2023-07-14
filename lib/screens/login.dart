@@ -8,6 +8,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import './navigation.dart';
 import 'package:http/http.dart' as http;
 
+final Url = TextEditingController();
+final Username = TextEditingController();
+final Password = TextEditingController();
+
 class LoginWidget extends StatefulWidget {
   const LoginWidget({super.key});
 
@@ -16,9 +20,6 @@ class LoginWidget extends StatefulWidget {
 }
 
 class _LoginWidgetState extends State<LoginWidget> {
-  final Url = TextEditingController();
-  final Username = TextEditingController();
-  final Password = TextEditingController();
   bool remember_me = false;
   String _response = '';
   String url = "";
@@ -117,8 +118,8 @@ class _LoginWidgetState extends State<LoginWidget> {
               padding: const EdgeInsets.fromLTRB(0, 20, 0, 25),
               child: Image.asset('./images/logo2.png'),
             ),
-            InputFieldMaker('Enter url', Url, TextInputType.url, context),
-            InputFieldMaker('Username', Username, TextInputType.text, context),
+            InputFieldMaker('Enter url', Url, TextInputType.url),
+            InputFieldMaker('Username', Username, TextInputType.text),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
               child: TextFormField(
@@ -173,7 +174,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                     bool? isloginvalid;
                     await fetchData();
                     _saveValuesToPreferences();
-                    print("hello");
                     print(_response);
                     if (_response.isNotEmpty) {
                       _response = _response.replaceAll("'", '"');
