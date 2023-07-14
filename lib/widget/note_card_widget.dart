@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:two_stage_d/model/note.dart';
 
+// ignore: must_be_immutable
 class NoteCardWidget extends StatelessWidget {
   NoteCardWidget({
     Key? key,
@@ -39,7 +40,7 @@ class NoteCardWidget extends StatelessWidget {
     /// Pick colors from the accent colors based on index
 
     // final time = DateFormat.yMMMd().format(note.createdTime);
-    print(note.createdTime);
+    // print(note.createdTime);
     final time = DateFormat.yMMMd().add_jm().format(note.createdTime);
     return Card(
       color: Colors.lightGreen[100],

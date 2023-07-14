@@ -1,14 +1,10 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:fluttercontactpicker/fluttercontactpicker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:two_stage_d/screens/login.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../components/input_field.dart';
 import '../db/notes_database.dart';
 import '../model/note.dart';
-import './settings.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:two_stage_d/components/logout_function.dart';
 

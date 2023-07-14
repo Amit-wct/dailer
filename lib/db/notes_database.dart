@@ -69,7 +69,7 @@ class NotesDatabase {
 
   Future<List<Note>> readAllNotes() async {
     final db = await instance.database;
-    final orderBy = '${NoteFields.time} ASC';
+    // final orderBy = '${NoteFields.time} ASC';
     final result = await db.rawQuery('SELECT * FROM $tableNotes ORDER BY time');
 
     return result.map((json) => Note.fromJson(json)).toList();

@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:two_stage_d/db/notes_database.dart';
 import 'package:two_stage_d/model/note.dart';
-import 'package:two_stage_d/screens/edit_note_page.dart';
 import 'package:two_stage_d/screens/note_detail_page.dart';
 import 'package:two_stage_d/widget/note_card_widget.dart';
 

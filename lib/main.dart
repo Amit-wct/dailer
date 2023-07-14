@@ -1,23 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import './screens/login.dart';
-import 'package:two_stage_d/db/notes_database.dart';
 
 void main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await SystemChrome.setPreferredOrientations([
-  //   DeviceOrientation.portraitUp,
-  //   DeviceOrientation.portraitDown,
-  // ]);
-
-  // Create an instance of NotesDatabase
-  // final notesDatabase = NotesDatabase.instance;
-
-  // // Open the database
-  // await notesDatabase.database;
-
-  // // Print the table schema
-  // notesDatabase.printTableSchema();
   runApp(const MyApp());
 }
 
