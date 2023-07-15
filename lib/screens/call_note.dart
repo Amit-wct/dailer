@@ -45,13 +45,11 @@ class _CallNotesState extends State<CallNotes> {
   Future refreshNotes() async {
     setState(() => isLoading = true);
 
-    notes = await NotesDatabase.instance.readAllNotes();
-    print(_response);
     await fetchData();
-    print(_response);
+    notes = formatNotes(_response);
 
     print(notes);
-    notes = notes.where((note) => note.agent == Username.text).toList();
+    // notes = notes.where((note) => note.agent == Username.text).toList();
     notes = notes.reversed.toList();
 
     setState(() => isLoading = false);
@@ -72,6 +70,47 @@ class _CallNotesState extends State<CallNotes> {
         _response = 'Error: ${response.statusCode}';
       });
     }
+  }
+
+  List<Note> formatNotes(String data) {
+    String cleanData = data.replaceAll("[", "").replaceAll("]", "");
+
+//  print(cleanData);
+// Split the string into individual items
+    List<String> items = cleanData.split("),");
+//   print(items);
+
+    List<dynamic> newList = [];
+
+    for (var item in items) {
+      newList.add(item.toString().replaceAll('(', '').replaceAll(')', ''));
+    }
+
+    List<Note> notes = newList.map((item) {
+      List<String> properties = item.split(", ");
+      int id = int.parse(properties[0]);
+      int priority = int.parse(properties[1]);
+      String domain = properties[2];
+      int phone = 1;
+      String title = properties[4];
+      String description = properties[5];
+      String agent = properties[6];
+      DateTime time = DateTime.now();
+//   DateTime time = DateTime.now();
+
+      return Note(
+        id: id,
+        priority: priority,
+        domain: domain,
+        phone: phone,
+        title: title,
+        description: description,
+        agent: agent,
+        createdTime: time,
+      );
+    }).toList();
+
+    return notes;
   }
 
   @override
