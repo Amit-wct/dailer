@@ -40,15 +40,46 @@ class NotesDatabase {
                   ${NoteFields.agent} $textType,
                   ${NoteFields.time} $textType
                   )''';
-    print(query1);
+    // print(query1);
 
     await db.execute(query1);
   }
 
+  // Future<Note> create(Note note) async {
+  //   final db = await instance.database;
+  //   final id = await db.insert(tableNotes, note.toJson());
+  //   return note.copy(id: id);
+  // }
+
   Future<Note> create(Note note) async {
     final db = await instance.database;
-    final id = await db.insert(tableNotes, note.toJson());
-    return note.copy(id: id);
+
+    // Check if a record with the same ID already exists
+    final existingNote = await getNoteById(note.id ?? -1);
+    if (existingNote != null) {
+      // Record with the same ID already exists
+      // You can choose to handle this case based on your requirements
+      // For example, throw an exception, return null, or update the existing record
+      await update(note);
+      return note.copy(id: note.id);
+    } else {
+      final id = await db.insert(tableNotes, note.toJson());
+      return note.copy(id: id);
+    }
+  }
+
+  Future<Note?> getNoteById(int id) async {
+    final db = await instance.database;
+    final maps = await db.query(tableNotes,
+        columns: null,
+        where: '${NoteFields.id} = ?',
+        whereArgs: [id],
+        limit: 1);
+    if (maps.isNotEmpty) {
+      return Note.fromJson(maps.first);
+    } else {
+      return null;
+    }
   }
 
   Future<Note> readNote(int id) async {

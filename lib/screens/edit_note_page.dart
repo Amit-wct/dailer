@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:two_stage_d/db/notes_database.dart';
 import 'package:two_stage_d/model/note.dart';
 import 'package:two_stage_d/widget/note_form_widget.dart';
+import 'package:http/http.dart' as http;
+
+import 'login.dart';
 
 class AddEditNotePage extends StatefulWidget {
   final Note? note;
@@ -23,6 +26,9 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
   late String title;
   late String description;
   late String agent;
+  String _response = '';
+  String url = "";
+  String updatedNoteData = "";
 
   @override
   void initState() {
@@ -32,6 +38,22 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
     priority = widget.note?.priority ?? 0;
     title = widget.note?.title ?? '';
     description = widget.note?.description ?? '';
+  }
+
+  Future<void> updateNoteOnline(String data) async {
+    url =
+        'http://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=update_notes&d=$data';
+    print(url);
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      setState(() {
+        _response = response.body;
+      });
+    } else {
+      setState(() {
+        _response = 'Error: ${response.statusCode}';
+      });
+    }
   }
 
   @override
@@ -87,12 +109,17 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
 
   Future updateNote() async {
     final note = widget.note!.copy(
-      domain: domain,
       priority: priority,
       title: title,
       description: description,
     );
 
+    String titleString = note.title.split(" ").join("|-|-|-|");
+    String descriptionString = note.description.split(" ").join("|-|-|-|");
+    updatedNoteData =
+        "${note.id}-,-${note.priority}-,-$titleString-,-$descriptionString";
+
+    await updateNoteOnline(updatedNoteData);
     await NotesDatabase.instance.update(note);
   }
 

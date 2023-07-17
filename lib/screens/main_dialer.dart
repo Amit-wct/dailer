@@ -7,7 +7,7 @@ import '../db/notes_database.dart';
 import '../model/note.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:two_stage_d/components/logout_function.dart';
-import 'package:two_stage_d/screens/login.dart';
+import 'package:http/http.dart' as http;
 
 class MainDialer extends StatefulWidget {
   const MainDialer({super.key});
@@ -20,6 +20,8 @@ class _MainDialerState extends State<MainDialer> {
   final fixed_no = TextEditingController();
   final extension = TextEditingController();
   final number_to_dial = TextEditingController();
+  String _response = '';
+  String url = "";
 
   @override
   void dispose() {
@@ -47,6 +49,22 @@ class _MainDialerState extends State<MainDialer> {
       fixed_no.text = number1;
       extension.text = number2;
     });
+  }
+
+  Future<void> addNoteOnline(String data) async {
+    url =
+        'http://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=add_note&d=$data';
+    print(url);
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      setState(() {
+        _response = response.body;
+      });
+    } else {
+      setState(() {
+        _response = 'Error: ${response.statusCode}';
+      });
+    }
   }
 
   @override
@@ -129,18 +147,12 @@ class _MainDialerState extends State<MainDialer> {
                         ",," +
                         extension.text +
                         ",," +
-                        number_to_dial.text +
+                        number_to_dial.text.replaceAll(RegExp(r'[^0-9]'), '') +
                         "#";
 
                     print(callnow);
                     await FlutterPhoneDirectCaller.callNumber(callnow);
-                    // print(callnow);
-                    // final call = Uri.parse(callnow);
-                    // if (await canLaunchUrl(call)) {
-                    //   launchUrl(call);
-                    // } else {
-                    //   throw 'Could not launch $call';
-                    // }
+
                     int nump = int.parse(
                         number_to_dial.text.replaceAll(RegExp(r'[^0-9]'), ''));
                     print(nump);
@@ -167,6 +179,13 @@ class _MainDialerState extends State<MainDialer> {
       createdTime: DateTime.now(),
     );
 
+    String titleString = note.title.split(" ").join("|-|-|-|");
+    String descriptionString = note.description.split(" ").join("|-|-|-|");
+    String datetime = "${note.createdTime}".split(" ").join("|-|-|-|");
+    String newNoteData =
+        "${note.priority}-,-${note.phone}-,-$titleString-,-$descriptionString-,-$datetime";
+
+    addNoteOnline(newNoteData);
     await NotesDatabase.instance.create(note);
   }
 }

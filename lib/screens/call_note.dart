@@ -46,12 +46,14 @@ class _CallNotesState extends State<CallNotes> {
     setState(() => isLoading = true);
 
     await fetchData();
-    notes = formatNotes(_response);
 
-    print(notes);
+    notes = formatNotes(_response) ?? [];
+
     // notes = notes.where((note) => note.agent == Username.text).toList();
     notes = notes.reversed.toList();
-
+    for (var note in notes) {
+      await NotesDatabase.instance.create(note);
+    }
     setState(() => isLoading = false);
   }
 
@@ -63,7 +65,6 @@ class _CallNotesState extends State<CallNotes> {
     if (response.statusCode == 200) {
       setState(() {
         _response = response.body;
-        print(_response.runtimeType);
       });
     } else {
       setState(() {
@@ -72,45 +73,51 @@ class _CallNotesState extends State<CallNotes> {
     }
   }
 
-  List<Note> formatNotes(String data) {
-    String cleanData = data.replaceAll("[", "").replaceAll("]", "");
+  List<Note>? formatNotes(String data) {
+    if (_response.length > 5) {
+      String cleanData = data.replaceAll("[", "").replaceAll("]", "");
 
 //  print(cleanData);
 // Split the string into individual items
-    List<String> items = cleanData.split("),");
+      List<String> items = cleanData.split("),");
 //   print(items);
 
-    List<dynamic> newList = [];
+      List<dynamic> newList = [];
 
-    for (var item in items) {
-      newList.add(item.toString().replaceAll('(', '').replaceAll(')', ''));
-    }
+      for (var item in items) {
+        newList.add(item.toString().replaceAll('(', '').replaceAll(')', ''));
+      }
 
-    List<Note> notes = newList.map((item) {
-      List<String> properties = item.split(", ");
-      int id = int.parse(properties[0]);
-      int priority = int.parse(properties[1]);
-      String domain = properties[2];
-      int phone = 1;
-      String title = properties[4];
-      String description = properties[5];
-      String agent = properties[6];
-      DateTime time = DateTime.now();
+      List<Note> notes = newList.map((item) {
+        List<String> properties = item.split(", ");
+        int id = int.parse(properties[0].replaceAll("'", ""));
+        int priority = int.parse(properties[1]);
+        String domain = properties[2].replaceAll("'", "");
+        int phone = 1;
+        String title = properties[4].replaceAll("'", "");
+        String description = properties[5].replaceAll("'", "");
+        String agent = properties[6].replaceAll("'", "");
+        String datetimeTemp =
+            properties[7].replaceAll("'", "").replaceAll('\n', '');
+        DateTime time = DateTime.parse(datetimeTemp);
 //   DateTime time = DateTime.now();
 
-      return Note(
-        id: id,
-        priority: priority,
-        domain: domain,
-        phone: phone,
-        title: title,
-        description: description,
-        agent: agent,
-        createdTime: time,
-      );
-    }).toList();
+        Note temp = Note(
+          id: id,
+          priority: priority,
+          domain: domain,
+          phone: phone,
+          title: title,
+          description: description,
+          agent: agent,
+          createdTime: time,
+        );
+        return temp;
+      }).toList();
 
-    return notes;
+      return notes;
+    }
+    return null;
   }
 
   @override
