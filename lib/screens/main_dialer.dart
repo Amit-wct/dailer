@@ -136,11 +136,6 @@ class _MainDialerState extends State<MainDialer> {
                       did = "+" + did;
                     } else if (did.length < 10) {
                       did = "0" + did;
-                    } else {
-                      print(did.length);
-                      print(did[0]);
-                      print(did[1]);
-                      print("not if");
                     }
                     final String callnow = "tel:" +
                         did +

@@ -7,7 +7,7 @@ import 'package:two_stage_d/model/note.dart';
 import 'package:two_stage_d/screens/edit_note_page.dart';
 import 'package:http/http.dart' as http;
 import './login.dart';
-
+import 'package:fluttertoast/fluttertoast.dart';
 import '../widget/date_time_picker.dart';
 
 class NoteDetailPage extends StatefulWidget {
@@ -27,6 +27,7 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
   bool isLoading = false;
   String _response = '';
   String url = "";
+  String _callbackSchedule = '';
 
   var alertStyle = AlertStyle(
     animationType: AnimationType.grow,
@@ -114,6 +115,20 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
               ),
       );
 
+  Future<void> deleteNoteOnline(int noteid) async {
+    url =
+        'http://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=delete_note&d=$noteid';
+    print(url);
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      print(response.body);
+    } else {
+      setState(() {
+        _response = 'Error: ${response.statusCode}';
+      });
+    }
+  }
+
   Widget editButton() => IconButton(
       icon: Icon(
         Icons.edit_outlined,
@@ -136,7 +151,7 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
         ),
         onPressed: () async {
           await NotesDatabase.instance.delete(widget.noteId);
-
+          await deleteNoteOnline(widget.noteId);
           Navigator.of(context).pop();
         },
       );
@@ -150,21 +165,23 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
           List callbackDateTime = await showDateTimePicker(context);
 
           if (callbackDateTime[0] == 1) {
-            sheduleCallback(callbackDateTime[1].replaceAll(' ', '_'));
+            await sheduleCallback(callbackDateTime[1].replaceAll(' ', '_'));
             if (_response.isNotEmpty) {
               _response = _response.replaceAll("'", '"');
               Map<String, dynamic> mapData = jsonDecode(_response);
               print(mapData);
               if (mapData['status'] == "callback scheduled") {
-                print("work");
-                Alert(
-                        // style: alertStyle,
-                        type: AlertType.error,
-                        context: context,
-                        title: "Alert",
-                        desc:
-                            "callback sheduled for no ${note.phone} at $callbackDateTime[1]")
-                    .show();
+                setState(() {
+                  _callbackSchedule = 'call back scheduled';
+                });
+                Fluttertoast.showToast(
+                    msg: "call back scheduled",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.CENTER,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 16.0);
               }
             }
           }

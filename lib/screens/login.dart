@@ -184,6 +184,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                       if (mapData['status'] == 'login success') {
                         SharedPreferences prefs =
                             await SharedPreferences.getInstance();
+
                         await prefs.setString('number1', mapData['number']);
                         isloginvalid = true;
                       } else {
