@@ -11,6 +11,9 @@ import 'package:http/http.dart' as http;
 final Url = TextEditingController();
 final Username = TextEditingController();
 final Password = TextEditingController();
+FocusNode focusNode_url = FocusNode();
+FocusNode focusNode_username = FocusNode();
+FocusNode focusNode_password = FocusNode();
 
 class LoginWidget extends StatefulWidget {
   const LoginWidget({super.key});
@@ -109,109 +112,120 @@ class _LoginWidgetState extends State<LoginWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: SingleChildScrollView(
-        child: Container(
-          margin: EdgeInsets.only(top: 50),
-          child: Column(children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 20, 0, 25),
-              child: Image.asset('./images/logo2.png'),
-            ),
-            InputFieldMaker('Enter url', Url, TextInputType.url),
-            InputFieldMaker('Username', Username, TextInputType.text),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-              child: TextFormField(
-                obscureText: _obscureText,
-                controller: Password,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Password',
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      _obscureText ? Icons.visibility : Icons.visibility_off,
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: SafeArea(
+        child: SingleChildScrollView(
+          child: Container(
+            margin: EdgeInsets.only(top: 50),
+            child: Column(children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 20, 0, 25),
+                child: Image.asset('./images/logo2.png'),
+              ),
+              InputFieldMaker(
+                  'Enter url', Url, TextInputType.url, focusNode_url),
+              InputFieldMaker(
+                  'Username', Username, TextInputType.text, focusNode_username),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                child: TextFormField(
+                  focusNode: focusNode_password,
+                  obscureText: _obscureText,
+                  controller: Password,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Password',
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _obscureText ? Icons.visibility : Icons.visibility_off,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _obscureText = !_obscureText;
+                        });
+                      },
                     ),
-                    onPressed: () {
-                      setState(() {
-                        _obscureText = !_obscureText;
-                      });
-                    },
                   ),
+                  keyboardType: TextInputType.visiblePassword,
                 ),
-                keyboardType: TextInputType.visiblePassword,
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
-              child: Row(
-                children: [
-                  Checkbox(
-                    value: this.remember_me,
-                    onChanged: (bool? value) {
-                      setState(() {
-                        remember_me = value!;
-                      });
-                      if (remember_me) {
-                        _saveLoginCreds(Username.text, Password.text);
-                      } else {
-                        _saveLoginCreds("", "");
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+                child: Row(
+                  children: [
+                    Checkbox(
+                      value: this.remember_me,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          remember_me = value!;
+                        });
+                        if (remember_me) {
+                          _saveLoginCreds(Username.text, Password.text);
+                        } else {
+                          _saveLoginCreds("", "");
+                        }
+                        updateCheckboxValue(remember_me);
+                      },
+                    ),
+                    Text('Remember me'),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(32.0),
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size.fromHeight(50), // NEW
+                    ),
+                    onPressed: () async {
+                      bool? isloginvalid;
+                      await fetchData();
+                      _saveValuesToPreferences();
+                      print(_response);
+                      if (_response.isNotEmpty) {
+                        _response = _response.replaceAll("'", '"');
+                        Map<String, dynamic> mapData = jsonDecode(_response);
+                        print(mapData);
+                        print(mapData['number']);
+
+                        if (mapData['status'] == 'login success') {
+                          SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
+
+                          await prefs.setString('number1', mapData['number']);
+                          isloginvalid = true;
+                        } else {
+                          isloginvalid = false;
+                        }
+
+                        print(isloginvalid);
                       }
-                      updateCheckboxValue(remember_me);
+
+                      if (isloginvalid == true) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => AppBarPage()),
+                        );
+                      } else {
+                        Alert(
+                                style: alertStyle,
+                                type: AlertType.error,
+                                context: context,
+                                title: "Invalid Login",
+                                desc: "Incorrect Password or username")
+                            .show();
+                      }
                     },
-                  ),
-                  Text('Remember me'),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(32.0),
-              child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size.fromHeight(50), // NEW
-                  ),
-                  onPressed: () async {
-                    bool? isloginvalid;
-                    await fetchData();
-                    _saveValuesToPreferences();
-                    print(_response);
-                    if (_response.isNotEmpty) {
-                      _response = _response.replaceAll("'", '"');
-                      Map<String, dynamic> mapData = jsonDecode(_response);
-                      print(mapData);
-                      print(mapData['number']);
-
-                      if (mapData['status'] == 'login success') {
-                        SharedPreferences prefs =
-                            await SharedPreferences.getInstance();
-
-                        await prefs.setString('number1', mapData['number']);
-                        isloginvalid = true;
-                      } else {
-                        isloginvalid = false;
-                      }
-
-                      print(isloginvalid);
-                    }
-
-                    if (isloginvalid == true) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => AppBarPage()),
-                      );
-                    } else {
-                      Alert(
-                              style: alertStyle,
-                              type: AlertType.error,
-                              context: context,
-                              title: "Invalid Login",
-                              desc: "Incorrect Password or username")
-                          .show();
-                    }
-                  },
-                  child: Text('Login')),
-            )
-          ]),
+                    child: Text('Login')),
+              )
+            ]),
+          ),
         ),
       ),
     );

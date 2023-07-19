@@ -77,32 +77,18 @@ class _CallNotesState extends State<CallNotes> {
   int c = 0;
   List<Note>? formatNotes(String data) {
     if (_response.length > 5) {
-      String cleanData = data.replaceAll("[", "").replaceAll("]", "");
-
-//  print(cleanData);
-// Split the string into individual items
-      List<String> items = cleanData.split("),");
-//   print(items);
-
-      List<dynamic> newList = [];
-
-      for (var item in items) {
-        newList.add(item.toString().replaceAll('(', '').replaceAll(')', ''));
-      }
-
-      // print(newList[14]);
+      List newList = _response.split("|#|");
 
       List<Note> notes = newList.map((item) {
-        List<String> properties = item.split(", ");
-        int id = int.parse(properties[0].replaceAll("'", ""));
+        List<String> properties = item.split("|&|");
+        int id = int.parse(properties[0]);
         int priority = int.parse(properties[1]);
-        String domain = properties[2].replaceAll("'", "");
-        int phone = int.parse(properties[3].replaceAll("'", ''));
-        String title = properties[4].replaceAll("'", "");
-        String description = properties[5].replaceAll("'", "");
-        String agent = properties[6].replaceAll("'", "");
-        String datetimeTemp =
-            properties[7].replaceAll("'", "").replaceAll('\n', '');
+        String domain = properties[2];
+        int phone = int.parse(properties[3]);
+        String title = properties[4];
+        String description = properties[5];
+        String agent = properties[6];
+        String datetimeTemp = properties[7].replaceAll('\n', '');
         c++;
         // print(c);
         // print(datetimeTemp);
