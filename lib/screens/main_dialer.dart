@@ -131,12 +131,8 @@ class _MainDialerState extends State<MainDialer> {
                     minimumSize: const Size.fromHeight(50), // NEW
                   ),
                   onPressed: () async {
-                    String did = fixed_no.text;
-                    if (did.length == 12 && did[0] == '9' && did[1] == '1') {
-                      did = "+" + did;
-                    } else if (did.length < 10) {
-                      did = "0" + did;
-                    }
+                    String did = formatNumber(fixed_no.text);
+                    print(did);
                     final String callnow = "tel:" +
                         did +
                         ",," +
@@ -147,10 +143,6 @@ class _MainDialerState extends State<MainDialer> {
 
                     print(callnow);
                     await FlutterPhoneDirectCaller.callNumber(callnow);
-
-                    int nump = int.parse(
-                        number_to_dial.text.replaceAll(RegExp(r'[^0-9]'), ''));
-                    print(nump);
                     await addNote();
                   },
                   child: const Text('Call'),
@@ -164,11 +156,13 @@ class _MainDialerState extends State<MainDialer> {
   }
 
   Future addNote() async {
+    String phone_v = formatNumber(number_to_dial.text);
+    print(phone_v);
     final note = Note(
       title: "${number_to_dial.text} -Outgoing call",
       domain: Url.text,
       priority: 0,
-      phone: int.parse(number_to_dial.text.replaceAll(RegExp(r'[^0-9]'), '')),
+      phone: int.parse(phone_v),
       description: "",
       agent: Username.text,
       createdTime: DateTime.now(),
@@ -182,5 +176,18 @@ class _MainDialerState extends State<MainDialer> {
 
     addNoteOnline(newNoteData);
     await NotesDatabase.instance.create(note);
+  }
+
+  String formatNumber(String num) {
+    num = num.replaceAll(RegExp(r'[^0-9]'), '');
+    if (num.length == 12 && num[0] == '9' && num[1] == '1') {
+      return "+" + num;
+    } else if (num.length < 10) {
+      return "0" + num;
+    } else if (num.length == 10) {
+      return "+91" + num;
+    } else {
+      return "+" + num;
+    }
   }
 }

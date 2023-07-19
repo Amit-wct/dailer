@@ -65,6 +65,7 @@ class _CallNotesState extends State<CallNotes> {
     if (response.statusCode == 200) {
       setState(() {
         _response = response.body;
+        print(_response);
       });
     } else {
       setState(() {
@@ -73,6 +74,7 @@ class _CallNotesState extends State<CallNotes> {
     }
   }
 
+  int c = 0;
   List<Note>? formatNotes(String data) {
     if (_response.length > 5) {
       String cleanData = data.replaceAll("[", "").replaceAll("]", "");
@@ -88,17 +90,22 @@ class _CallNotesState extends State<CallNotes> {
         newList.add(item.toString().replaceAll('(', '').replaceAll(')', ''));
       }
 
+      // print(newList[14]);
+
       List<Note> notes = newList.map((item) {
         List<String> properties = item.split(", ");
         int id = int.parse(properties[0].replaceAll("'", ""));
         int priority = int.parse(properties[1]);
         String domain = properties[2].replaceAll("'", "");
-        int phone = 1;
+        int phone = int.parse(properties[3].replaceAll("'", ''));
         String title = properties[4].replaceAll("'", "");
         String description = properties[5].replaceAll("'", "");
         String agent = properties[6].replaceAll("'", "");
         String datetimeTemp =
             properties[7].replaceAll("'", "").replaceAll('\n', '');
+        c++;
+        // print(c);
+        // print(datetimeTemp);
         DateTime time = DateTime.parse(datetimeTemp);
 //   DateTime time = DateTime.now();
 

@@ -29,7 +29,13 @@ class NoteFormWidget extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Text("Priority"),
+                  Text(
+                    "Priority",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
                   Expanded(
                     child: Slider(
                       value: (priority ?? 0).toDouble(),
@@ -37,10 +43,13 @@ class NoteFormWidget extends StatelessWidget {
                       max: 3,
                       divisions: 3,
                       onChanged: (number) => onChangedNumber(number.toInt()),
+                      activeColor: Colors.lightGreen, // Change the active color
+                      inactiveColor: Colors.grey, // Change the inactive color
                     ),
-                  )
+                  ),
                 ],
               ),
+              SizedBox(height: 16),
               buildTitle(),
               SizedBox(height: 16),
               buildDescription(),
@@ -58,8 +67,19 @@ class NoteFormWidget extends StatelessWidget {
           fontSize: 24,
         ),
         decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: 'Title',
+          border: OutlineInputBorder(), // Add a border to the input field
+          labelText: 'Title', // Replace hintText with labelText
+          labelStyle: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+            color: Colors.lightGreen, // Change the label color
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.lightGreen, // Change the focused border color
+              width: 2, // Adjust the focused border width
+            ),
+          ),
         ),
         validator: (title) =>
             title != null && title.isEmpty ? 'The title cannot be empty' : null,
@@ -71,10 +91,20 @@ class NoteFormWidget extends StatelessWidget {
         initialValue: description,
         style: TextStyle(fontSize: 18),
         decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: 'Type something...',
+          border: OutlineInputBorder(), // Add a border to the input field
+          labelText: 'Description', // Replace hintText with labelText
+          labelStyle: TextStyle(
+            fontSize: 16,
+            color: Colors.lightGreen, // Change the label color
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.lightGreen, // Change the focused border color
+              width: 2, // Adjust the focused border width
+            ),
+          ),
         ),
-        validator: (title) => title != null && title.isEmpty
+        validator: (description) => description != null && description.isEmpty
             ? 'The description cannot be empty'
             : null,
         onChanged: onChangedDescription,

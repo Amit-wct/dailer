@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:two_stage_d/db/notes_database.dart';
 import 'package:two_stage_d/model/note.dart';
 import 'package:two_stage_d/screens/edit_note_page.dart';
 import 'package:http/http.dart' as http;
 import './login.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:motion_toast/motion_toast.dart';
+import 'package:motion_toast/resources/arrays.dart';
 import '../widget/date_time_picker.dart';
 
 class NoteDetailPage extends StatefulWidget {
@@ -28,19 +28,7 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
   String _response = '';
   String url = "";
   String _callbackSchedule = '';
-
-  var alertStyle = AlertStyle(
-    animationType: AnimationType.grow,
-    isCloseButton: false,
-    descStyle: TextStyle(fontWeight: FontWeight.w400),
-    // animationDuration: Duration(milliseconds: 200),
-    alertBorder: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(8.0),
-      side: BorderSide(
-        color: Colors.grey,
-      ),
-    ),
-  );
+  int? num_toast;
 
   @override
   void initState() {
@@ -53,13 +41,14 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
     setState(() => isLoading = true);
 
     this.note = await NotesDatabase.instance.readNote(widget.noteId);
-
+    print(note.phone);
+    num_toast = note.phone;
     setState(() => isLoading = false);
   }
 
   Future<void> sheduleCallback(String dt) async {
     url =
-        'http://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=callback&cbn=${note.phone}&dt=$dt';
+        'http://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=callback&cbn=%2B${note.phone}&dt=$dt';
     print(url);
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
@@ -78,7 +67,11 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          actions: [callbackButton(), editButton(), deleteButton()],
+          actions: [
+            callbackButton(),
+            editButton(),
+            deleteButton(),
+          ],
           backgroundColor: Colors.blueGrey[900],
           foregroundColor: Colors.white,
         ),
@@ -89,27 +82,61 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
                 child: ListView(
                   padding: EdgeInsets.symmetric(vertical: 8),
                   children: [
-                    Text(
-                      note.title,
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
+                    Container(
+                      padding: EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.green[100], // Change the container color
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            note.title,
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 8),
+                          Text(
+                            DateFormat.yMMMd().format(note.createdTime),
+                            style: TextStyle(
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    SizedBox(height: 8),
-                    Text(
-                      DateFormat.yMMMd().format(note.createdTime),
+                    SizedBox(height: 16),
+                    Divider(
+                      color: Colors.grey, // Change the divider color
+                      height: 1, // Adjust the divider height
+                      thickness: 1, // Adjust the divider thickness
+                      indent: 8, // Adjust the indent of the divider
+                      endIndent: 8, // Adjust the end indent of the divider
                     ),
-                    SizedBox(height: 8),
-                    Divider(color: Colors.black),
-                    note.description.isEmpty
-                        ? Text(
-                            "Click on edit button to add something to this note",
-                            style: TextStyle(color: Colors.black38),
-                          )
-                        : Text(
-                            note.description,
-                          ),
+                    SizedBox(height: 16),
+                    Container(
+                      padding: EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors
+                            .lightGreen[100], // Change the container color
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: note.description.isEmpty
+                          ? Text(
+                              "Click on the edit button to add something to this note",
+                              style: TextStyle(
+                                color: Colors.black38,
+                                fontStyle: FontStyle.italic,
+                              ),
+                            )
+                          : Text(
+                              note.description,
+                            ),
+                    ),
+                    SizedBox(height: 16),
                   ],
                 ),
               ),
@@ -165,7 +192,9 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
           List callbackDateTime = await showDateTimePicker(context);
 
           if (callbackDateTime[0] == 1) {
+            setState(() => isLoading = true);
             await sheduleCallback(callbackDateTime[1].replaceAll(' ', '_'));
+            setState(() => isLoading = false);
             if (_response.isNotEmpty) {
               _response = _response.replaceAll("'", '"');
               Map<String, dynamic> mapData = jsonDecode(_response);
@@ -174,14 +203,23 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
                 setState(() {
                   _callbackSchedule = 'call back scheduled';
                 });
-                Fluttertoast.showToast(
-                    msg: "call back scheduled",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.CENTER,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Colors.red,
-                    textColor: Colors.white,
-                    fontSize: 16.0);
+                MotionToast toast = MotionToast.success(
+                  title: const Text(
+                    'Callback Scheduled',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  description: Text(
+                    'call back scheduled for the number $num_toast at ${callbackDateTime[1]}',
+                    style: TextStyle(fontSize: 12),
+                  ),
+                  layoutOrientation: ToastOrientation.ltr,
+                  animationType: AnimationType.fromRight,
+                  dismissable: true,
+                );
+                toast.show(context);
+                Future.delayed(const Duration(seconds: 8)).then((value) {
+                  toast.dismiss();
+                });
               }
             }
           }

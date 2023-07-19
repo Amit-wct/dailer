@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:motion_toast/motion_toast.dart';
+import 'package:motion_toast/resources/arrays.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../components/input_field.dart';
 import '../components/logout_function.dart';
@@ -95,6 +97,25 @@ class _SettingsWidget extends State<SettingsWidget> {
                   //   context,
                   //   MaterialPageRoute(builder: (context) => const MainDialer()),
                   // );
+                  MotionToast toast = MotionToast.info(
+                    // title: const Text(
+                    //   'Info',
+                    //   style: TextStyle(fontWeight: FontWeight.bold),
+                    // ),
+                    description: Text(
+                      'settings saved Succesfully',
+                      style: TextStyle(fontSize: 12),
+                    ),
+                    layoutOrientation: ToastOrientation.ltr,
+                    animationType: AnimationType.fromRight,
+                    dismissable: true,
+                    position: MotionToastPosition.bottom,
+                    iconType: IconType.cupertino,
+                  );
+                  toast.show(context);
+                  Future.delayed(const Duration(seconds: 2)).then((value) {
+                    toast.dismiss();
+                  });
                 },
                 child: Text('OK'),
               ),
