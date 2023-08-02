@@ -3,7 +3,7 @@ final String tableNotes = 'notes';
 class NoteFields {
   static final List<String> values = [
     /// Add all fields
-    id, priority, domain, phone, title, description, time, agent
+    id, priority, domain, phone, title, description, time, agent, call_type
   ];
 
   static final String id = '_id';
@@ -14,6 +14,7 @@ class NoteFields {
   static final String description = 'description';
   static final String agent = 'agent';
   static final String time = 'time';
+  static final String call_type = 'call_type';
 }
 
 class Note {
@@ -24,6 +25,8 @@ class Note {
   final String title;
   final String description;
   final String agent;
+  final String call_type;
+
   final DateTime createdTime;
 
   const Note({
@@ -35,6 +38,7 @@ class Note {
     required this.description,
     required this.agent,
     required this.createdTime,
+    required this.call_type,
   });
 
   Note copy({
@@ -45,6 +49,7 @@ class Note {
     String? title,
     String? description,
     String? agent,
+    String? call_type,
     DateTime? createdTime,
   }) =>
       Note(
@@ -55,6 +60,7 @@ class Note {
         title: title ?? this.title,
         description: description ?? this.description,
         agent: agent ?? this.agent,
+        call_type: call_type ?? this.call_type,
         createdTime: createdTime ?? this.createdTime,
       );
 
@@ -66,6 +72,7 @@ class Note {
         title: json[NoteFields.title] as String,
         description: json[NoteFields.description] as String,
         agent: json[NoteFields.agent] as String,
+        call_type: json[NoteFields.call_type] as String,
         createdTime: DateTime.parse(json[NoteFields.time] as String),
       );
 
@@ -77,6 +84,7 @@ class Note {
         NoteFields.phone: phone,
         NoteFields.description: description,
         NoteFields.agent: agent,
+        NoteFields.call_type: call_type,
         NoteFields.time: createdTime.toIso8601String(),
       };
 }

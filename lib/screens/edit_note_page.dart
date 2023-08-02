@@ -26,6 +26,8 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
   late String title;
   late String description;
   late String agent;
+  late String call_type;
+
   String _response = '';
   String url = "";
   String updatedNoteData = "";
@@ -131,6 +133,7 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
       phone: phone,
       description: description,
       agent: agent,
+      call_type: call_type,
       createdTime: DateTime.now(),
     );
 

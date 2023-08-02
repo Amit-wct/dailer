@@ -98,11 +98,25 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
+                          Text(
+                            "Number:- ${note.phone}",
+                            style: TextStyle(
+                              color: Colors.grey.shade700,
+                            ),
+                          ),
+                          Text(
+                            "Type:- ${note.call_type}",
+                            style: TextStyle(
+                              color: Colors.grey.shade700,
+                            ),
+                          ),
                           SizedBox(height: 8),
                           Text(
-                            DateFormat.yMMMd().format(note.createdTime),
+                            DateFormat.yMMMd()
+                                .add_jm()
+                                .format(note.createdTime),
                             style: TextStyle(
-                              color: Colors.grey,
+                              color: Colors.grey.shade700,
                             ),
                           ),
                         ],

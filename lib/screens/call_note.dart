@@ -88,7 +88,9 @@ class _CallNotesState extends State<CallNotes> {
         String title = properties[4];
         String description = properties[5];
         String agent = properties[6];
-        String datetimeTemp = properties[7].replaceAll('\n', '');
+        String datetimeTemp = properties[7].split("+")[0];
+        String call_type = properties[8].replaceAll('\n', '');
+
         c++;
         // print(c);
         // print(datetimeTemp);
@@ -104,6 +106,7 @@ class _CallNotesState extends State<CallNotes> {
           description: description,
           agent: agent,
           createdTime: time,
+          call_type: call_type,
         );
         return temp;
       }).toList();
@@ -163,7 +166,7 @@ class _CallNotesState extends State<CallNotes> {
         crossAxisSpacing: 0,
         itemBuilder: (context, index) {
           final note = notes[index];
-
+          print(note.call_type);
           return GestureDetector(
             onTap: () async {
               await Navigator.of(context).push(MaterialPageRoute(

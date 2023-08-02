@@ -34,6 +34,25 @@ class NoteCardWidget extends StatelessWidget {
       size: 24,
     ),
   ];
+
+  Map<String, Icon> call_types = {
+    "Missed": const Icon(
+      Icons.call_missed_outgoing,
+      color: Colors.red,
+      size: 20,
+    ),
+    "Outgoing": const Icon(
+      Icons.call_made,
+      color: Colors.green,
+      size: 20,
+    ),
+    "Incoming": const Icon(
+      Icons.call_received,
+      size: 20,
+      color: Colors.blue,
+    )
+  };
+
   @override
   Widget build(BuildContext context) {
     /// Pick colors from the accent colors based on index
@@ -59,11 +78,25 @@ class NoteCardWidget extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   note.title,
-                  style: const TextStyle(
-                    color: Colors.black,
+                  style: TextStyle(
+                    color: Colors.grey.shade800,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
+                ),
+                const SizedBox(height: 4),
+                Row(
+                  children: [
+                    Text(
+                      "${note.phone}",
+                      style:
+                          TextStyle(color: Colors.grey.shade800, fontSize: 16),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 4.0),
+                      child: call_types[note.call_type] ?? Icon(Icons.abc),
+                    ),
+                  ],
                 ),
               ],
             ),

@@ -172,20 +172,21 @@ class _MainDialerState extends State<MainDialer> {
     String phone_v = formatNumber(number_to_dial.text);
     print(phone_v);
     final note = Note(
-      title: "${number_to_dial.text} -Outgoing call",
+      title: "${number_to_dial.text}",
       domain: Url.text,
       priority: 0,
       phone: int.parse(phone_v),
       description: "",
       agent: Username.text,
       createdTime: DateTime.now(),
+      call_type: "Outgoing",
     );
 
     String titleString = note.title.split(" ").join("|-|-|-|");
     String descriptionString = note.description.split(" ").join("|-|-|-|");
     String datetime = "${note.createdTime}".split(" ").join("|-|-|-|");
     String newNoteData =
-        "${note.priority}-,-${note.phone}-,-$titleString-,-$descriptionString-,-$datetime";
+        "${note.priority}-,-${note.phone}-,-$titleString-,-$descriptionString-,-$datetime-,-${note.call_type}";
 
     addNoteOnline(newNoteData);
     await NotesDatabase.instance.create(note);

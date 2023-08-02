@@ -38,6 +38,8 @@ class NotesDatabase {
                   ${NoteFields.title} $textType,
                   ${NoteFields.description} $textType,
                   ${NoteFields.agent} $textType,
+                  ${NoteFields.call_type} $textType,
+
                   ${NoteFields.time} $textType
                   )''';
     // print(query1);
