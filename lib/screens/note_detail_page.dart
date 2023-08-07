@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:two_stage_d/db/notes_database.dart';
-import 'package:two_stage_d/model/note.dart';
-import 'package:two_stage_d/screens/edit_note_page.dart';
+import 'package:Dialer/db/notes_database.dart';
+import 'package:Dialer/model/note.dart';
+import 'package:Dialer/screens/edit_note_page.dart';
 import 'package:http/http.dart' as http;
 import './login.dart';
 import 'package:motion_toast/motion_toast.dart';

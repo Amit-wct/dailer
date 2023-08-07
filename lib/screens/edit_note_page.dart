@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:two_stage_d/db/notes_database.dart';
-import 'package:two_stage_d/model/note.dart';
-import 'package:two_stage_d/widget/note_form_widget.dart';
+import 'package:Dialer/db/notes_database.dart';
+import 'package:Dialer/model/note.dart';
+import 'package:Dialer/widget/note_form_widget.dart';
 import 'package:http/http.dart' as http;
 
 import 'login.dart';
@@ -27,6 +27,7 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
   late String description;
   late String agent;
   late String call_type;
+  late String trkn;
 
   String _response = '';
   String url = "";
@@ -42,9 +43,11 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
     description = widget.note?.description ?? '';
   }
 
-  Future<void> updateNoteOnline(String data) async {
+  Future<void> updateNoteOnline(
+      String trkn, int priority, String title, String desc) async {
     url =
-        'http://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=update_notes&d=$data';
+        'http://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=update_notes&id=$trkn&pr=$priority&t=$title&d=$description';
+
     print(url);
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
@@ -116,12 +119,11 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
       description: description,
     );
 
-    String titleString = note.title.split(" ").join("|-|-|-|");
-    String descriptionString = note.description.split(" ").join("|-|-|-|");
-    updatedNoteData =
-        "${note.id}-,-${note.priority}-,-$titleString-,-$descriptionString";
-
-    await updateNoteOnline(updatedNoteData);
+    await updateNoteOnline(
+        note.trkn,
+        note.priority,
+        note.title.replaceAll(" ", "%20"),
+        note.description.replaceAll(" ", "%20"));
     await NotesDatabase.instance.update(note);
   }
 
@@ -134,6 +136,7 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
       description: description,
       agent: agent,
       call_type: call_type,
+      trkn: trkn,
       createdTime: DateTime.now(),
     );
 

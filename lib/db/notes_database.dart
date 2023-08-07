@@ -1,6 +1,6 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:two_stage_d/model/note.dart';
+import 'package:Dialer/model/note.dart';
 
 class NotesDatabase {
   static final NotesDatabase instance = NotesDatabase._init();
@@ -39,6 +39,7 @@ class NotesDatabase {
                   ${NoteFields.description} $textType,
                   ${NoteFields.agent} $textType,
                   ${NoteFields.call_type} $textType,
+                  ${NoteFields.trkn} $textType,
 
                   ${NoteFields.time} $textType
                   )''';
@@ -131,6 +132,11 @@ class NotesDatabase {
     print("called me");
     final db = await instance.database;
     db.close();
+  }
+
+  Future<void> clearData() async {
+    final db = await instance.database;
+    final result = await db.rawDelete('DELETE FROM $tableNotes');
   }
 
   Future<void> printTableSchema() async {

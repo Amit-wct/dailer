@@ -56,7 +56,7 @@ class _SettingsWidget extends State<SettingsWidget> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text(
-            "Dailer",
+            "Settings",
             // style: TextStyle(color: Colors.white),
           ),
           backgroundColor: Colors.blueGrey[900],

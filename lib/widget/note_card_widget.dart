@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:two_stage_d/model/note.dart';
+import 'package:Dialer/model/note.dart';
 
 class NoteCardWidget extends StatelessWidget {
   NoteCardWidget({

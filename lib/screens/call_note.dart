@@ -1,10 +1,13 @@
+import 'dart:convert';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:two_stage_d/db/notes_database.dart';
-import 'package:two_stage_d/model/note.dart';
-import 'package:two_stage_d/screens/note_detail_page.dart';
-import 'package:two_stage_d/widget/note_card_widget.dart';
+import 'package:Dialer/db/notes_database.dart';
+import 'package:Dialer/model/note.dart';
+import 'package:Dialer/screens/note_detail_page.dart';
+import 'package:Dialer/widget/note_card_widget.dart';
 import '../components/logout_function.dart';
 import 'login.dart';
 import 'package:http/http.dart' as http;
@@ -48,12 +51,14 @@ class _CallNotesState extends State<CallNotes> {
     await fetchData();
 
     notes = formatNotes(_response) ?? [];
+    await NotesDatabase.instance.clearData();
 
     // notes = notes.where((note) => note.agent == Username.text).toList();
     notes = notes.reversed.toList();
     for (var note in notes) {
       await NotesDatabase.instance.create(note);
     }
+
     setState(() => isLoading = false);
   }
 
@@ -74,31 +79,28 @@ class _CallNotesState extends State<CallNotes> {
     }
   }
 
-  int c = 0;
   List<Note>? formatNotes(String data) {
     if (_response.length > 5) {
-      List newList = _response.split("|#|");
+      _response = _response.replaceAll("'", '"');
+
+      List newList = json.decode(_response);
 
       List<Note> notes = newList.map((item) {
-        List<String> properties = item.split("|&|");
-        int id = int.parse(properties[0]);
-        int priority = int.parse(properties[1]);
-        String domain = properties[2];
-        int phone = int.parse(properties[3]);
-        String title = properties[4];
-        String description = properties[5];
-        String agent = properties[6];
-        String datetimeTemp = properties[7].split("+")[0];
-        String call_type = properties[8].replaceAll('\n', '');
-
-        c++;
-        // print(c);
-        // print(datetimeTemp);
+        String id = item['id'];
+        int unique_id = int.parse(id.substring(id.length - 5, id.length) +
+            Random().nextInt(9999).toString());
+        int priority = item['priority'];
+        String domain = item['domainname'];
+        int phone = int.parse(item['destination']);
+        String title = item['title'];
+        String description = item['description'];
+        String agent = item['omuser'];
+        String datetimeTemp = item['time'].split("+")[0];
+        String call_type = item['call_type'].replaceAll('\n', '');
         DateTime time = DateTime.parse(datetimeTemp);
-//   DateTime time = DateTime.now();
 
         Note temp = Note(
-          id: id,
+          id: unique_id,
           priority: priority,
           domain: domain,
           phone: phone,
@@ -107,6 +109,7 @@ class _CallNotesState extends State<CallNotes> {
           agent: agent,
           createdTime: time,
           call_type: call_type,
+          trkn: id,
         );
         return temp;
       }).toList();

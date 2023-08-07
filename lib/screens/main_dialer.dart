@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:fluttercontactpicker/fluttercontactpicker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:two_stage_d/screens/login.dart';
+import 'package:Dialer/screens/login.dart';
 import '../components/input_field.dart';
 import '../db/notes_database.dart';
 import '../model/note.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
-import 'package:two_stage_d/components/logout_function.dart';
+import 'package:Dialer/components/logout_function.dart';
 import 'package:http/http.dart' as http;
 
 class MainDialer extends StatefulWidget {
@@ -80,7 +80,7 @@ class _MainDialerState extends State<MainDialer> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text(
-            "Dailer",
+            "Dialer",
             style: TextStyle(color: Colors.white),
           ),
           automaticallyImplyLeading: false,
@@ -155,7 +155,7 @@ class _MainDialerState extends State<MainDialer> {
 
                       print(callnow);
                       await FlutterPhoneDirectCaller.callNumber(callnow);
-                      await addNote();
+                      // await addNote();
                     },
                     child: const Text('Call'),
                   ),
@@ -168,29 +168,30 @@ class _MainDialerState extends State<MainDialer> {
     );
   }
 
-  Future addNote() async {
-    String phone_v = formatNumber(number_to_dial.text);
-    print(phone_v);
-    final note = Note(
-      title: "${number_to_dial.text}",
-      domain: Url.text,
-      priority: 0,
-      phone: int.parse(phone_v),
-      description: "",
-      agent: Username.text,
-      createdTime: DateTime.now(),
-      call_type: "Outgoing",
-    );
+  // Future addNote() async {
+  //   String phone_v = formatNumber(number_to_dial.text);
+  //   print(phone_v);
+  //   final note = Note(
+  //     title: "${number_to_dial.text}",
+  //     domain: Url.text,
+  //     priority: 0,
+  //     phone: int.parse(phone_v),
+  //     description: "",
+  //     agent: Username.text,
+  //     createdTime: DateTime.now(),
+  //     call_type: "Outgoing",
+  //     trkn: "Outgoing",
+  //   );
 
-    String titleString = note.title.split(" ").join("|-|-|-|");
-    String descriptionString = note.description.split(" ").join("|-|-|-|");
-    String datetime = "${note.createdTime}".split(" ").join("|-|-|-|");
-    String newNoteData =
-        "${note.priority}-,-${note.phone}-,-$titleString-,-$descriptionString-,-$datetime-,-${note.call_type}";
+  //   String titleString = note.title.split(" ").join("|-|-|-|");
+  //   String descriptionString = note.description.split(" ").join("|-|-|-|");
+  //   String datetime = "${note.createdTime}".split(" ").join("|-|-|-|");
+  //   String newNoteData =
+  //       "${note.priority}-,-${note.phone}-,-$titleString-,-$descriptionString-,-$datetime-,-${note.call_type}";
 
-    addNoteOnline(newNoteData);
-    await NotesDatabase.instance.create(note);
-  }
+  //   addNoteOnline(newNoteData);
+  //   await NotesDatabase.instance.create(note);
+  // }
 
   String formatNumber(String num) {
     num = num.replaceAll(RegExp(r'[^0-9]'), '');

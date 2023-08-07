@@ -3,7 +3,8 @@ final String tableNotes = 'notes';
 class NoteFields {
   static final List<String> values = [
     /// Add all fields
-    id, priority, domain, phone, title, description, time, agent, call_type
+    id, priority, domain, phone, title, description, time, agent, call_type,
+    trkn
   ];
 
   static final String id = '_id';
@@ -15,6 +16,7 @@ class NoteFields {
   static final String agent = 'agent';
   static final String time = 'time';
   static final String call_type = 'call_type';
+  static final String trkn = 'trkn';
 }
 
 class Note {
@@ -26,6 +28,7 @@ class Note {
   final String description;
   final String agent;
   final String call_type;
+  final String trkn;
 
   final DateTime createdTime;
 
@@ -39,6 +42,7 @@ class Note {
     required this.agent,
     required this.createdTime,
     required this.call_type,
+    required this.trkn,
   });
 
   Note copy({
@@ -50,6 +54,7 @@ class Note {
     String? description,
     String? agent,
     String? call_type,
+    String? trkn,
     DateTime? createdTime,
   }) =>
       Note(
@@ -61,6 +66,7 @@ class Note {
         description: description ?? this.description,
         agent: agent ?? this.agent,
         call_type: call_type ?? this.call_type,
+        trkn: trkn ?? this.trkn,
         createdTime: createdTime ?? this.createdTime,
       );
 
@@ -73,6 +79,7 @@ class Note {
         description: json[NoteFields.description] as String,
         agent: json[NoteFields.agent] as String,
         call_type: json[NoteFields.call_type] as String,
+        trkn: json[NoteFields.trkn] as String,
         createdTime: DateTime.parse(json[NoteFields.time] as String),
       );
 
@@ -85,6 +92,7 @@ class Note {
         NoteFields.description: description,
         NoteFields.agent: agent,
         NoteFields.call_type: call_type,
+        NoteFields.trkn: trkn,
         NoteFields.time: createdTime.toIso8601String(),
       };
 }
