@@ -39,8 +39,9 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
 
   Future refreshNote() async {
     setState(() => isLoading = true);
-
     this.note = await NotesDatabase.instance.readNote(widget.noteId);
+    print("here i am");
+
     print(note.phone);
     num_toast = note.phone;
     setState(() => isLoading = false);
@@ -98,12 +99,19 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Text(
-                            "Number:- ${note.phone}",
-                            style: TextStyle(
-                              color: Colors.grey.shade700,
-                            ),
-                          ),
+                          note.call_type == "Outgoing"
+                              ? Text(
+                                  "Number:- " + note.phone.toString(),
+                                  style: TextStyle(
+                                    color: Colors.grey.shade700,
+                                  ),
+                                )
+                              : Text(
+                                  "Number:- " + note.caller.toString(),
+                                  style: TextStyle(
+                                    color: Colors.grey.shade700,
+                                  ),
+                                ),
                           Text(
                             "Type:- ${note.call_type}",
                             style: TextStyle(

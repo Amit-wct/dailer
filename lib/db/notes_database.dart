@@ -39,8 +39,8 @@ class NotesDatabase {
                   ${NoteFields.description} $textType,
                   ${NoteFields.agent} $textType,
                   ${NoteFields.call_type} $textType,
+                  ${NoteFields.caller} $textType,
                   ${NoteFields.trkn} $textType,
-
                   ${NoteFields.time} $textType
                   )''';
     // print(query1);

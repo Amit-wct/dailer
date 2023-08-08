@@ -88,7 +88,9 @@ class NoteCardWidget extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      "${note.phone}",
+                      note.call_type == "Outgoing"
+                          ? note.phone.toString()
+                          : note.caller.toString(),
                       style:
                           TextStyle(color: Colors.grey.shade800, fontSize: 16),
                     ),
