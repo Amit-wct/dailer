@@ -24,10 +24,10 @@ class NotesDatabase {
   }
 
   Future _createDB(Database db, int version) async {
-    final idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
-    final textType = 'TEXT NOT NULL';
-    final boolType = 'BOOLEAN NOT NULL';
-    final integerType = 'INTEGER NOT NULL';
+    const idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
+    const textType = 'TEXT NOT NULL';
+    const boolType = 'BOOLEAN NOT NULL';
+    const integerType = 'INTEGER NOT NULL';
 
     String query1 = '''
                   CREATE TABLE $tableNotes ( 
@@ -129,7 +129,6 @@ class NotesDatabase {
   }
 
   Future close() async {
-    print("called me");
     final db = await instance.database;
     db.close();
   }

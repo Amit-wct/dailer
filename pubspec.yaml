@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  contacts_service:
+  contacts_service: ^0.6.3
   permission_handler:
   flutter_contacts:
   url_launcher:

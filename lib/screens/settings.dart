@@ -109,7 +109,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                       //   'Info',
                       //   style: TextStyle(fontWeight: FontWeight.bold),
                       // ),
-                      description: Text(
+                      description: const Text(
                         'settings saved Succesfully',
                         style: TextStyle(fontSize: 12),
                       ),

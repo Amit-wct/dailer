@@ -76,7 +76,7 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
             priority: priority,
             title: title,
             description: description,
-            onChangedNumber: (number) => setState(() => this.priority = number),
+            onChangedNumber: (number) => setState(() => priority = number),
             onChangedTitle: (title) => setState(() => this.title = title),
             onChangedDescription: (description) =>
                 setState(() => this.description = description),
@@ -86,9 +86,9 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
 
   Widget buildButton() {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
       child: IconButton(
-        icon: Icon(
+        icon: const Icon(
           Icons.save,
           color: Colors.lightGreen,
         ),

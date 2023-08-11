@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttercontactpicker/fluttercontactpicker.dart';
+import 'package:motion_toast/motion_toast.dart';
+import 'package:motion_toast/resources/arrays.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:Dialer/screens/login.dart';
 import '../components/input_field.dart';
@@ -98,70 +100,87 @@ class _MainDialerState extends State<MainDialer> {
           ],
         ),
         backgroundColor: Color.fromRGBO(249, 253, 246, 1),
-        body: Container(
-          margin: EdgeInsets.only(top: 30),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              InputFieldMaker('Enter a fixed number', fixed_no,
-                  TextInputType.phone, focusNode_fixed_no),
-              InputFieldMaker('Enter option', extension, TextInputType.phone,
-                  focusNode_extension),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-                child: TextFormField(
-                  focusNode: _focusNode,
-                  onEditingComplete: () {
-                    FocusScope.of(context).unfocus(); // Dismiss the keyboard
-                  },
-                  controller: number_to_dial,
-                  keyboardType: TextInputType.phone,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Enter number to dial',
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        Icons.contact_page,
-                      ),
-                      onPressed: () async {
-                        final PhoneContact contact =
-                            await FlutterContactPicker.pickPhoneContact();
-                        print(contact.phoneNumber!.number);
-                        number_to_dial.text = contact.phoneNumber!.number!;
+        body: SingleChildScrollView(
+          child: Container(
+            child: Container(
+              margin: EdgeInsets.only(top: 30),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  InputFieldMaker('Enter a fixed number', fixed_no,
+                      TextInputType.phone, focusNode_fixed_no),
+                  InputFieldMaker('Enter option', extension,
+                      TextInputType.phone, focusNode_extension),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 32, vertical: 16),
+                    child: TextFormField(
+                      focusNode: _focusNode,
+                      onEditingComplete: () {
+                        FocusScope.of(context)
+                            .unfocus(); // Dismiss the keyboard
                       },
+                      controller: number_to_dial,
+                      keyboardType: TextInputType.phone,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Enter number to dial',
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            Icons.contact_page,
+                          ),
+                          onPressed: () async {
+                            final PhoneContact contact =
+                                await FlutterContactPicker.pickPhoneContact();
+                            print(contact.phoneNumber!.number);
+                            number_to_dial.text = contact.phoneNumber!.number!;
+                          },
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(32.0),
-                child: Center(
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: const Size.fromHeight(50), // NEW
-                    ),
-                    onPressed: () async {
-                      String did = formatNumber(fixed_no.text);
-                      print(did);
-                      final String callnow = "tel:" +
-                          did +
-                          ",," +
-                          extension.text +
-                          ",," +
-                          number_to_dial.text
-                              .replaceAll(RegExp(r'[^0-9]'), '') +
-                          "#";
+                  Padding(
+                    padding: const EdgeInsets.all(32.0),
+                    child: Center(
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: const Size.fromHeight(50), // NEW
+                        ),
+                        onPressed: () async {
+                          String did = formatNumber(fixed_no.text);
+                          print(did);
+                          final String callnow =
+                              "tel:$did,,${extension.text},,${number_to_dial.text.replaceAll(RegExp(r'[^0-9]'), '')}#";
 
-                      print(callnow);
-                      await FlutterPhoneDirectCaller.callNumber(callnow);
-                      // await addNote();
-                    },
-                    child: const Text('Call'),
+                          print(callnow);
+
+                          if (number_to_dial.text.length < 3) {
+                            MotionToast.warning(
+                              // title: const Text(
+                              //   'Info',
+                              //   style: TextStyle(fontWeight: FontWeight.bold),
+                              // ),
+                              description: const Text(
+                                'Number can\'t be empty',
+                                style: TextStyle(fontSize: 12),
+                              ),
+                              layoutOrientation: ToastOrientation.ltr,
+                              animationType: AnimationType.fromRight,
+                              dismissable: true,
+                              position: MotionToastPosition.bottom,
+                            ).show(context);
+                          } else {
+                            await FlutterPhoneDirectCaller.callNumber(callnow);
+                          }
+                          // await addNote();
+                        },
+                        child: const Text('Call'),
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),
@@ -196,13 +215,13 @@ class _MainDialerState extends State<MainDialer> {
   String formatNumber(String num) {
     num = num.replaceAll(RegExp(r'[^0-9]'), '');
     if (num.length == 12 && num[0] == '9' && num[1] == '1') {
-      return "+" + num;
+      return "+$num";
     } else if (num.length < 10) {
-      return "0" + num;
+      return "0$num";
     } else if (num.length == 10) {
-      return "+91" + num;
+      return "+91$num";
     } else {
-      return "+" + num;
+      return "+$num";
     }
   }
 }
