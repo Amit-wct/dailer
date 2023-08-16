@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../screens/main_dialer.dart';
+
 void showLogoutConfirmation(BuildContext context) {
   showDialog(
     context: context,
@@ -20,6 +22,8 @@ void showLogoutConfirmation(BuildContext context) {
             onPressed: () {
               // Perform logout actions here
               // ...
+              fixed_no.dispose();
+              extension.dispose();
 
               // Close the app
               SystemChannels.platform.invokeMethod('SystemNavigator.pop');

@@ -139,24 +139,36 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
                       endIndent: 8, // Adjust the end indent of the divider
                     ),
                     SizedBox(height: 16),
-                    Container(
-                      padding: EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: Colors
-                            .lightGreen[100], // Change the container color
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: note.description.isEmpty
-                          ? Text(
-                              "Click on the edit button to add something to this note",
-                              style: TextStyle(
-                                color: Colors.black38,
-                                fontStyle: FontStyle.italic,
+                    GestureDetector(
+                      onTap: () async {
+                        print("tapp");
+                        if (isLoading) return;
+
+                        await Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => AddEditNotePage(note: note),
+                        ));
+
+                        refreshNote();
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: Colors
+                              .lightGreen[100], // Change the container color
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: note.description.isEmpty
+                            ? Text(
+                                "Click on the edit button to add something to this note",
+                                style: TextStyle(
+                                  color: Colors.black38,
+                                  fontStyle: FontStyle.italic,
+                                ),
+                              )
+                            : Text(
+                                note.description,
                               ),
-                            )
-                          : Text(
-                              note.description,
-                            ),
+                      ),
                     ),
                     SizedBox(height: 16),
                   ],

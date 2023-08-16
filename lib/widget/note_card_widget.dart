@@ -1,6 +1,11 @@
+import 'package:Dialer/screens/main_dialer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:intl/intl.dart';
 import 'package:Dialer/model/note.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import '../screens/login.dart';
 
 class NoteCardWidget extends StatelessWidget {
   NoteCardWidget({
@@ -53,6 +58,23 @@ class NoteCardWidget extends StatelessWidget {
     )
   };
 
+  Future<String> _loadExtensionValue() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('number2') ?? '';
+  }
+
+  Future<String> fetchExt() async {
+    String url =
+        'http://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=get_extn';
+    print(url);
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      return "";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     /// Pick colors from the accent colors based on index
@@ -60,13 +82,19 @@ class NoteCardWidget extends StatelessWidget {
     // final time = DateFormat.yMMMd().format(note.createdTime);
     // print(note.createdTime);
     final time = DateFormat.yMMMd().add_jm().format(note.createdTime);
+
+    String no_to_show = note.call_type == "Outgoing"
+        ? note.phone.toString()
+        : note.caller.toString();
+
     return Card(
       color: Colors.lightGreen[100],
       child: Stack(
         children: [
           Container(
             constraints: const BoxConstraints(minHeight: 70),
-            padding: const EdgeInsets.all(12),
+            padding:
+                const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,9 +116,7 @@ class NoteCardWidget extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      note.call_type == "Outgoing"
-                          ? note.phone.toString()
-                          : note.caller.toString(),
+                      no_to_show,
                       style:
                           TextStyle(color: Colors.grey.shade800, fontSize: 16),
                     ),
@@ -103,7 +129,39 @@ class NoteCardWidget extends StatelessWidget {
               ],
             ),
           ),
-          Positioned(top: 8, right: 8, child: priorityIcons[note.priority]),
+          Positioned(top: 8, right: 12, child: priorityIcons[note.priority]),
+          Positioned(
+            bottom: 0,
+            right: 0,
+            child: GestureDetector(
+              onTap: () async {
+                String ext = extension.text;
+                print("ext from field pref $ext");
+                if (ext.isEmpty) {
+                  ext = await _loadExtensionValue();
+                  print("ext after loadfrom pref $ext");
+                }
+                if (ext.isEmpty) {
+                  ext = await fetchExt();
+                  print("ext after fetch pref $ext");
+                }
+
+                print("clicked");
+                String callnow = fixed_no.text + ",," + ext + ",," + no_to_show;
+                print(callnow);
+                await FlutterPhoneDirectCaller.callNumber(callnow);
+              },
+              child: Container(
+                height: 50,
+                width: 48,
+                color: Colors.transparent,
+                child: Icon(
+                  Icons.call_sharp,
+                  color: Colors.green,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

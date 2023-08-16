@@ -11,6 +11,9 @@ import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:Dialer/components/logout_function.dart';
 import 'package:http/http.dart' as http;
 
+final fixed_no = TextEditingController();
+final extension = TextEditingController();
+
 class MainDialer extends StatefulWidget {
   const MainDialer({super.key});
 
@@ -19,8 +22,6 @@ class MainDialer extends StatefulWidget {
 }
 
 class _MainDialerState extends State<MainDialer> {
-  final fixed_no = TextEditingController();
-  final extension = TextEditingController();
   final number_to_dial = TextEditingController();
   String _response = '';
   String url = "";
@@ -31,8 +32,6 @@ class _MainDialerState extends State<MainDialer> {
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
-    fixed_no.dispose();
-    extension.dispose();
     number_to_dial.dispose();
     super.dispose();
   }
