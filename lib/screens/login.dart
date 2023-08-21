@@ -45,16 +45,25 @@ class _LoginWidgetState extends State<LoginWidget> {
     url =
         'http://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=login';
     print(url);
-    final response = await http.get(Uri.parse(url));
-    if (response.statusCode == 200) {
+    try {
+      final response = await http.get(Uri.parse(url));
+
+      if (response.statusCode == 200) {
+        setState(() {
+          _response = response.body;
+          print("type");
+          print(_response.runtimeType);
+        });
+      } else {
+        setState(() {
+          _response = 'Error: ${response.statusCode}';
+        });
+      }
+    } catch (e) {
+      // Handle the exception here
+      print('hello');
       setState(() {
-        _response = response.body;
-        print("type");
-        print(_response.runtimeType);
-      });
-    } else {
-      setState(() {
-        _response = 'Error: ${response.statusCode}';
+        _response = '{\'status\': \'No Internet\'}';
       });
     }
   }
@@ -184,7 +193,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                       minimumSize: const Size.fromHeight(50), // NEW
                     ),
                     onPressed: () async {
-                      bool? isloginvalid;
+                      String? alertDesc;
+                      String? alertTitle;
+                      bool isloginvalid = false;
                       await fetchData();
                       _saveValuesToPreferences();
                       print(_response);
@@ -200,11 +211,13 @@ class _LoginWidgetState extends State<LoginWidget> {
 
                           await prefs.setString('number1', mapData['number']);
                           isloginvalid = true;
-                        } else {
-                          isloginvalid = false;
+                        } else if (mapData['status'] == 'No Internet') {
+                          alertDesc = "login failed check internet connection";
+                          alertTitle = mapData['status'];
+                        } else if (mapData['status'] == 'login failed') {
+                          alertDesc = "Incorrect username or passworld";
+                          alertTitle = mapData['status'];
                         }
-
-                        print(isloginvalid);
                       }
 
                       if (isloginvalid == true) {
@@ -217,8 +230,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 style: alertStyle,
                                 type: AlertType.error,
                                 context: context,
-                                title: "Invalid Login",
-                                desc: "Incorrect Password or username")
+                                title: alertTitle,
+                                desc: alertDesc)
                             .show();
                       }
                     },

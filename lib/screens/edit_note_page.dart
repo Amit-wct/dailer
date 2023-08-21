@@ -3,6 +3,8 @@ import 'package:Dialer/db/notes_database.dart';
 import 'package:Dialer/model/note.dart';
 import 'package:Dialer/widget/note_form_widget.dart';
 import 'package:http/http.dart' as http;
+import 'package:motion_toast/motion_toast.dart';
+import 'package:motion_toast/resources/arrays.dart';
 
 import 'login.dart';
 
@@ -50,6 +52,7 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
         'http://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=update_notes&id=$trkn&pr=$priority&t=$title&d=$description';
 
     print(url);
+
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       setState(() {
@@ -119,13 +122,30 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
       title: title,
       description: description,
     );
-
-    await updateNoteOnline(
-        note.trkn,
-        note.priority,
-        note.title.replaceAll(" ", "%20"),
-        note.description.replaceAll(" ", "%20"));
-    await NotesDatabase.instance.update(note);
+    try {
+      await updateNoteOnline(
+          note.trkn,
+          note.priority,
+          note.title.replaceAll(" ", "%20"),
+          note.description.replaceAll(" ", "%20"));
+      await NotesDatabase.instance.update(note);
+    } catch (e) {
+      print("error");
+      MotionToast toast = MotionToast.error(
+        title: const Text(
+          'There is some issue',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        description: Text(
+          'Please check your internet connection',
+          style: TextStyle(fontSize: 12),
+        ),
+        layoutOrientation: ToastOrientation.ltr,
+        animationType: AnimationType.fromRight,
+        dismissable: true,
+      );
+      toast.show(context);
+    }
   }
 
   Future addNote() async {

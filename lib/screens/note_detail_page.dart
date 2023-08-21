@@ -190,6 +190,23 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
     }
   }
 
+  void showAlert() {
+    MotionToast toast = MotionToast.error(
+      title: const Text(
+        'There is some issue',
+        style: TextStyle(fontWeight: FontWeight.bold),
+      ),
+      description: Text(
+        'Please check your internet connection',
+        style: TextStyle(fontSize: 12),
+      ),
+      layoutOrientation: ToastOrientation.ltr,
+      animationType: AnimationType.fromRight,
+      dismissable: true,
+    );
+    toast.show(context);
+  }
+
   Widget editButton() => IconButton(
       icon: Icon(
         Icons.edit_outlined,
@@ -212,8 +229,12 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
         ),
         onPressed: () async {
           await NotesDatabase.instance.delete(widget.noteId);
-          await deleteNoteOnline(widget.noteId);
-          Navigator.of(context).pop();
+          try {
+            await deleteNoteOnline(widget.noteId);
+            Navigator.of(context).pop();
+          } catch (e) {
+            showAlert();
+          }
         },
       );
 
@@ -227,7 +248,11 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
 
           if (callbackDateTime[0] == 1) {
             setState(() => isLoading = true);
-            await sheduleCallback(callbackDateTime[1].replaceAll(' ', '_'));
+            try {
+              await sheduleCallback(callbackDateTime[1].replaceAll(' ', '_'));
+            } catch (e) {
+              showAlert();
+            }
             setState(() => isLoading = false);
             if (_response.isNotEmpty) {
               _response = _response.replaceAll("'", '"');

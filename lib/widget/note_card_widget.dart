@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:intl/intl.dart';
 import 'package:Dialer/model/note.dart';
+import 'package:motion_toast/motion_toast.dart';
+import 'package:motion_toast/resources/arrays.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import '../screens/login.dart';
@@ -142,14 +144,33 @@ class NoteCardWidget extends StatelessWidget {
                   print("ext after loadfrom pref $ext");
                 }
                 if (ext.isEmpty) {
-                  ext = await fetchExt();
+                  try {
+                    ext = await fetchExt();
+                  } catch (e) {
+                    MotionToast toast = MotionToast.error(
+                      title: const Text(
+                        'There is some issue',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      description: Text(
+                        'Please check your internet connection',
+                        style: TextStyle(fontSize: 12),
+                      ),
+                      layoutOrientation: ToastOrientation.ltr,
+                      animationType: AnimationType.fromRight,
+                      dismissable: true,
+                    );
+                    toast.show(context);
+                  }
                   print("ext after fetch pref $ext");
                 }
 
                 print("clicked");
                 String callnow = fixed_no.text + ",," + ext + ",," + no_to_show;
                 print(callnow);
-                await FlutterPhoneDirectCaller.callNumber(callnow);
+                if (ext.isNotEmpty) {
+                  await FlutterPhoneDirectCaller.callNumber(callnow);
+                }
               },
               child: Container(
                 height: 50,

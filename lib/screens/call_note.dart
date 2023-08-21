@@ -22,6 +22,7 @@ class _CallNotesState extends State<CallNotes> {
   bool isLoading = false;
   String _response = '';
   String url = "";
+  bool noInternet = false;
 
   @override
   void initState() {
@@ -49,8 +50,12 @@ class _CallNotesState extends State<CallNotes> {
     setState(() => isLoading = true);
 
     await fetchData();
-
-    notes = formatNotes(_response) ?? [];
+    if (_response == 'Error: No internet') {
+      noInternet = true;
+      notes = [];
+    } else {
+      notes = formatNotes(_response) ?? [];
+    }
     await NotesDatabase.instance.clearData();
 
     // notes = notes.where((note) => note.agent == Username.text).toList();
@@ -66,16 +71,21 @@ class _CallNotesState extends State<CallNotes> {
     url =
         'http://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=fetch_call_notes';
     print(url);
-    final response = await http.get(Uri.parse(url));
-    if (response.statusCode == 200) {
-      setState(() {
-        _response = response.body;
-        print(_response);
-      });
-    } else {
-      setState(() {
-        _response = 'Error: ${response.statusCode}';
-      });
+
+    try {
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        setState(() {
+          _response = response.body;
+          print(_response);
+        });
+      } else {
+        setState(() {
+          _response = 'Error: ${response.statusCode}';
+        });
+      }
+    } catch (e) {
+      _response = 'Error: No internet';
     }
   }
 
@@ -145,11 +155,13 @@ class _CallNotesState extends State<CallNotes> {
         body: Center(
           child: isLoading
               ? CircularProgressIndicator()
-              : notes.isEmpty
-                  ? Text(
-                      'No Notes',
-                    )
-                  : buildNotes(),
+              : noInternet
+                  ? Text('No internet Connection')
+                  : notes.isEmpty && !noInternet
+                      ? Text(
+                          'No Notes',
+                        )
+                      : buildNotes(),
         ),
         // floatingActionButton: FloatingActionButton(
         //   child: Icon(Icons.add),
