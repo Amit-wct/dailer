@@ -101,7 +101,8 @@ class _CallNotesState extends State<CallNotes> {
             Random().nextInt(9999).toString());
         int priority = item['priority'];
         String domain = item['domainname'];
-        int phone = int.parse(item['destination']);
+        int phone =
+            int.parse(item['destination'].replaceAll(RegExp(r'[^0-9]'), ''));
         String title = item['title'];
         String description = item['description'];
         String agent = item['omuser'];

@@ -138,10 +138,10 @@ class NoteCardWidget extends StatelessWidget {
             child: GestureDetector(
               onTap: () async {
                 String ext = extension.text;
-                print("ext from field pref $ext");
+                // print("ext from field pref $ext");
                 if (ext.isEmpty) {
                   ext = await _loadExtensionValue();
-                  print("ext after loadfrom pref $ext");
+                  // print("ext after loadfrom pref $ext");
                 }
                 if (ext.isEmpty) {
                   try {
@@ -162,7 +162,7 @@ class NoteCardWidget extends StatelessWidget {
                     );
                     toast.show(context);
                   }
-                  print("ext after fetch pref $ext");
+                  // print("ext after fetch pref $ext");
                 }
 
                 print("clicked");
