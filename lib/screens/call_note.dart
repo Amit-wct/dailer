@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'dart:io';
+
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -8,9 +10,12 @@ import 'package:Dialer/db/notes_database.dart';
 import 'package:Dialer/model/note.dart';
 import 'package:Dialer/screens/note_detail_page.dart';
 import 'package:Dialer/widget/note_card_widget.dart';
+import 'package:motion_toast/motion_toast.dart';
+import 'package:motion_toast/resources/arrays.dart';
 import '../components/logout_function.dart';
 import 'login.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class CallNotes extends StatefulWidget {
   @override
@@ -23,7 +28,9 @@ class _CallNotesState extends State<CallNotes> {
   String _response = '';
   String url = "";
   bool noInternet = false;
-
+  DateTime? selectedDate;
+  DateTime? toDate, fromDate;
+  bool isfiltered = false;
   @override
   void initState() {
     super.initState();
@@ -68,9 +75,20 @@ class _CallNotesState extends State<CallNotes> {
   }
 
   Future<void> fetchData() async {
-    url =
-        'http://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=fetch_call_notes';
-    print(url);
+    print("from fetchdata $selectedDate");
+
+    if (toDate == null && fromDate == null) {
+      url =
+          'http://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=fetch_call_notes&toDate=none&fromDate=none';
+      print(url);
+    } else {
+      String dateTo = toDate.toString().split(' ')[0];
+      String dateFrom = fromDate.toString().split(' ')[0];
+
+      url =
+          'http://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=fetch_call_notes&fromDate=$dateFrom&toDate=$dateTo';
+      print(url);
+    }
 
     try {
       final response = await http.get(Uri.parse(url));
@@ -133,6 +151,136 @@ class _CallNotesState extends State<CallNotes> {
     return null;
   }
 
+  void showAlertMessage(String message) {
+    MotionToast toast = MotionToast.warning(
+      title: const Text(
+        'Invalid Date',
+        style: TextStyle(fontWeight: FontWeight.bold),
+      ),
+      description: Text(
+        message,
+        style: TextStyle(fontSize: 12),
+      ),
+      layoutOrientation: ToastOrientation.ltr,
+      animationType: AnimationType.fromRight,
+      dismissable: true,
+    );
+    toast.show(context);
+  }
+
+  dynamic searchFilter() {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 20,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: TextField(
+                  onTap: () async {
+                    DateTime? selectedDate = await showDatePicker(
+                      context: context,
+                      initialDate: fromDate ?? DateTime.now(),
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2101),
+                    );
+                    if (selectedDate != null && selectedDate != fromDate) {
+                      setState(() {
+                        fromDate = selectedDate;
+                      });
+                    }
+                  },
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'From Date',
+                  ),
+                  readOnly: true,
+                  controller: TextEditingController(
+                    text: fromDate != null
+                        ? "${fromDate!.year}-${fromDate!.month.toString().padLeft(2, '0')}-${fromDate!.day.toString().padLeft(2, '0')}"
+                        : "",
+                  ),
+                ),
+              ),
+              SizedBox(width: 10),
+              Expanded(
+                child: TextFormField(
+                  onTap: () async {
+                    DateTime? selectedDate = await showDatePicker(
+                      context: context,
+                      initialDate: toDate ?? DateTime.now(),
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2101),
+                    );
+                    if (selectedDate != null && selectedDate != toDate) {
+                      setState(() {
+                        toDate = selectedDate;
+                      });
+                    }
+                  },
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'To Date',
+                  ),
+                  readOnly: true,
+                  controller: TextEditingController(
+                    text: toDate != null
+                        ? "${toDate!.year}-${toDate!.month.toString().padLeft(2, '0')}-${toDate!.day.toString().padLeft(2, '0')}"
+                        : "",
+                  ),
+                ),
+              ),
+              SizedBox(width: 16),
+              ElevatedButton(
+                onPressed: () {
+                  // Handle the search action here
+                  final now = DateTime.now();
+                  if (fromDate != null && toDate != null) {
+                    print("Searching from $fromDate to $toDate");
+
+                    if (toDate!.isBefore(fromDate!)) {
+                      showAlertMessage('To date cannot be less than from date');
+                    } else if (toDate!.isAfter(now)) {
+                      showAlertMessage('To date cannot be future date');
+                    } else if (fromDate!.isAfter(now)) {
+                      showAlertMessage('From date cannot be future date');
+                    } else {
+                      refreshNotes();
+                    }
+                  } else {
+                    showAlertMessage("To date from date cannot be empty");
+                  }
+                  isfiltered = true;
+                },
+                child: Text('Search'),
+              ),
+            ],
+          ),
+          isfiltered
+              ? ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      toDate = null;
+                      fromDate = null;
+                      isfiltered = false;
+                    });
+
+                    refreshNotes();
+                  },
+                  child: Text("clear filter"),
+                )
+              : SizedBox(
+                  height: 10,
+                ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
@@ -155,21 +303,42 @@ class _CallNotesState extends State<CallNotes> {
         ),
         body: Center(
           child: isLoading
-              ? CircularProgressIndicator()
+              ? SpinKitWaveSpinner(
+                  color: Color.fromARGB(255, 114, 189, 71),
+                  waveColor: Color.fromARGB(230, 147, 197, 132),
+                  size: 100)
               : noInternet
                   ? Text('No internet Connection')
                   : notes.isEmpty && !noInternet
-                      ? Text(
-                          'No Notes',
+                      ? Column(
+                          children: [
+                            searchFilter(),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Center(
+                              child: Text(
+                                'No Notes',
+                              ),
+                            ),
+                          ],
                         )
-                      : buildNotes(),
+                      : Column(
+                          children: [
+                            searchFilter(),
+                            Expanded(
+                              child: buildNotes(),
+                            ),
+                          ],
+                        ),
         ),
         // floatingActionButton: FloatingActionButton(
-        //   child: Icon(Icons.add),
+        //   child: Icon(Icons.filter_alt_off_outlined),
         //   onPressed: () async {
-        //     await Navigator.of(context).push(
-        //       MaterialPageRoute(builder: (context) => AddEditNotePage()),
-        //     );
+        //     setState(() {
+        //       toDate = null;
+        //       fromDate = null;
+        //     });
 
         //     refreshNotes();
         //   },

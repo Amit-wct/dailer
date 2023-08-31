@@ -166,7 +166,8 @@ class NoteCardWidget extends StatelessWidget {
                 }
 
                 print("clicked");
-                String callnow = fixed_no.text + ",," + ext + ",," + no_to_show;
+                String callnow =
+                    "+${fixed_no.text},,${ext.replaceAll('\n', '')},,$no_to_show#";
                 print(callnow);
                 if (ext.isNotEmpty) {
                   await FlutterPhoneDirectCaller.callNumber(callnow);

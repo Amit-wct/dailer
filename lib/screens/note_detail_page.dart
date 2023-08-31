@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/intl.dart';
 import 'package:Dialer/db/notes_database.dart';
 import 'package:Dialer/model/note.dart';
@@ -77,7 +78,11 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
           foregroundColor: Colors.white,
         ),
         body: isLoading
-            ? Center(child: CircularProgressIndicator())
+            ? Center(
+                child: SpinKitWaveSpinner(
+                    color: Color.fromARGB(255, 114, 189, 71),
+                    waveColor: Color.fromARGB(230, 147, 197, 132),
+                    size: 100))
             : Padding(
                 padding: EdgeInsets.all(12),
                 child: ListView(
