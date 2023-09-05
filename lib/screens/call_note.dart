@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -18,6 +16,8 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class CallNotes extends StatefulWidget {
+  const CallNotes({super.key});
+
   @override
   _CallNotesState createState() => _CallNotesState();
 }
@@ -75,19 +75,19 @@ class _CallNotesState extends State<CallNotes> {
   }
 
   Future<void> fetchData() async {
-    print("from fetchdata $selectedDate");
+    // print("from fetchdata $selectedDate");
 
     if (toDate == null && fromDate == null) {
       url =
           'http://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=fetch_call_notes&toDate=none&fromDate=none';
-      print(url);
+      // print(url);
     } else {
       String dateTo = toDate.toString().split(' ')[0];
       String dateFrom = fromDate.toString().split(' ')[0];
 
       url =
           'http://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=fetch_call_notes&fromDate=$dateFrom&toDate=$dateTo';
-      print(url);
+      // print(url);
     }
 
     try {
@@ -95,7 +95,7 @@ class _CallNotesState extends State<CallNotes> {
       if (response.statusCode == 200) {
         setState(() {
           _response = response.body;
-          print(_response);
+          // print(_response);
         });
       } else {
         setState(() {
@@ -127,7 +127,7 @@ class _CallNotesState extends State<CallNotes> {
         String datetimeTemp = item['time'].split("+")[0];
         String call_type = item['call_type'];
         String caller = item['caller'].replaceAll('\n', '');
-        print(caller);
+        // print(caller);
         DateTime time = DateTime.parse(datetimeTemp);
 
         Note temp = Note(
@@ -159,7 +159,7 @@ class _CallNotesState extends State<CallNotes> {
       ),
       description: Text(
         message,
-        style: TextStyle(fontSize: 12),
+        style: const TextStyle(fontSize: 12),
       ),
       layoutOrientation: ToastOrientation.ltr,
       animationType: AnimationType.fromRight,
@@ -170,10 +170,10 @@ class _CallNotesState extends State<CallNotes> {
 
   dynamic searchFilter() {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+      padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Row(
@@ -194,7 +194,7 @@ class _CallNotesState extends State<CallNotes> {
                       });
                     }
                   },
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'From Date',
                   ),
@@ -206,7 +206,7 @@ class _CallNotesState extends State<CallNotes> {
                   ),
                 ),
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               Expanded(
                 child: TextFormField(
                   onTap: () async {
@@ -222,7 +222,7 @@ class _CallNotesState extends State<CallNotes> {
                       });
                     }
                   },
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'To Date',
                   ),
@@ -234,13 +234,13 @@ class _CallNotesState extends State<CallNotes> {
                   ),
                 ),
               ),
-              SizedBox(width: 16),
+              const SizedBox(width: 16),
               ElevatedButton(
                 onPressed: () {
                   // Handle the search action here
                   final now = DateTime.now();
                   if (fromDate != null && toDate != null) {
-                    print("Searching from $fromDate to $toDate");
+                    // print("Searching from $fromDate to $toDate");
 
                     if (toDate!.isBefore(fromDate!)) {
                       showAlertMessage('To date cannot be less than from date');
@@ -256,24 +256,27 @@ class _CallNotesState extends State<CallNotes> {
                   }
                   isfiltered = true;
                 },
-                child: Text('Search'),
+                child: const Text('Search'),
               ),
             ],
           ),
           isfiltered
-              ? ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      toDate = null;
-                      fromDate = null;
-                      isfiltered = false;
-                    });
+              ? Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        toDate = null;
+                        fromDate = null;
+                        isfiltered = false;
+                      });
 
-                    refreshNotes();
-                  },
-                  child: Text("clear filter"),
+                      refreshNotes();
+                    },
+                    child: const Text("clear filter"),
+                  ),
                 )
-              : SizedBox(
+              : const SizedBox(
                   height: 10,
                 ),
         ],
@@ -284,14 +287,14 @@ class _CallNotesState extends State<CallNotes> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             'Call Notes',
             style: TextStyle(color: Colors.white),
           ),
           backgroundColor: Colors.blueGrey[900],
           actions: <Widget>[
             IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.logout,
                 color: Colors.white,
               ),
@@ -303,20 +306,20 @@ class _CallNotesState extends State<CallNotes> {
         ),
         body: Center(
           child: isLoading
-              ? SpinKitWaveSpinner(
+              ? const SpinKitWaveSpinner(
                   color: Color.fromARGB(255, 114, 189, 71),
                   waveColor: Color.fromARGB(230, 147, 197, 132),
                   size: 100)
               : noInternet
-                  ? Text('No internet Connection')
+                  ? const Text('No internet Connection')
                   : notes.isEmpty && !noInternet
                       ? Column(
                           children: [
                             searchFilter(),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
-                            Center(
+                            const Center(
                               child: Text(
                                 'No Notes',
                               ),
@@ -346,9 +349,9 @@ class _CallNotesState extends State<CallNotes> {
       );
 
   Widget buildNotes() => StaggeredGridView.countBuilder(
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         itemCount: notes.length,
-        staggeredTileBuilder: (index) => StaggeredTile.fit(4),
+        staggeredTileBuilder: (index) => const StaggeredTile.fit(4),
         crossAxisCount: 4,
         mainAxisSpacing: 0,
         crossAxisSpacing: 0,
