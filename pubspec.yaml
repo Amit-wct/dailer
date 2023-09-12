@@ -10,13 +10,11 @@ dependencies:
   flutter:
     sdk: flutter
 
-  contacts_service: 0.6.3
-  permission_handler:
-  flutter_contacts:
-  url_launcher:
-  shared_preferences:
-  fluttercontactpicker:
-  http:
+  permission_handler: 11.0.0
+  url_launcher: 6.0.15
+  shared_preferences: 2.2.1
+  fluttercontactpicker: 4.7.0
+  http: 0.13.6
   flutter_phone_direct_caller: 2.1.1
   rflutter_alert: 2.0.7
   sqflite: 2.0.0
@@ -29,9 +27,15 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: 2.0.0
+  flutter_launcher_icons: 0.13.1
 
 flutter:
   uses-material-design: true
 
   assets:
     - images/
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "images/call.png"

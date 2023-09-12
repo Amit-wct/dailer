@@ -80,14 +80,14 @@ class _CallNotesState extends State<CallNotes> {
     if (toDate == null && fromDate == null) {
       url =
           'http://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=fetch_call_notes&toDate=none&fromDate=none';
-      // print(url);
+      print(url);
     } else {
       String dateTo = toDate.toString().split(' ')[0];
       String dateFrom = fromDate.toString().split(' ')[0];
 
       url =
           'http://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=fetch_call_notes&fromDate=$dateFrom&toDate=$dateTo';
-      // print(url);
+      print(url);
     }
 
     try {

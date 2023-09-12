@@ -125,14 +125,21 @@ class _MainDialerState extends State<MainDialer> {
                         border: OutlineInputBorder(),
                         labelText: 'Enter number to dial',
                         suffixIcon: IconButton(
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.contact_page,
                           ),
                           onPressed: () async {
-                            final PhoneContact contact =
-                                await FlutterContactPicker.pickPhoneContact();
-                            print(contact.phoneNumber!.number);
-                            number_to_dial.text = contact.phoneNumber!.number!;
+                            PhoneContact? contact;
+                            try {
+                              contact =
+                                  await FlutterContactPicker.pickPhoneContact();
+                            } catch (e) {
+                              number_to_dial.text = "";
+                            }
+                            // print(contact!.phoneNumber!.number);
+                            if (contact != null)
+                              number_to_dial.text =
+                                  contact.phoneNumber!.number!;
                           },
                         ),
                       ),
@@ -147,11 +154,11 @@ class _MainDialerState extends State<MainDialer> {
                         ),
                         onPressed: () async {
                           String did = formatNumber(fixed_no.text);
-                          print(did);
+                          // print(did);
                           final String callnow =
                               "tel:$did,,${extension.text},,${number_to_dial.text.replaceAll(RegExp(r'[^0-9]'), '')}#";
 
-                          print(callnow);
+                          // print(callnow);
 
                           if (number_to_dial.text.length < 3) {
                             MotionToast.warning(
