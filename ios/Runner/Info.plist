@@ -52,5 +52,10 @@
 	<dict>
     	<key>NSAllowsArbitraryLoads</key><true/>
 	</dict>
+
+	<dict> 
+		<key>NSContactsUsageDescription</key>   
+		<string>You can import a friend from a list of contacts.</string>
+	</dict>
 </dict>
 </plist>

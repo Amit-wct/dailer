@@ -48,9 +48,9 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
     setState(() => isLoading = false);
   }
 
-  Future<void> sheduleCallback(String dt) async {
+  Future<void> sheduleCallback(String dt, String phone) async {
     url =
-        'http://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=callback&cbn=%2B${note.phone}&dt=$dt';
+        'http://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=callback&cbn=%2B$phone&dt=$dt';
     print(url);
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
@@ -254,7 +254,12 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
           if (callbackDateTime[0] == 1) {
             setState(() => isLoading = true);
             try {
-              await sheduleCallback(callbackDateTime[1].replaceAll(' ', '_'));
+              String no_to_call = note.call_type == "Outgoing"
+                  ? note.phone.toString()
+                  : note.caller.toString();
+
+              await sheduleCallback(
+                  callbackDateTime[1].replaceAll(' ', '_'), no_to_call);
             } catch (e) {
               showAlert();
             }
@@ -273,7 +278,7 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   description: Text(
-                    'call back scheduled for the number $num_toast at ${callbackDateTime[1]}',
+                    'call back scheduled for the number ${note.call_type == "Outgoing" ? note.phone.toString() : note.caller.toString()} at ${callbackDateTime[1]}',
                     style: TextStyle(fontSize: 12),
                   ),
                   layoutOrientation: ToastOrientation.ltr,
