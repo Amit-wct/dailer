@@ -49,7 +49,7 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
   Future<void> updateNoteOnline(
       String trkn, int priority, String title, String desc) async {
     url =
-        'http://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=update_notes&id=$trkn&pr=$priority&t=$title&d=$description';
+        'https://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=update_notes&id=$trkn&pr=$priority&t=$title&d=$description';
 
     print(url);
 

@@ -66,7 +66,7 @@ class _CallNotesState extends State<CallNotes> {
     await NotesDatabase.instance.clearData();
 
     // notes = notes.where((note) => note.agent == Username.text).toList();
-    notes = notes.reversed.toList();
+    //  notes = notes.reversed.toList();
     for (var note in notes) {
       await NotesDatabase.instance.create(note);
     }
@@ -79,14 +79,14 @@ class _CallNotesState extends State<CallNotes> {
 
     if (toDate == null && fromDate == null) {
       url =
-          'http://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=fetch_call_notes&toDate=none&fromDate=none';
+          'https://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=fetch_call_notes&toDate=none&fromDate=none';
       print(url);
     } else {
       String dateTo = toDate.toString().split(' ')[0];
       String dateFrom = fromDate.toString().split(' ')[0];
 
       url =
-          'http://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=fetch_call_notes&fromDate=$dateFrom&toDate=$dateTo';
+          'https://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=fetch_call_notes&fromDate=$dateFrom&toDate=$dateTo';
       print(url);
     }
 

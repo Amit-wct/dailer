@@ -1,4 +1,5 @@
 import 'package:Dialer/screens/main_dialer.dart';
+import './player2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:intl/intl.dart';
@@ -18,6 +19,8 @@ class NoteCardWidget extends StatelessWidget {
 
   final Note note;
   final int index;
+  String? did1;
+  String? extension;
 
   List<Icon> priorityIcons = [
     const Icon(
@@ -65,9 +68,15 @@ class NoteCardWidget extends StatelessWidget {
     return prefs.getString('number2') ?? '';
   }
 
+  Future<void> _loadValuesFromPreferences() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    did1 = prefs.getString('number1') ?? '';
+    extension = prefs.getString('number2') ?? '';
+  }
+
   Future<String> fetchExt() async {
     String url =
-        'http://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=get_extn';
+        'https://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=get_extn';
     print(url);
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
@@ -84,7 +93,7 @@ class NoteCardWidget extends StatelessWidget {
     // final time = DateFormat.yMMMd().format(note.createdTime);
     // print(note.createdTime);
     final time = DateFormat.yMMMd().add_jm().format(note.createdTime);
-
+    print(note.trkn);
     String no_to_show = note.call_type == "Outgoing"
         ? note.phone.toString()
         : note.caller.toString();
@@ -128,16 +137,20 @@ class NoteCardWidget extends StatelessWidget {
                     ),
                   ],
                 ),
+                Player(
+                    url:
+                        'https://www2.cs.uic.edu/~i101/SoundFiles/gettysburg10.wav')
               ],
             ),
           ),
           Positioned(top: 8, right: 12, child: priorityIcons[note.priority]),
           Positioned(
-            bottom: 0,
+            bottom: 10,
             right: 0,
             child: GestureDetector(
               onTap: () async {
-                String ext = extension.text;
+                await _loadValuesFromPreferences();
+                String ext = extension!;
                 // print("ext from field pref $ext");
                 if (ext.isEmpty) {
                   ext = await _loadExtensionValue();
@@ -167,7 +180,7 @@ class NoteCardWidget extends StatelessWidget {
 
                 print("clicked");
                 String callnow =
-                    "+${fixed_no.text},,${ext.replaceAll('\n', '')},,$no_to_show#";
+                    "+$did1,,${ext.replaceAll('\n', '')},,$no_to_show#";
                 print(callnow);
                 if (ext.isNotEmpty) {
                   await FlutterPhoneDirectCaller.callNumber(callnow);

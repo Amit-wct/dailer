@@ -50,7 +50,7 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
 
   Future<void> sheduleCallback(String dt, String phone) async {
     url =
-        'http://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=callback&cbn=%2B$phone&dt=$dt';
+        'https://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=callback&cbn=%2B$phone&dt=$dt';
     print(url);
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
@@ -183,7 +183,7 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
 
   Future<void> deleteNoteOnline(int noteid) async {
     url =
-        'http://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=delete_note&d=$noteid';
+        'https://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=delete_note&d=$noteid';
     print(url);
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {

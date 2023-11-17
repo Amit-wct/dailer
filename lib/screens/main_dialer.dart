@@ -10,9 +10,10 @@ import '../model/note.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:Dialer/components/logout_function.dart';
 import 'package:http/http.dart' as http;
+import 'package:Dialer/widget/dailpad.dart';
 
-final fixed_no = TextEditingController();
-final extension = TextEditingController();
+String? did1;
+String? extension;
 
 class MainDialer extends StatefulWidget {
   const MainDialer({super.key});
@@ -46,18 +47,13 @@ class _MainDialerState extends State<MainDialer> {
 
   Future<void> _loadValuesFromPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String number1 = prefs.getString('number1') ?? '';
-    String number2 = prefs.getString('number2') ?? '';
-
-    setState(() {
-      fixed_no.text = number1;
-      extension.text = number2;
-    });
+    did1 = prefs.getString('number1') ?? '';
+    extension = prefs.getString('number2') ?? '';
   }
 
   Future<void> addNoteOnline(String data) async {
     url =
-        'http://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=add_note&d=$data';
+        'https://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=add_note&d=$data';
     print(url);
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
@@ -68,6 +64,18 @@ class _MainDialerState extends State<MainDialer> {
       setState(() {
         _response = 'Error: ${response.statusCode}';
       });
+    }
+  }
+
+  Future<String> fetchExt() async {
+    String url =
+        'https://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=get_extn';
+    print(url);
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      return "";
     }
   }
 
@@ -99,95 +107,88 @@ class _MainDialerState extends State<MainDialer> {
           ],
         ),
         backgroundColor: Color.fromRGBO(249, 253, 246, 1),
-        body: SingleChildScrollView(
-          child: Container(
-            child: Container(
-              margin: EdgeInsets.only(top: 30),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  InputFieldMaker('Enter a fixed number', fixed_no,
-                      TextInputType.phone, focusNode_fixed_no),
-                  InputFieldMaker('Enter option', extension,
-                      TextInputType.phone, focusNode_extension),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 32, vertical: 16),
-                    child: TextFormField(
-                      focusNode: _focusNode,
-                      onEditingComplete: () {
-                        FocusScope.of(context)
-                            .unfocus(); // Dismiss the keyboard
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 16),
+              child: SizedBox(
+                width: 260,
+                child: TextFormField(
+                  readOnly: true,
+                  // showCursor: true,
+                  autofocus: true,
+                  style: TextStyle(fontSize: 28),
+                  controller: number_to_dial,
+
+                  decoration: InputDecoration(
+                    // border: OutlineInputBorder(),
+                    hintText: 'Enter number',
+                    suffixIcon: IconButton(
+                      enableFeedback: true,
+                      splashColor: const Color.fromARGB(255, 190, 235, 191),
+                      icon: const Icon(
+                        Icons.contact_page,
+                      ),
+                      onPressed: () async {
+                        PhoneContact? contact;
+                        try {
+                          contact =
+                              await FlutterContactPicker.pickPhoneContact();
+                        } catch (e) {
+                          number_to_dial.text = "";
+                        }
+                        // print(contact!.phoneNumber!.number);
+                        if (contact != null)
+                          number_to_dial.text = contact.phoneNumber!.number!;
                       },
-                      controller: number_to_dial,
-                      keyboardType: TextInputType.phone,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Enter number to dial',
-                        suffixIcon: IconButton(
-                          icon: const Icon(
-                            Icons.contact_page,
-                          ),
-                          onPressed: () async {
-                            PhoneContact? contact;
-                            try {
-                              contact =
-                                  await FlutterContactPicker.pickPhoneContact();
-                            } catch (e) {
-                              number_to_dial.text = "";
-                            }
-                            // print(contact!.phoneNumber!.number);
-                            if (contact != null)
-                              number_to_dial.text =
-                                  contact.phoneNumber!.number!;
-                          },
-                        ),
-                      ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(32.0),
-                    child: Center(
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: const Size.fromHeight(50), // NEW
-                        ),
-                        onPressed: () async {
-                          String did = formatNumber(fixed_no.text);
-                          // print(did);
-                          final String callnow =
-                              "tel:$did,,${extension.text},,${number_to_dial.text.replaceAll(RegExp(r'[^0-9]'), '')}#";
-
-                          // print(callnow);
-
-                          if (number_to_dial.text.length < 3) {
-                            MotionToast.warning(
-                              // title: const Text(
-                              //   'Info',
-                              //   style: TextStyle(fontWeight: FontWeight.bold),
-                              // ),
-                              description: const Text(
-                                'Number can\'t be empty',
-                                style: TextStyle(fontSize: 12),
-                              ),
-                              layoutOrientation: ToastOrientation.ltr,
-                              animationType: AnimationType.fromRight,
-                              dismissable: true,
-                              position: MotionToastPosition.bottom,
-                            ).show(context);
-                          } else {
-                            await FlutterPhoneDirectCaller.callNumber(callnow);
-                          }
-                          // await addNote();
-                        },
-                        child: const Text('Call'),
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
             ),
-          ),
+            Dailpad(number_to_dial, callNumber),
+            // Padding(
+            //   padding: const EdgeInsets.all(32.0),
+            //   child: Center(
+            //     child: ElevatedButton(
+            //       style: ElevatedButton.styleFrom(
+            //         minimumSize: const Size.fromHeight(50), // NEW
+            //       ),
+            //       onPressed: () async {
+            //         String did = formatNumber(did1!);
+            //         // print(did);
+            //         final String callnow =
+            //             "tel:$did,,$extension,,${number_to_dial.text.replaceAll(RegExp(r'[^0-9]'), '')}#";
+
+            //         print(callnow);
+
+            //         if (number_to_dial.text.length < 3) {
+            //           MotionToast.warning(
+            //             // title: const Text(
+            //             //   'Info',
+            //             //   style: TextStyle(fontWeight: FontWeight.bold),
+            //             // ),
+            //             description: const Text(
+            //               'Number can\'t be empty',
+            //               style: TextStyle(fontSize: 12),
+            //             ),
+            //             layoutOrientation: ToastOrientation.ltr,
+            //             animationType: AnimationType.fromRight,
+            //             dismissable: true,
+            //             position: MotionToastPosition.bottom,
+            //           ).show(context);
+            //         } else {
+            //           await FlutterPhoneDirectCaller.callNumber(callnow);
+            //         }
+            //         // await addNote();
+            //       },
+            //       child: const Text('Call'),
+            //     ),
+            //   ),
+            // ),
+          ],
         ),
       ),
     );
@@ -217,6 +218,34 @@ class _MainDialerState extends State<MainDialer> {
   //   addNoteOnline(newNoteData);
   //   await NotesDatabase.instance.create(note);
   // }
+
+  void callNumber() async {
+    String did = formatNumber(did1!);
+    // print(did);
+    final String callnow =
+        "tel:$did,,$extension,,${number_to_dial.text.replaceAll(RegExp(r'[^0-9]'), '')}#";
+
+    print(callnow);
+
+    if (number_to_dial.text.length < 3) {
+      MotionToast.warning(
+        // title: const Text(
+        //   'Info',
+        //   style: TextStyle(fontWeight: FontWeight.bold),
+        // ),
+        description: const Text(
+          'Number can\'t be empty',
+          style: TextStyle(fontSize: 12),
+        ),
+        layoutOrientation: ToastOrientation.ltr,
+        animationType: AnimationType.fromRight,
+        dismissable: true,
+        position: MotionToastPosition.bottom,
+      ).show(context);
+    } else {
+      await FlutterPhoneDirectCaller.callNumber(callnow);
+    }
+  }
 
   String formatNumber(String num) {
     num = num.replaceAll(RegExp(r'[^0-9]'), '');

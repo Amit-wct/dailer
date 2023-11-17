@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:Dialer/widget/player2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -43,7 +44,7 @@ class _LoginWidgetState extends State<LoginWidget> {
 
   Future<void> fetchData() async {
     url =
-        'http://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=login';
+        'https://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=login';
     print(url);
     try {
       final response = await http.get(Uri.parse(url));
@@ -210,12 +211,14 @@ class _LoginWidgetState extends State<LoginWidget> {
                               await SharedPreferences.getInstance();
 
                           await prefs.setString('number1', mapData['number']);
+                          await prefs.setString(
+                              'number2', mapData['call_ext'].toString());
                           isloginvalid = true;
                         } else if (mapData['status'] == 'No Internet') {
                           alertDesc = "login failed check internet connection";
                           alertTitle = mapData['status'];
                         } else if (mapData['status'] == 'login failed') {
-                          alertDesc = "Incorrect username or passworld";
+                          alertDesc = "Incorrect username or password";
                           alertTitle = mapData['status'];
                         }
                       }
@@ -236,7 +239,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                       }
                     },
                     child: Text('Login')),
-              )
+              ),
             ]),
           ),
         ),
