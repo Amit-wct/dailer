@@ -139,7 +139,7 @@ class NoteCardWidget extends StatelessWidget {
                 ),
                 Player(
                     url:
-                        'https://www2.cs.uic.edu/~i101/SoundFiles/gettysburg10.wav')
+                        'https://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=get_recording&uid=${note.trkn}')
               ],
             ),
           ),

@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import './screens/login.dart';
 
 void main() async {
+  FlutterError.onError = (FlutterErrorDetails details) {
+    FlutterError.dumpErrorToConsole(details);
+  };
+
   runApp(const MyApp());
 }
 

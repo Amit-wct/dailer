@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:Dialer/widget/player2.dart';
+import 'package:Dialer/services/networking.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -8,6 +8,8 @@ import '../components/input_field.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import './navigation.dart';
 import 'package:http/http.dart' as http;
+import 'package:Dialer/services/location.dart';
+import 'cam.dart';
 
 final Url = TextEditingController();
 final Username = TextEditingController();
@@ -83,6 +85,18 @@ class _LoginWidgetState extends State<LoginWidget> {
     // TODO: implement initState
     super.initState();
     _loadValuesFromPreferences();
+  }
+
+  Future<void> getLocationData() async {
+    Location loc = Location();
+    await loc.getCurrentLocation();
+    String url =
+        'https://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&la=${loc.latitude}&lo=${loc.longitude}&a=save_cordinates';
+
+    print(url);
+    NetworkHelper helper = new NetworkHelper(url);
+    final data = await helper.getData();
+    print(data);
   }
 
   Future<void> _loadValuesFromPreferences() async {
@@ -214,6 +228,22 @@ class _LoginWidgetState extends State<LoginWidget> {
                           await prefs.setString(
                               'number2', mapData['call_ext'].toString());
                           isloginvalid = true;
+
+                          if (mapData['attendance_cord'] == 't') {
+                            getLocationData();
+                          }
+
+                          if (mapData['attendance_selfie'] == 't') {
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Cam()),
+                            ).then((result) {
+                              if (result != 'captured') {
+                                isloginvalid = false;
+                                alertDesc = 'Selfie not taken';
+                              }
+                            });
+                          }
                         } else if (mapData['status'] == 'No Internet') {
                           alertDesc = "login failed check internet connection";
                           alertTitle = mapData['status'];
@@ -239,7 +269,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                       }
                     },
                     child: Text('Login')),
-              ),
+              )
             ]),
           ),
         ),

@@ -25,6 +25,9 @@ dependencies:
   flutter_dialpad: 1.0.5
   flutter_dtmf: 2.0.2
   audioplayers: 4.0.0
+  geolocator: 9.0.0
+  camera: 0.10.5
+  path_provider: 2.1.1
 
 dev_dependencies:
   flutter_test:
