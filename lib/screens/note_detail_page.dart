@@ -181,7 +181,7 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
               ),
       );
 
-  Future<void> deleteNoteOnline(int noteid) async {
+  Future<void> deleteNoteOnline(String noteid) async {
     url =
         'https://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=delete_note&d=$noteid';
     print(url);
@@ -234,8 +234,9 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
         ),
         onPressed: () async {
           await NotesDatabase.instance.delete(widget.noteId);
+          print(widget.noteId);
           try {
-            await deleteNoteOnline(widget.noteId);
+            await deleteNoteOnline(note.trkn);
             Navigator.of(context).pop();
           } catch (e) {
             showAlert();

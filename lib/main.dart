@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.lightGreen,
       ),
-      home: MyHomePage(),
+      home: const MyHomePage(),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -45,6 +45,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           backgroundColor: Colors.blueGrey[900],
         ),
-        body: LoginWidget());
+        body: const LoginWidget());
   }
 }

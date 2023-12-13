@@ -9,6 +9,8 @@ import 'package:http/http.dart' as http;
 import 'package:async/async.dart';
 
 class Cam extends StatefulWidget {
+  final timestamp;
+  Cam({required this.timestamp});
   @override
   _CamState createState() => _CamState();
 }
@@ -18,8 +20,8 @@ class _CamState extends State<Cam> {
   CameraController? controller; //controller for camera
   XFile? image; //for captured image
   bool isPictureTaken = false;
-  String uploadURL =
-      'https://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=upload_image';
+  late String uploadURL =
+      'https://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&tmp=${widget.timestamp}&a=upload_image';
 
   int camera_front = 1;
 
@@ -27,6 +29,13 @@ class _CamState extends State<Cam> {
   void initState() {
     loadCamera();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    // Dispose of the camera controller when the widget is disposed
+    controller?.dispose();
+    super.dispose();
   }
 
   loadCamera() async {

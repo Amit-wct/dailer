@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:Dialer/screens/queue_login.dart';
 import 'package:Dialer/services/networking.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -10,6 +11,7 @@ import './navigation.dart';
 import 'package:http/http.dart' as http;
 import 'package:Dialer/services/location.dart';
 import 'cam.dart';
+import 'package:intl/intl.dart';
 
 final Url = TextEditingController();
 final Username = TextEditingController();
@@ -29,6 +31,10 @@ class _LoginWidgetState extends State<LoginWidget> {
   bool remember_me = false;
   String _response = '';
   String url = "";
+
+  DateTime now = DateTime.now();
+
+  // Format the timestamp
 
   bool _obscureText = true;
   var alertStyle = AlertStyle(
@@ -87,11 +93,11 @@ class _LoginWidgetState extends State<LoginWidget> {
     _loadValuesFromPreferences();
   }
 
-  Future<void> getLocationData() async {
+  Future<void> getLocationData(timestamp) async {
     Location loc = Location();
     await loc.getCurrentLocation();
     String url =
-        'https://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&la=${loc.latitude}&lo=${loc.longitude}&a=save_cordinates';
+        'https://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&la=${loc.latitude}&lo=${loc.longitude}&tmp=$timestamp&a=save_cordinates';
 
     print(url);
     NetworkHelper helper = new NetworkHelper(url);
@@ -229,19 +235,44 @@ class _LoginWidgetState extends State<LoginWidget> {
                               'number2', mapData['call_ext'].toString());
                           isloginvalid = true;
 
+                          String formattedTimestamp =
+                              DateFormat('yyyy-MM-dd_HH-mm-ss_SSSSSS')
+                                  .format(now);
+
+                          print('from flutter still');
+                          print(formattedTimestamp);
+
                           if (mapData['attendance_cord'] == 't') {
-                            getLocationData();
+                            getLocationData(formattedTimestamp);
                           }
 
                           if (mapData['attendance_selfie'] == 't') {
                             await Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => Cam()),
+                              MaterialPageRoute(
+                                  builder: (context) => Cam(
+                                        timestamp: formattedTimestamp,
+                                      )),
                             ).then((result) {
                               if (result != 'captured') {
                                 isloginvalid = false;
                                 alertDesc = 'Selfie not taken';
                               }
+                            });
+                          }
+
+                          if (mapData['queues_present'] == 't') {
+                            print(mapData['queues'].length);
+                            print(mapData['queues']);
+
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => QueueLogin(
+                                        queues: mapData['queues'],
+                                      )),
+                            ).then((value) {
+                              print(value);
                             });
                           }
                         } else if (mapData['status'] == 'No Internet') {
