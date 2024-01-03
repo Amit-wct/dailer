@@ -1,5 +1,4 @@
 import 'package:Dialer/screens/main_dialer.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import './player2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
@@ -11,7 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import '../screens/login.dart';
 
-class NoteCardWidget extends StatefulWidget {
+class NoteCardWidget extends StatelessWidget {
   NoteCardWidget({
     Key? key,
     required this.note,
@@ -20,18 +19,8 @@ class NoteCardWidget extends StatefulWidget {
 
   final Note note;
   final int index;
-
-  @override
-  State<NoteCardWidget> createState() => _NoteCardWidgetState();
-}
-
-class _NoteCardWidgetState extends State<NoteCardWidget> {
   String? did1;
-
   String? extension;
-
-  bool show_player = true;
-  bool isLoading = false;
 
   List<Icon> priorityIcons = [
     const Icon(
@@ -74,23 +63,6 @@ class _NoteCardWidgetState extends State<NoteCardWidget> {
     )
   };
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    setState(() {
-      isLoading = true;
-    });
-    _initializeData();
-  }
-
-  Future<void> _initializeData() async {
-    await CheckRecording();
-    setState(() {
-      isLoading = false;
-    });
-  }
-
   Future<String> _loadExtensionValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('number2') ?? '';
@@ -114,28 +86,19 @@ class _NoteCardWidgetState extends State<NoteCardWidget> {
     }
   }
 
-  Future<void> CheckRecording() async {
-    String url =
-        'https://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=test_rec&uid=${widget.note.trkn}';
+  // Future<void> CheckRecording() async {
+  //   String url =
+  //       'https://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=test_rec&uid=${note.trkn}';
 
-    print(url);
+  //   print(url);
 
-    final response = await http.get(Uri.parse(url));
-    if (response.statusCode == 200) {
-      if (response.body == 'file not found\n') {
-        setState(() {
-          show_player = false;
-        });
-
-        print('come check this');
-      }
-    } else {
-      setState(() {
-        show_player = false;
-        print('object');
-      });
-    }
-  }
+  //   final response = await http.get(Uri.parse(url));
+  //   if (response.statusCode == 200) {
+  //     if (response.body == 'file not found') show_player = false;
+  //   } else {
+  //     show_player = false;
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -143,125 +106,116 @@ class _NoteCardWidgetState extends State<NoteCardWidget> {
 
     // final time = DateFormat.yMMMd().format(note.createdTime);
     // print(note.createdTime);
-    // CheckRecording();
-    final time = DateFormat.yMMMd().add_jm().format(widget.note.createdTime);
-    print(widget.note.trkn);
-    String no_to_show = widget.note.call_type == "Outgoing"
-        ? widget.note.phone.toString()
-        : widget.note.caller.toString();
+
+    final time = DateFormat.yMMMd().add_jm().format(note.createdTime);
+    // print(note.trkn);
+    String no_to_show = note.call_type == "Outgoing"
+        ? note.phone.toString()
+        : note.caller.toString();
 
     return Card(
       color: Colors.lightGreen[100],
-      child: isLoading
-          ? const SpinKitWaveSpinner(
-              color: Color.fromARGB(255, 114, 189, 71),
-              waveColor: Color.fromARGB(230, 147, 197, 132),
-              size: 100)
-          : Stack(
+      child: Stack(
+        children: [
+          Container(
+            constraints: const BoxConstraints(minHeight: 70),
+            padding:
+                const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  constraints: const BoxConstraints(minHeight: 70),
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 12.0, horizontal: 16.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        time,
-                        style: TextStyle(color: Colors.grey.shade800),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        widget.note.title,
-                        style: TextStyle(
-                          color: Colors.grey.shade800,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Row(
-                        children: [
-                          Text(
-                            no_to_show,
-                            style: TextStyle(
-                                color: Colors.grey.shade800, fontSize: 16),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 4.0),
-                            child: call_types[widget.note.call_type] ??
-                                Icon(Icons.abc),
-                          ),
-                        ],
-                      ),
-                      show_player
-                          ? Player(
-                              url:
-                                  'https://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=get_recording&uid=${widget.note.trkn}')
-                          : Text('Rec not found')
-                    ],
+                Text(
+                  time,
+                  style: TextStyle(color: Colors.grey.shade800),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  note.title,
+                  style: TextStyle(
+                    color: Colors.grey.shade800,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                Positioned(
-                    top: 8,
-                    right: 12,
-                    child: priorityIcons[widget.note.priority]),
-                Positioned(
-                  bottom: 10,
-                  right: 0,
-                  child: GestureDetector(
-                    onTap: () async {
-                      await _loadValuesFromPreferences();
-                      String ext = extension!;
-                      // print("ext from field pref $ext");
-                      if (ext.isEmpty) {
-                        ext = await _loadExtensionValue();
-                        // print("ext after loadfrom pref $ext");
-                      }
-                      if (ext.isEmpty) {
-                        try {
-                          ext = await fetchExt();
-                        } catch (e) {
-                          MotionToast toast = MotionToast.error(
-                            title: const Text(
-                              'There is some issue',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            description: Text(
-                              'Please check your internet connection',
-                              style: TextStyle(fontSize: 12),
-                            ),
-                            layoutOrientation: ToastOrientation.ltr,
-                            animationType: AnimationType.fromRight,
-                            dismissable: true,
-                          );
-                          toast.show(context);
-                        }
-                        // print("ext after fetch pref $ext");
-                      }
-
-                      print("clicked");
-                      String callnow =
-                          "+$did1,,${ext.replaceAll('\n', '')},,$no_to_show#";
-                      print(callnow);
-                      if (ext.isNotEmpty) {
-                        await FlutterPhoneDirectCaller.callNumber(callnow);
-                      }
-                    },
-                    child: Container(
-                      height: 50,
-                      width: 48,
-                      color: Colors.transparent,
-                      child: Icon(
-                        Icons.call_sharp,
-                        color: Colors.green,
-                      ),
+                const SizedBox(height: 4),
+                Row(
+                  children: [
+                    Text(
+                      no_to_show,
+                      style:
+                          TextStyle(color: Colors.grey.shade800, fontSize: 16),
                     ),
-                  ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 4.0),
+                      child: call_types[note.call_type] ?? Icon(Icons.abc),
+                    ),
+                  ],
                 ),
+                note.recording != ''
+                    ? Player(
+                        url:
+                            'https://${Url.text}/pbxlogin.py?l=${Username.text}&p=${Password.text}&a=test_rec&uid=${note.trkn}')
+                    : const Text('Recording not available for this call')
               ],
             ),
+          ),
+          Positioned(top: 8, right: 12, child: priorityIcons[note.priority]),
+          Positioned(
+            bottom: 10,
+            right: 0,
+            child: GestureDetector(
+              onTap: () async {
+                await _loadValuesFromPreferences();
+                String ext = extension!;
+                // print("ext from field pref $ext");
+                if (ext.isEmpty) {
+                  ext = await _loadExtensionValue();
+                  // print("ext after loadfrom pref $ext");
+                }
+                if (ext.isEmpty) {
+                  try {
+                    ext = await fetchExt();
+                  } catch (e) {
+                    MotionToast toast = MotionToast.error(
+                      title: const Text(
+                        'There is some issue',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      description: const Text(
+                        'Please check your internet connection',
+                        style: TextStyle(fontSize: 12),
+                      ),
+                      layoutOrientation: ToastOrientation.ltr,
+                      animationType: AnimationType.fromRight,
+                      dismissable: true,
+                    );
+                    toast.show(context);
+                  }
+                  // print("ext after fetch pref $ext");
+                }
+
+                // print("clicked");
+                String callnow =
+                    "+$did1,,${ext.replaceAll('\n', '')},,$no_to_show#";
+                print(callnow);
+                if (ext.isNotEmpty) {
+                  await FlutterPhoneDirectCaller.callNumber(callnow);
+                }
+              },
+              child: Container(
+                height: 50,
+                width: 48,
+                color: Colors.transparent,
+                child: const Icon(
+                  Icons.call_sharp,
+                  color: Colors.green,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

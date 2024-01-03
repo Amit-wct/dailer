@@ -40,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // resizeToAvoidBottomInset : false,
         appBar: AppBar(
           title: const Text(
-            "Dialer",
+            "WarmBiz",
             style: TextStyle(color: Colors.white),
           ),
           backgroundColor: Colors.blueGrey[900],

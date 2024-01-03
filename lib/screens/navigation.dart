@@ -64,8 +64,8 @@ class _MyHomePageState extends State<MyHomePage> {
             label: 'Call Notes',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.info),
-            label: 'About',
+            icon: Icon(Icons.queue_rounded),
+            label: 'Queues',
           ),
         ],
       ),

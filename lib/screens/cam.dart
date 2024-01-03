@@ -64,7 +64,7 @@ class _CamState extends State<Cam> {
     var uri = Uri.parse(uploadURL);
 
     var request = http.MultipartRequest("POST", uri);
-    var multipartFile = http.MultipartFile('file', stream, length,
+    var multipartFile = http.MultipartFile('selfie', stream, length,
         filename: basename(imageFile.path));
     //contentType: new MediaType('image', 'png'));
 
@@ -81,7 +81,12 @@ class _CamState extends State<Cam> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Capture Selfie"),
+        title: const Text(
+          "Capture Selfie",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.blueGrey[900],
+        foregroundColor: Colors.white,
       ),
       body: Center(
           child: Column(children: [

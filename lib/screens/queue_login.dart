@@ -46,7 +46,12 @@ class _QueueLoginState extends State<QueueLogin> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Queue Login'),
+        title: const Text(
+          "Queue Login",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.blueGrey[900],
+        foregroundColor: Colors.white,
       ),
       body: Center(
         child: Column(

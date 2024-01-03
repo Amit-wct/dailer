@@ -40,6 +40,7 @@ class NotesDatabase {
                   ${NoteFields.agent} $textType,
                   ${NoteFields.call_type} $textType,
                   ${NoteFields.caller} $textType,
+                  ${NoteFields.recording} $textType,
                   ${NoteFields.trkn} $textType,
                   ${NoteFields.time} $textType
                   )''';

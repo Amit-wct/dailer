@@ -30,6 +30,7 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
   late String agent;
   late String call_type;
   late String caller;
+  late String recording;
   late String trkn;
 
   String _response = '';
@@ -157,6 +158,7 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
       description: description,
       agent: agent,
       call_type: call_type,
+      recording: recording,
       trkn: trkn,
       caller: caller,
       createdTime: DateTime.now(),

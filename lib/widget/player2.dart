@@ -1,13 +1,14 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:motion_toast/motion_toast.dart';
 import 'package:motion_toast/resources/arrays.dart';
-import 'package:http/http.dart' as http;
+import 'package:rflutter_alert/rflutter_alert.dart' as alert;
 
 class Player extends StatefulWidget {
-  const Player({super.key, required this.url});
+  const Player({Key? key, required this.url}) : super(key: key);
 
   final String url;
+
   @override
   State<Player> createState() => _PlayerState();
 }
@@ -17,66 +18,46 @@ class _PlayerState extends State<Player> {
   bool isPlaying = false;
   Duration duration = Duration.zero;
   Duration position = Duration.zero;
-  bool playing_first = true;
-  bool isRecordingExist = true;
-  String? _response;
-  Future<void> CheckRecording() async {
-    String url =
-        widget.url.replaceFirst('a=get_recording', 'a=check_recording');
-
-    print(url);
-
-    final response = await http.get(Uri.parse(url));
-    if (response.statusCode == 200) {
-      setState(() {
-        _response = response.body;
-        if (_response == 'f\n') {
-          isRecordingExist = false;
-        } else {
-          print('nhi ho raha $_response');
-        }
-      });
-    } else {
-      setState(() {
-        _response = 'Error: ${response.statusCode}';
-      });
-    }
-
-    print(_response);
-  }
+  bool playingFirst = true;
 
   String formatTime(int seconds) {
-    return '${(Duration(seconds: seconds))}'.split('.')[0].padLeft(2, '0');
+    return '${Duration(seconds: seconds)}'.split('.')[0].padLeft(2, '0');
   }
 
   @override
   void initState() {
     super.initState();
 
-    player.onPlayerStateChanged.listen((state) {
-      setState(() {
-        isPlaying = state == PlayerState.playing;
-      });
+    player.playerStateStream.listen((state) {
+      if (mounted) {
+        setState(() {
+          isPlaying = state.playing;
+        });
+      }
     });
 
-    player.onDurationChanged.listen((newDuration) {
-      setState(() {
-        duration = newDuration;
-      });
+    player.durationStream.listen((newDuration) {
+      if (mounted) {
+        setState(() {
+          duration = newDuration ?? Duration.zero;
+        });
+      }
     });
 
-    player.onPositionChanged.listen((newPosition) {
-      setState(() {
-        position = newPosition;
-      });
+    player.positionStream.listen((newPosition) {
+      if (mounted) {
+        setState(() {
+          position = newPosition ?? Duration.zero;
+        });
+      }
     });
   }
 
-  void toastmsg(String msg) {
+  void toastMsg(String msg) {
     MotionToast toast = MotionToast.success(
       description: Text(
-        '$msg',
-        style: TextStyle(fontSize: 12),
+        msg,
+        style: const TextStyle(fontSize: 12),
       ),
       layoutOrientation: ToastOrientation.ltr,
       animationType: AnimationType.fromRight,
@@ -89,10 +70,8 @@ class _PlayerState extends State<Player> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      // mainAxisAlignment: MainAxisAlignment.center,
       children: [
         CircleAvatar(
-          // foregroundColor: Colors.green,
           backgroundColor: Colors.green,
           radius: 16,
           child: IconButton(
@@ -102,34 +81,46 @@ class _PlayerState extends State<Player> {
             ),
             onPressed: () async {
               try {
-                if (playing_first) {
-                  await CheckRecording();
-                  if (isRecordingExist) {
-                    toastmsg("Please wait rec will be played once loaded");
-                  }
+                if (playingFirst) {
+                  toastMsg("Please wait rec will be played once loaded");
                 }
-                playing_first = false;
+                playingFirst = false;
                 if (isPlaying) {
-                  player.pause();
+                  await player.pause();
                 } else {
-                  if (isRecordingExist) {
-                    player.play(UrlSource(widget.url));
-                  } else {
-                    toastmsg("Recording file not available for this call");
-                  }
+                  await player.setUrl(widget.url);
+                  await player.play();
                 }
               } catch (e, stackTrace) {
-                print("Error playing audio: $e");
-                print("StackTrace: $stackTrace");
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text("File not found"),
+                      content: const Text(
+                          "Recording for this call is not available at this moment try after some time"),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context)
+                                .pop(); // Close the alert dialog
+                          },
+                          child: const Text("Cancel"),
+                        ),
+                      ],
+                    );
+                  },
+                );
               }
             },
           ),
         ),
         SliderTheme(
           data: SliderTheme.of(context).copyWith(
-              trackHeight: 2,
-              thumbShape: RoundSliderThumbShape(enabledThumbRadius: 8),
-              overlayShape: RoundSliderOverlayShape(overlayRadius: 20)),
+            trackHeight: 2,
+            thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8),
+            overlayShape: const RoundSliderOverlayShape(overlayRadius: 20),
+          ),
           child: Container(
             width: 150,
             child: Slider(
@@ -139,24 +130,30 @@ class _PlayerState extends State<Player> {
               onChanged: (value) {
                 final position = Duration(seconds: value.toInt());
                 player.seek(position);
-                player.resume();
+                player.play();
               },
             ),
           ),
         ),
         Text(
           formatTime(position.inSeconds),
-          style: TextStyle(fontSize: 10),
+          style: const TextStyle(fontSize: 10),
         ),
-        Text(
+        const Text(
           "/",
           style: TextStyle(fontSize: 10),
         ),
         Text(
           formatTime((duration - position).inSeconds),
-          style: TextStyle(fontSize: 10),
+          style: const TextStyle(fontSize: 10),
         ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    player.dispose();
+    super.dispose();
   }
 }

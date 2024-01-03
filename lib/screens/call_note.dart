@@ -126,6 +126,7 @@ class _CallNotesState extends State<CallNotes> {
         String agent = item['omuser'];
         String datetimeTemp = item['time'].split("+")[0];
         String call_type = item['call_type'];
+        String recording = item['recording'];
         String caller = item['caller'].replaceAll('\n', '');
         // print(caller);
         DateTime time = DateTime.parse(datetimeTemp);
@@ -142,6 +143,7 @@ class _CallNotesState extends State<CallNotes> {
           call_type: call_type,
           trkn: id,
           caller: caller,
+          recording: recording,
         );
         return temp;
       }).toList();

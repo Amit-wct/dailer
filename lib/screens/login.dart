@@ -11,6 +11,8 @@ import './navigation.dart';
 import 'package:http/http.dart' as http;
 import 'package:Dialer/services/location.dart';
 import 'cam.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import 'package:intl/intl.dart';
 
 final Url = TextEditingController();
@@ -153,8 +155,8 @@ class _LoginWidgetState extends State<LoginWidget> {
             margin: EdgeInsets.only(top: 50),
             child: Column(children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 20, 0, 25),
-                child: Image.asset('./images/logo2.png'),
+                padding: const EdgeInsets.fromLTRB(25, 20, 30, 25),
+                child: Image.asset('./images/logo3.png'),
               ),
               InputFieldMaker(
                   'Enter url', Url, TextInputType.url, focusNode_url),
@@ -243,6 +245,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                           print(formattedTimestamp);
 
                           if (mapData['attendance_cord'] == 't') {
+                            print('sending cords');
+
                             getLocationData(formattedTimestamp);
                           }
 
@@ -300,11 +304,24 @@ class _LoginWidgetState extends State<LoginWidget> {
                       }
                     },
                     child: Text('Login')),
-              )
+              ),
+              TextButton(
+                onPressed: _launchUrl,
+                child: Text(
+                  'sign up',
+                  style: TextStyle(decoration: TextDecoration.underline),
+                ),
+              ),
             ]),
           ),
         ),
       ),
     );
+  }
+
+  Future<void> _launchUrl() async {
+    if (!await launch("https://www.warmconnect.in/hosted-pbx.php")) {
+      throw Exception('Could not launch');
+    }
   }
 }
