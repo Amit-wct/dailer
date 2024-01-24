@@ -19,6 +19,8 @@ class _PlayerState extends State<Player> {
   Duration duration = Duration.zero;
   Duration position = Duration.zero;
   bool playingFirst = true;
+  Duration lastPausedPosition = Duration.zero;
+  bool disablePlayButton = false;
 
   String formatTime(int seconds) {
     return '${Duration(seconds: seconds)}'.split('.')[0].padLeft(2, '0');
@@ -32,6 +34,7 @@ class _PlayerState extends State<Player> {
       if (mounted) {
         setState(() {
           isPlaying = state.playing;
+          disablePlayButton = false;
         });
       }
     });
@@ -48,6 +51,12 @@ class _PlayerState extends State<Player> {
       if (mounted) {
         setState(() {
           position = newPosition ?? Duration.zero;
+        });
+      }
+
+      if (position >= duration) {
+        setState(() {
+          isPlaying = false;
         });
       }
     });
@@ -75,44 +84,12 @@ class _PlayerState extends State<Player> {
           backgroundColor: Colors.green,
           radius: 16,
           child: IconButton(
+            disabledColor: Colors.grey,
             icon: Icon(
               isPlaying ? Icons.pause : Icons.play_arrow,
               size: 15,
             ),
-            onPressed: () async {
-              try {
-                if (playingFirst) {
-                  toastMsg("Please wait rec will be played once loaded");
-                }
-                playingFirst = false;
-                if (isPlaying) {
-                  await player.pause();
-                } else {
-                  await player.setUrl(widget.url);
-                  await player.play();
-                }
-              } catch (e, stackTrace) {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: const Text("File not found"),
-                      content: const Text(
-                          "Recording for this call is not available at this moment try after some time"),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context)
-                                .pop(); // Close the alert dialog
-                          },
-                          child: const Text("Cancel"),
-                        ),
-                      ],
-                    );
-                  },
-                );
-              }
-            },
+            onPressed: disablePlayButton ? () {} : _playbutton,
           ),
         ),
         SliderTheme(
@@ -149,6 +126,51 @@ class _PlayerState extends State<Player> {
         ),
       ],
     );
+  }
+
+  _playbutton() async {
+    try {
+      print('button clicked');
+      if (playingFirst) {
+        toastMsg("Please wait rec will be played once loaded");
+        setState(() {
+          disablePlayButton = true;
+        });
+      }
+      playingFirst = false;
+      if (isPlaying) {
+        await player.pause();
+        setState(() {
+          lastPausedPosition = position;
+        });
+      } else {
+        if (lastPausedPosition < duration) {
+          // Only seek to the last paused position if it's within the duration
+          await player.seek(lastPausedPosition);
+        }
+        await player.setUrl(widget.url);
+        await player.play();
+      }
+    } catch (e, stackTrace) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("File not found"),
+            content: const Text(
+                "Recording for this call is not available at this moment try after some time"),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the alert dialog
+                },
+                child: const Text("Cancel"),
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 
   @override

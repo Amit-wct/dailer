@@ -57,6 +57,7 @@ class _SettingsWidget extends State<SettingsWidget> {
         _response = response.body;
         _response = _response!.replaceAll("'", "\"");
         data = json.decode(_response!);
+        print(data);
       });
     } else {
       setState(() {
@@ -67,68 +68,76 @@ class _SettingsWidget extends State<SettingsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Queues"),
-        backgroundColor: Colors.blueGrey[900],
-        foregroundColor: Colors.white,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.logout,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              showLogoutConfirmation(context);
-            },
-          )
-        ],
-      ),
-      backgroundColor: Color.fromRGBO(249, 253, 246, 1),
-      body: isLoading
-          ? Center(
-              child: const SpinKitWaveSpinner(
-                  color: Color.fromARGB(255, 114, 189, 71),
-                  waveColor: Color.fromARGB(230, 147, 197, 132),
-                  size: 100),
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Queues"),
+          backgroundColor: Colors.blueGrey[900],
+          foregroundColor: Colors.white,
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.logout,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                showLogoutConfirmation(context);
+              },
             )
-          : Container(
-              margin: EdgeInsets.only(top: 30, left: 50, right: 50),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // Dynamically create checkboxes based on JSON data
-                  ...List.generate(
-                    checkboxValues.length,
-                    (index) => CheckboxListTile(
-                      title: Text(data!['queue_status'][index].keys.first),
-                      value: checkboxValues[index],
-                      onChanged: (bool? newValue) {
-                        setState(() {
-                          checkboxValues[index] = newValue ?? false;
-                          hasChanges =
-                              true; // Set changes flag when checkbox value changes
-                        });
-                      },
+          ],
+        ),
+        backgroundColor: Color.fromRGBO(249, 253, 246, 1),
+        body: isLoading
+            ? Center(
+                child: const SpinKitWaveSpinner(
+                    color: Color.fromARGB(255, 114, 189, 71),
+                    waveColor: Color.fromARGB(230, 147, 197, 132),
+                    size: 100),
+              )
+            : data!['queue_status'].length == 0
+                ? Center(child: Text("You are not in any queue"))
+                : Container(
+                    margin: EdgeInsets.only(top: 30, left: 50, right: 50),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        // Dynamically create checkboxes based on JSON data
+                        ...List.generate(
+                          checkboxValues.length,
+                          (index) => CheckboxListTile(
+                            title:
+                                Text(data!['queue_status'][index].keys.first),
+                            value: checkboxValues[index],
+                            onChanged: (bool? newValue) {
+                              setState(() {
+                                checkboxValues[index] = newValue ?? false;
+                                hasChanges =
+                                    true; // Set changes flag when checkbox value changes
+                              });
+                            },
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        ElevatedButton(
+                          onPressed: () async {
+                            // Create a new JSON object with updated values only if there are changes
+                            if (hasChanges) {
+                              final updatedJson = createUpdatedJson();
+                              // Upload the updated JSON values using POST request
+                              await uploadUpdatedValues(updatedJson);
+                            } else {
+                              toastmsg("No changes in checkbox values.");
+                            }
+                          },
+                          child: Text("Save"),
+                        ),
+                      ],
                     ),
                   ),
-                  SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () async {
-                      // Create a new JSON object with updated values only if there are changes
-                      if (hasChanges) {
-                        final updatedJson = createUpdatedJson();
-                        // Upload the updated JSON values using POST request
-                        await uploadUpdatedValues(updatedJson);
-                      } else {
-                        toastmsg("No changes in checkbox values.");
-                      }
-                    },
-                    child: Text("Save"),
-                  ),
-                ],
-              ),
-            ),
+      ),
     );
   }
 

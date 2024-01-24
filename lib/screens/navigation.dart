@@ -48,26 +48,31 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _widgetOptions.elementAt(_selectedIndex),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Color.fromRGBO(210, 227, 191, 1),
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.dialpad),
-            label: 'Dialpad',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.edit_note),
-            label: 'Call Notes',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.queue_rounded),
-            label: 'Queues',
-          ),
-        ],
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+        body: _widgetOptions.elementAt(_selectedIndex),
+        bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Color.fromRGBO(210, 227, 191, 1),
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.dialpad),
+              label: 'Dialpad',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.edit_note),
+              label: 'Call Notes',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.queue_rounded),
+              label: 'Queues',
+            ),
+          ],
+        ),
       ),
     );
   }

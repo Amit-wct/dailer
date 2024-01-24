@@ -225,9 +225,9 @@ class _CallNotesState extends State<CallNotes> {
                     }
                   },
                   decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'To Date',
-                  ),
+                      border: OutlineInputBorder(),
+                      // labelText: 'To Date',
+                      hintText: 'yyyy-mm-dd'),
                   readOnly: true,
                   controller: TextEditingController(
                     text: toDate != null

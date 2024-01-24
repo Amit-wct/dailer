@@ -81,10 +81,10 @@ class _MainDialerState extends State<MainDialer> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: () {
-        FocusScope.of(context).unfocus();
+    return WillPopScope(
+      onWillPop: () async {
+        print('hello');
+        return false;
       },
       child: Scaffold(
         appBar: AppBar(
@@ -114,12 +114,12 @@ class _MainDialerState extends State<MainDialer> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 16),
               child: SizedBox(
-                width: 260,
+                width: 290,
                 child: TextFormField(
                   readOnly: true,
                   // showCursor: true,
                   autofocus: true,
-                  style: TextStyle(fontSize: 28),
+                  style: TextStyle(fontSize: 25),
                   controller: number_to_dial,
 
                   decoration: InputDecoration(
@@ -149,75 +149,11 @@ class _MainDialerState extends State<MainDialer> {
               ),
             ),
             Dailpad(number_to_dial, callNumber),
-            // Padding(
-            //   padding: const EdgeInsets.all(32.0),
-            //   child: Center(
-            //     child: ElevatedButton(
-            //       style: ElevatedButton.styleFrom(
-            //         minimumSize: const Size.fromHeight(50), // NEW
-            //       ),
-            //       onPressed: () async {
-            //         String did = formatNumber(did1!);
-            //         // print(did);
-            //         final String callnow =
-            //             "tel:$did,,$extension,,${number_to_dial.text.replaceAll(RegExp(r'[^0-9]'), '')}#";
-
-            //         print(callnow);
-
-            //         if (number_to_dial.text.length < 3) {
-            //           MotionToast.warning(
-            //             // title: const Text(
-            //             //   'Info',
-            //             //   style: TextStyle(fontWeight: FontWeight.bold),
-            //             // ),
-            //             description: const Text(
-            //               'Number can\'t be empty',
-            //               style: TextStyle(fontSize: 12),
-            //             ),
-            //             layoutOrientation: ToastOrientation.ltr,
-            //             animationType: AnimationType.fromRight,
-            //             dismissable: true,
-            //             position: MotionToastPosition.bottom,
-            //           ).show(context);
-            //         } else {
-            //           await FlutterPhoneDirectCaller.callNumber(callnow);
-            //         }
-            //         // await addNote();
-            //       },
-            //       child: const Text('Call'),
-            //     ),
-            //   ),
-            // ),
           ],
         ),
       ),
     );
   }
-
-  // Future addNote() async {
-  //   String phone_v = formatNumber(number_to_dial.text);
-  //   print(phone_v);
-  //   final note = Note(
-  //     title: "${number_to_dial.text}",
-  //     domain: Url.text,
-  //     priority: 0,
-  //     phone: int.parse(phone_v),
-  //     description: "",
-  //     agent: Username.text,
-  //     createdTime: DateTime.now(),
-  //     call_type: "Outgoing",
-  //     trkn: "Outgoing",
-  //   );
-
-  //   String titleString = note.title.split(" ").join("|-|-|-|");
-  //   String descriptionString = note.description.split(" ").join("|-|-|-|");
-  //   String datetime = "${note.createdTime}".split(" ").join("|-|-|-|");
-  //   String newNoteData =
-  //       "${note.priority}-,-${note.phone}-,-$titleString-,-$descriptionString-,-$datetime-,-${note.call_type}";
-
-  //   addNoteOnline(newNoteData);
-  //   await NotesDatabase.instance.create(note);
-  // }
 
   void callNumber() async {
     String did = formatNumber(did1!);
