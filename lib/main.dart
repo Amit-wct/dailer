@@ -17,7 +17,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.lightGreen,
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.lightGreen, primary: Colors.lightGreen),
+        // primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(),
       debugShowCheckedModeBanner: false,

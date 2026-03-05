@@ -29,9 +29,27 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
 
   static final List<Widget> _widgetOptions = <Widget>[
-    const MainDialer(),
-    CallNotes(),
-    SettingsWidget(),
+    PopScope(
+        canPop: false,
+        onPopInvoked: (didPop) {
+          print(
+              '======----------------------------_+++++++++++++++++++++++++++++++');
+        },
+        child: MainDialer()),
+    PopScope(
+        canPop: false,
+        onPopInvoked: (didPop) {
+          print(
+              '======----------------------------_+++++++++++++++++++++++++++++++');
+        },
+        child: CallNotes()),
+    PopScope(
+        canPop: false,
+        onPopInvoked: (didPop) {
+          print(
+              '======----------------------------_+++++++++++++++++++++++++++++++');
+        },
+        child: SettingsWidget()),
   ];
 
   void _onItemTapped(int index) {
@@ -48,11 +66,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        return false;
-      },
-      child: Scaffold(
+    return MaterialApp(
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.lightGreen, primary: Colors.lightGreen),
+        // primarySwatch: Colors.blue,
+      ),
+      home: Scaffold(
         body: _widgetOptions.elementAt(_selectedIndex),
         bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Color.fromRGBO(210, 227, 191, 1),

@@ -188,7 +188,7 @@ class _CallNotesState extends State<CallNotes> {
                       context: context,
                       initialDate: fromDate ?? DateTime.now(),
                       firstDate: DateTime(2000),
-                      lastDate: DateTime(2101),
+                      lastDate: DateTime.now(),
                     );
                     if (selectedDate != null && selectedDate != fromDate) {
                       setState(() {
@@ -215,8 +215,8 @@ class _CallNotesState extends State<CallNotes> {
                     DateTime? selectedDate = await showDatePicker(
                       context: context,
                       initialDate: toDate ?? DateTime.now(),
-                      firstDate: DateTime(2000),
-                      lastDate: DateTime(2101),
+                      firstDate: fromDate ?? DateTime(2000),
+                      lastDate: DateTime.now(),
                     );
                     if (selectedDate != null && selectedDate != toDate) {
                       setState(() {
@@ -225,9 +225,10 @@ class _CallNotesState extends State<CallNotes> {
                     }
                   },
                   decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      // labelText: 'To Date',
-                      hintText: 'yyyy-mm-dd'),
+                    border: OutlineInputBorder(),
+                    labelText: 'To Date',
+                    // hintText: 'yyyy-mm-dd',
+                  ),
                   readOnly: true,
                   controller: TextEditingController(
                     text: toDate != null

@@ -81,11 +81,8 @@ class _MainDialerState extends State<MainDialer> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        print('hello');
-        return false;
-      },
+    return PopScope(
+      canPop: false,
       child: Scaffold(
         appBar: AppBar(
           title: const Text(
@@ -124,12 +121,17 @@ class _MainDialerState extends State<MainDialer> {
 
                   decoration: InputDecoration(
                     // border: OutlineInputBorder(),
+                    hintStyle:
+                        TextStyle(fontWeight: FontWeight.w400, fontSize: 20),
                     hintText: 'Enter number',
                     suffixIcon: IconButton(
                       enableFeedback: true,
                       splashColor: const Color.fromARGB(255, 190, 235, 191),
                       icon: const Icon(
                         Icons.contact_page,
+                        color: Colors.lightGreen,
+                        semanticLabel:
+                            'Click here to select contact from phonebook',
                       ),
                       onPressed: () async {
                         PhoneContact? contact;

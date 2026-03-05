@@ -4,8 +4,8 @@ Future<List> showDateTimePicker(BuildContext context) async {
   final DateTime? pickedDateTime = await showDatePicker(
     context: context,
     initialDate: DateTime.now(),
-    firstDate: DateTime(2021),
-    lastDate: DateTime(2024),
+    firstDate: DateTime.now(),
+    lastDate: DateTime(2100),
   );
 
   final DateTime selectedDateTime;

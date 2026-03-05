@@ -303,13 +303,17 @@ class _LoginWidgetState extends State<LoginWidget> {
                             .show();
                       }
                     },
-                    child: Text('Login')),
+                    child: Text(
+                      'Login',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                    )),
               ),
               TextButton(
                 onPressed: _launchUrl,
                 child: Text(
                   'sign up',
-                  style: TextStyle(decoration: TextDecoration.underline),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
               ),
             ]),
