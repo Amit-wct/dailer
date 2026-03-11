@@ -1,0 +1,68 @@
+﻿Running Gradle task 'assembleDebug'...                          
+flutter : 
+At line:1 char:33
++ ... flutter pub 
+get; flutter build 
+apk --debug > 
+build_output_11.txt 
+2>&1
++                    
+  ~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~
+    + CategoryInfo   
+           : NotSpe  
+  cified: (:String   
+ ) [], RemoteExce    
+ption
+    + FullyQualified 
+   ErrorId : Native  
+  CommandError
+ 
+FAILURE: Build 
+failed with an 
+exception.
+
+* What went wrong:
+Execution failed for 
+task ':audioplayers_a
+ndroid:compileDebugKo
+tlin'.
+> Inconsistent 
+JVM-target 
+compatibility 
+detected for tasks 'c
+ompileDebugJavaWithJa
+vac' (1.8) and 
+'compileDebugKotlin' 
+(17).
+
+  Consider using JVM 
+Toolchain: https://ko
+tl.in/gradle/jvm/tool
+chain
+  Learn more about 
+JVM-target 
+validation: https://k
+otl.in/gradle/jvm/tar
+get-validation 
+
+* Try:
+> Run with 
+--stacktrace option 
+to get the stack 
+trace.
+> Run with --info or 
+--debug option to 
+get more log output.
+> Run with --scan to 
+get full insights.
+> Get more help at ht
+tps://help.gradle.org
+.
+
+BUILD FAILED in 38s
+Running Gradle task 'assembleDebug'...                             39.2s
+Gradle task 
+assembleDebug failed 
+with exit code 1

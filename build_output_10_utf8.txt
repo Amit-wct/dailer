@@ -1,0 +1,76 @@
+﻿Running Gradle task 'assembleDebug'...                          
+Stripping 'package' attribute from C:\Users\amitk\AppData\Local\Pub\Cache\hosted\pub.dev\audio_session-0.1.25\android\src\main\AndroidManifest.xml
+Stripping 'package' attribute from C:\Users\amitk\AppData\Local\Pub\Cache\hosted\pub.dev\audioplayers_android-3.0.2\android\src\main\AndroidManifest.xml
+Stripping 'package' attribute from C:\Users\amitk\AppData\Local\Pub\Cache\hosted\pub.dev\camera_android-0.10.10+15\android\src\main\AndroidManifest.xml
+Stripping 'package' attribute from C:\Users\amitk\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_dtmf-2.0.2\android\src\main\AndroidManifest.xml
+Stripping 'package' attribute from C:\Users\amitk\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_phone_direct_caller-2.1.1\android\src\main\AndroidManifest.xml
+Stripping 'package' attribute from C:\Users\amitk\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_plugin_android_lifecycle-2.0.33\android\src\main\AndroidManifest.xml
+Stripping 'package' attribute from C:\Users\amitk\AppData\Local\Pub\Cache\hosted\pub.dev\fluttercontactpicker-4.7.0\android\src\main\AndroidManifest.xml
+Stripping 'package' attribute from C:\Users\amitk\AppData\Local\Pub\Cache\hosted\pub.dev\geolocator_android-4.3.1\android\src\main\AndroidManifest.xml
+Stripping 'package' attribute from C:\Users\amitk\AppData\Local\Pub\Cache\hosted\pub.dev\path_provider_android-2.2.22\android\src\main\AndroidManifest.xml
+Stripping 'package' attribute from C:\Users\amitk\AppData\Local\Pub\Cache\hosted\pub.dev\permission_handler_android-11.1.0\android\src\main\AndroidManifest.xml
+Stripping 'package' attribute from C:\Users\amitk\AppData\Local\Pub\Cache\hosted\pub.dev\shared_preferences_android-2.4.21\android\src\main\AndroidManifest.xml
+Stripping 'package' attribute from C:\Users\amitk\AppData\Local\Pub\Cache\hosted\pub.dev\sqflite-2.3.0\android\src\main\AndroidManifest.xml
+Stripping 'package' attribute from C:\Users\amitk\AppData\Local\Pub\Cache\hosted\pub.dev\url_launcher_android-6.3.28\android\src\main\AndroidManifest.xml
+flutter : 
+At line:1 char:33
++ ... flutter pub 
+get; flutter build 
+apk --debug > 
+build_output_10.txt 
+2>&1
++                   
+   ~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
+    + CategoryInfo  
+            : NotS  
+  pecified: (:Str   
+ ing) [], Remote    
+Exception
+    + FullyQualifie 
+   dErrorId : Nati  
+  veCommandError
+ 
+FAILURE: Build 
+failed with an 
+exception.
+
+* Where:
+Build file 'I:\WFH\D
+ailer\android\build.
+gradle' line: 23
+
+* What went wrong:
+Execution failed 
+for task ':app:proce
+ssDebugMainManifest'
+.
+> No such property: 
+asFile for class: 
+java.io.File
+  Possible 
+solutions: file
+
+* Try:
+> Run with 
+--stacktrace option 
+to get the stack 
+trace.
+> Run with --info 
+or --debug option 
+to get more log 
+output.
+> Run with --scan 
+to get full 
+insights.
+> Get more help at h
+ttps://help.gradle.o
+rg.
+
+BUILD FAILED in 27s
+Running Gradle task 'assembleDebug'...                             27.4s
+Gradle task 
+assembleDebug 
+failed with exit 
+code 1

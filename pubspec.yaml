@@ -1,41 +1,40 @@
-name: Dialer
+name: dialer
 description: A new Flutter project.
 publish_to: "none"
 version: 0.1.1+4
 
 environment:
-  sdk: ">=2.19.4 <3.0.0"
+  sdk: ">=3.2.5 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  permission_handler: 11.0.0
-  url_launcher: 6.0.15
-  shared_preferences: 2.2.1
-  fluttercontactpicker: 4.7.0
-  http: 0.13.6
-  flutter_phone_direct_caller: 2.1.1
+  permission_handler: ^12.0.1
+  url_launcher: ^6.1.0
+  shared_preferences: ^2.5.4
+  http: ^1.6.0
+  flutter_phone_direct_caller: ^2.2.1
   rflutter_alert: 2.0.7
-  sqflite: 2.3.0
-  flutter_staggered_grid_view: 0.4.0
-  intl: 0.17.0
-  motion_toast: 2.7.8
-  flutter_spinkit: 5.2.0
-  flutter_dialpad: 1.0.5
-  flutter_dtmf: 2.0.2
-  audioplayers: 4.0.0
-  geolocator: 9.0.0
-  camera: 0.10.5
-  path_provider: 2.1.1
+  sqflite: ^2.3.3
+  flutter_staggered_grid_view: ^0.7.0
+  intl: ^0.20.2
+  motion_toast: ^2.15.0
+  flutter_spinkit: ^5.2.2
+  flutter_native_contact_picker:
+ 
+  audioplayers: ^6.6.0
+  geolocator: ^14.0.2
+  camera: ^0.12.0
+  path_provider: ^2.1.5
   just_audio:
-  audio_session: ^0.1.18
+  audio_session: ^0.2.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: 2.0.0
-  flutter_launcher_icons: 0.13.1
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
   change_app_package_name: ^1.1.0
 
 flutter:

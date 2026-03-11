@@ -1,0 +1,69 @@
+﻿Running Gradle task 'assembleDebug'...                          
+flutter : 
+At line:1 char:33
++ ... flutter pub 
+get; flutter build 
+apk --debug > 
+build_output_12.txt 
+2>&1
++                   
+   ~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
+    + CategoryInfo  
+            : NotS  
+  pecified: (:Str   
+ ing) [], Remote    
+Exception
+    + FullyQualifie 
+   dErrorId : Nati  
+  veCommandError
+ 
+FAILURE: Build 
+failed with an 
+exception.
+
+* Where:
+Build file 'I:\WFH\D
+ailer\android\build.
+gradle' line: 21
+
+* What went wrong:
+A problem occurred 
+configuring project 
+':audio_session'.
+> Could not find 
+method 
+kotlinOptions() for 
+arguments [build_br6
+lronw9abxgsxnzysmjvj
+s5$_run_closure2$_cl
+osure6$_closure7$_cl
+osure11@73eb13d] on 
+extension 'android' 
+of type com.android.
+build.gradle.Library
+Extension.
+
+* Try:
+> Run with 
+--stacktrace option 
+to get the stack 
+trace.
+> Run with --info 
+or --debug option 
+to get more log 
+output.
+> Run with --scan 
+to get full 
+insights.
+> Get more help at h
+ttps://help.gradle.o
+rg.
+
+BUILD FAILED in 2s
+Running Gradle task 'assembleDebug'...                              3.0s
+Gradle task 
+assembleDebug 
+failed with exit 
+code 1

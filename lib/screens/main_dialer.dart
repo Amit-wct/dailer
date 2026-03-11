@@ -1,16 +1,20 @@
+import 'package:dialer/components/logout_function.dart';
+import 'package:dialer/screens/login.dart';
+import 'package:dialer/widget/dailpad.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttercontactpicker/fluttercontactpicker.dart';
+import 'package:flutter_native_contact_picker/flutter_native_contact_picker.dart';
+import 'package:flutter_native_contact_picker/model/contact.dart';
+
 import 'package:motion_toast/motion_toast.dart';
 import 'package:motion_toast/resources/arrays.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:Dialer/screens/login.dart';
+
 import '../components/input_field.dart';
 import '../db/notes_database.dart';
 import '../model/note.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
-import 'package:Dialer/components/logout_function.dart';
+
 import 'package:http/http.dart' as http;
-import 'package:Dialer/widget/dailpad.dart';
 
 String? did1;
 String? extension;
@@ -29,6 +33,8 @@ class _MainDialerState extends State<MainDialer> {
   FocusNode _focusNode = FocusNode();
   FocusNode focusNode_extension = FocusNode();
   FocusNode focusNode_fixed_no = FocusNode();
+  final FlutterNativeContactPicker _contactPicker =
+      FlutterNativeContactPicker();
 
   @override
   void dispose() {
@@ -134,16 +140,15 @@ class _MainDialerState extends State<MainDialer> {
                             'Click here to select contact from phonebook',
                       ),
                       onPressed: () async {
-                        PhoneContact? contact;
+                        Contact? contact;
                         try {
-                          contact =
-                              await FlutterContactPicker.pickPhoneContact();
+                          contact = await _contactPicker.selectPhoneNumber();
                         } catch (e) {
                           number_to_dial.text = "";
                         }
                         // print(contact!.phoneNumber!.number);
                         if (contact != null)
-                          number_to_dial.text = contact.phoneNumber!.number!;
+                          number_to_dial.text = contact.selectedPhoneNumber!;
                       },
                     ),
                   ),
@@ -175,10 +180,10 @@ class _MainDialerState extends State<MainDialer> {
           'Number can\'t be empty',
           style: TextStyle(fontSize: 12),
         ),
-        layoutOrientation: ToastOrientation.ltr,
-        animationType: AnimationType.fromRight,
+        layoutOrientation: TextDirection.ltr,
+        animationType: AnimationType.slideInFromRight,
         dismissable: true,
-        position: MotionToastPosition.bottom,
+        toastAlignment: Alignment.bottomCenter,
       ).show(context);
     } else {
       await FlutterPhoneDirectCaller.callNumber(callnow);

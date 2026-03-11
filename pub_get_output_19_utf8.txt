@@ -1,0 +1,42 @@
+﻿Resolving dependencies...
+flutter : Because 
+dialer depends on flu
+tter_native_contact_p
+icker ^0.1.0 which 
+doesn't match any 
+versions, version 
+solving failed.
+At line:1 char:1
++ flutter pub get > p
+ub_get_output_19.txt 
+2>&1; Get-Content 
+pub_get_out ...
++ ~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
+~~~~
+    + CategoryInfo   
+           : NotSpe  
+  cified: (Because   
+  dialer ...solvi    
+ng failed.:Strin    
+g) [], RemoteExc    
+eption
+    + FullyQualified 
+   ErrorId : Native  
+  CommandError
+ 
+
+
+You can try the 
+following suggestion 
+to make the pubspec 
+resolve:
+* Consider 
+downgrading your 
+constraint on flutter
+_native_contact_picke
+r: flutter pub add fl
+utter_native_contact_
+picker:^0.0.11
+Failed to update 
+packages.

@@ -1,0 +1,221 @@
+﻿Running Gradle task 'assembleDebug'...                          
+flutter : Warning: 
+Flutter support for 
+your project's 
+Gradle version 
+(8.5.0) will soon 
+be dropped. Please 
+upgrade your Gradle 
+version to a 
+version of at least 
+8.7.0 soon.
+At line:1 char:33
++ ...  flutter pub 
+get; flutter build 
+apk --debug > 
+build_output_6.txt 
+2>&1
++                   
+    ~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
+    + CategoryInfo  
+            : NotS  
+  pecified: (Warn   
+ ing: Flutte...a    
+st 8.7.0 soon.:    
+String) [], Rem    
+oteException
+    + FullyQualifie 
+   dErrorId : Nati  
+  veCommandError
+ 
+Alternatively, use 
+the flag "--android-
+skip-build-dependenc
+y-validation" to 
+bypass this check.
+
+Potential fix: Your 
+project's gradle 
+version is 
+typically defined 
+in the gradle 
+wrapper file. By 
+default, this can 
+be found at I:\WFH\D
+ailer\android/gradle
+/wrapper/gradle-wrap
+per.properties. 
+For more 
+information, see htt
+ps://docs.gradle.org
+/current/userguide/g
+radle_wrapper.html.
+
+Warning: Flutter 
+support for your 
+project's Android 
+Gradle Plugin 
+version (Android 
+Gradle Plugin 
+version 8.2.1) will 
+soon be dropped. 
+Please upgrade your 
+Android Gradle 
+Plugin version to a 
+version of at least 
+Android Gradle 
+Plugin version 
+8.6.0 soon.
+Alternatively, use 
+the flag "--android-
+skip-build-dependenc
+y-validation" to 
+bypass this check.
+
+Potential fix: Your 
+project's AGP 
+version is 
+typically defined 
+in the plugins 
+block of the 
+`settings.gradle` 
+file (I:\WFH\Dailer\
+android/settings.gra
+dle), by a plugin 
+with the id of com.a
+ndroid.application. 
+If you don't see a 
+plugins block, your 
+project was likely 
+created with an 
+older template 
+version. In this 
+case it is most 
+likely defined in 
+the top-level 
+build.gradle file (I
+:\WFH\Dailer\android
+/build.gradle) by 
+the following line 
+in the dependencies 
+block of the 
+buildscript: 
+"classpath 'com.andr
+oid.tools.build:grad
+le:<version>'".
+
+Warning: Flutter 
+support for your 
+project's Kotlin 
+version (1.9.22) 
+will soon be 
+dropped. Please 
+upgrade your Kotlin 
+version to a 
+version of at least 
+2.1.0 soon.
+Alternatively, use 
+the flag "--android-
+skip-build-dependenc
+y-validation" to 
+bypass this check.
+
+Potential fix: Your 
+project's KGP 
+version is 
+typically defined 
+in the plugins 
+block of the 
+`settings.gradle` 
+file (I:\WFH\Dailer\
+android/settings.gra
+dle), by a plugin 
+with the id of org.j
+etbrains.kotlin.andr
+oid. 
+If you don't see a 
+plugins block, your 
+project was likely 
+created with an 
+older template 
+version, in which 
+case it is most 
+likely defined in 
+the top-level 
+build.gradle file (I
+:\WFH\Dailer\android
+/build.gradle) by 
+the 
+ext.kotlin_version 
+property.
+
+
+FAILURE: Build 
+failed with an 
+exception.
+
+* What went wrong:
+A problem occurred 
+configuring project 
+':flutter_dtmf'.
+> Could not create 
+an instance of type 
+com.android.build.ap
+i.variant.impl.Libra
+ryVariantBuilderImpl
+.
+   > Namespace not 
+specified. Specify 
+a namespace in the 
+module's build 
+file. See https://d.
+android.com/r/tools/
+upgrade-assistant/se
+t-namespace for 
+information about 
+setting the 
+namespace.
+
+     If you've 
+specified the 
+package attribute 
+in the source Androi
+dManifest.xml, you 
+can use the AGP 
+Upgrade Assistant 
+to migrate to the 
+namespace value in 
+the build file. 
+Refer to https://d.a
+ndroid.com/r/tools/u
+pgrade-assistant/agp
+-upgrade-assistant 
+for general 
+information about 
+using the AGP 
+Upgrade Assistant.
+
+* Try:
+> Run with 
+--stacktrace option 
+to get the stack 
+trace.
+> Run with --info 
+or --debug option 
+to get more log 
+output.
+> Run with --scan 
+to get full 
+insights.
+> Get more help at h
+ttps://help.gradle.o
+rg.
+
+BUILD FAILED in 53s
+Running Gradle task 'assembleDebug'...                             54.1s
+Gradle task 
+assembleDebug 
+failed with exit 
+code 1

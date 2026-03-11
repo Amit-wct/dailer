@@ -1,15 +1,14 @@
 import 'dart:convert';
-import 'dart:io';
 import 'dart:math';
+import 'package:dialer/db/notes_database.dart';
+import 'package:dialer/model/note.dart';
+import 'package:dialer/screens/note_detail_page.dart';
+import 'package:dialer/widget/note_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:Dialer/db/notes_database.dart';
-import 'package:Dialer/model/note.dart';
-import 'package:Dialer/screens/note_detail_page.dart';
-import 'package:Dialer/widget/note_card_widget.dart';
+
 import 'package:motion_toast/motion_toast.dart';
-import 'package:motion_toast/resources/arrays.dart';
 import '../components/logout_function.dart';
 import 'login.dart';
 import 'package:http/http.dart' as http;
@@ -23,7 +22,7 @@ class CallNotes extends StatefulWidget {
 }
 
 class _CallNotesState extends State<CallNotes> {
-  late List<Note> notes;
+  List<Note> notes = [];
   bool isLoading = false;
   String _response = '';
   String url = "";
@@ -31,6 +30,8 @@ class _CallNotesState extends State<CallNotes> {
   DateTime? selectedDate;
   DateTime? toDate, fromDate;
   bool isfiltered = false;
+  final TextEditingController fromDateController = TextEditingController();
+  final TextEditingController toDateController = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -163,14 +164,14 @@ class _CallNotesState extends State<CallNotes> {
         message,
         style: const TextStyle(fontSize: 12),
       ),
-      layoutOrientation: ToastOrientation.ltr,
-      animationType: AnimationType.fromRight,
+      layoutOrientation: TextDirection.ltr,
+      animationType: AnimationType.slideInFromRight,
       dismissable: true,
     );
     toast.show(context);
   }
 
-  dynamic searchFilter() {
+  Widget searchFilter() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
       child: Column(
@@ -193,6 +194,8 @@ class _CallNotesState extends State<CallNotes> {
                     if (selectedDate != null && selectedDate != fromDate) {
                       setState(() {
                         fromDate = selectedDate;
+                        fromDateController.text =
+                            "${fromDate!.year}-${fromDate!.month.toString().padLeft(2, '0')}-${fromDate!.day.toString().padLeft(2, '0')}";
                       });
                     }
                   },
@@ -201,11 +204,7 @@ class _CallNotesState extends State<CallNotes> {
                     labelText: 'From Date',
                   ),
                   readOnly: true,
-                  controller: TextEditingController(
-                    text: fromDate != null
-                        ? "${fromDate!.year}-${fromDate!.month.toString().padLeft(2, '0')}-${fromDate!.day.toString().padLeft(2, '0')}"
-                        : "",
-                  ),
+                  controller: fromDateController,
                 ),
               ),
               const SizedBox(width: 10),
@@ -221,6 +220,8 @@ class _CallNotesState extends State<CallNotes> {
                     if (selectedDate != null && selectedDate != toDate) {
                       setState(() {
                         toDate = selectedDate;
+                        toDateController.text =
+                            "${toDate!.year}-${toDate!.month.toString().padLeft(2, '0')}-${toDate!.day.toString().padLeft(2, '0')}";
                       });
                     }
                   },
@@ -230,11 +231,7 @@ class _CallNotesState extends State<CallNotes> {
                     // hintText: 'yyyy-mm-dd',
                   ),
                   readOnly: true,
-                  controller: TextEditingController(
-                    text: toDate != null
-                        ? "${toDate!.year}-${toDate!.month.toString().padLeft(2, '0')}-${toDate!.day.toString().padLeft(2, '0')}"
-                        : "",
-                  ),
+                  controller: toDateController,
                 ),
               ),
               const SizedBox(width: 16),
@@ -257,7 +254,9 @@ class _CallNotesState extends State<CallNotes> {
                   } else {
                     showAlertMessage("To date from date cannot be empty");
                   }
-                  isfiltered = true;
+                  setState(() {
+                    isfiltered = true;
+                  });
                 },
                 child: const Text('Search'),
               ),
@@ -271,6 +270,8 @@ class _CallNotesState extends State<CallNotes> {
                       setState(() {
                         toDate = null;
                         fromDate = null;
+                        toDateController.clear();
+                        fromDateController.clear();
                         isfiltered = false;
                       });
 
@@ -351,11 +352,10 @@ class _CallNotesState extends State<CallNotes> {
         // ),
       );
 
-  Widget buildNotes() => StaggeredGridView.countBuilder(
+  Widget buildNotes() => MasonryGridView.count(
         padding: const EdgeInsets.all(8),
         itemCount: notes.length,
-        staggeredTileBuilder: (index) => const StaggeredTile.fit(4),
-        crossAxisCount: 4,
+        crossAxisCount: 1, // Since fit(4) in count(4) was effectively 1 column
         mainAxisSpacing: 0,
         crossAxisSpacing: 0,
         itemBuilder: (context, index) {

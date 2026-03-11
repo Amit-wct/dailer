@@ -1,7 +1,8 @@
 import 'dart:convert';
 
-import 'package:Dialer/screens/queue_login.dart';
-import 'package:Dialer/services/networking.dart';
+import 'package:dialer/screens/queue_login.dart';
+import 'package:dialer/services/location.dart';
+import 'package:dialer/services/networking.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -9,7 +10,7 @@ import '../components/input_field.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import './navigation.dart';
 import 'package:http/http.dart' as http;
-import 'package:Dialer/services/location.dart';
+
 import 'cam.dart';
 import 'package:url_launcher/url_launcher.dart';
 

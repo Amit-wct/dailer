@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:Dialer/screens/login.dart';
+
+import 'package:dialer/screens/login.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';

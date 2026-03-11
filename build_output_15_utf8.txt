@@ -1,0 +1,99 @@
+﻿Running Gradle task 'assembleDebug'...                          
+flutter : e: file://
+/C:/Users/amitk/AppD
+ata/Local/Pub/Cache/
+hosted/pub.dev/flutt
+er_dtmf-2.0.2/androi
+d/src/main/kotlin/co
+m/eopeter/flutter_dt
+mf/DtmfPlugin.kt:11:
+48 Unresolved 
+reference 
+'Registrar'.
+At line:1 char:33
++ ... flutter pub 
+get; flutter build 
+apk --debug > 
+build_output_15.txt 
+2>&1
++                   
+   ~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
+    + CategoryInfo  
+            : NotS  
+  pecified: (e: f   
+ ile:///C:/U...c    
+e 'Registrar'.:    
+String) [], Rem    
+oteException
+    + FullyQualifie 
+   dErrorId : Nati  
+  veCommandError
+ 
+e: file:///C:/Users/
+amitk/AppData/Local/
+Pub/Cache/hosted/pub
+.dev/flutter_dtmf-2.
+0.2/android/src/main
+/kotlin/com/eopeter/
+flutter_dtmf/DtmfPlu
+gin.kt:25:33 
+Unresolved 
+reference 
+'Registrar'.
+e: file:///C:/Users/
+amitk/AppData/Local/
+Pub/Cache/hosted/pub
+.dev/flutter_dtmf-2.
+0.2/android/src/main
+/kotlin/com/eopeter/
+flutter_dtmf/DtmfPlu
+gin.kt:26:31 
+Unresolved 
+reference 
+'messenger'.
+
+FAILURE: Build 
+failed with an 
+exception.
+
+* What went wrong:
+Execution failed 
+for task ':flutter_d
+tmf:compileDebugKotl
+in'.
+> A failure 
+occurred while 
+executing org.jetbra
+ins.kotlin.compilerR
+unner.GradleCompiler
+RunnerWithWorkers$Gr
+adleKotlinCompilerWo
+rkAction
+   > Compilation 
+error. See log for 
+more details
+
+* Try:
+> Run with 
+--stacktrace option 
+to get the stack 
+trace.
+> Run with --info 
+or --debug option 
+to get more log 
+output.
+> Run with --scan 
+to get full 
+insights.
+> Get more help at h
+ttps://help.gradle.o
+rg.
+
+BUILD FAILED in 29s
+Running Gradle task 'assembleDebug'...                             29.5s
+Gradle task 
+assembleDebug 
+failed with exit 
+code 1

@@ -1,0 +1,119 @@
+﻿Running Gradle task 'assembleDebug'...                          
+flutter : Incorrect p
+ackage="com.example.f
+luttercontactpicker" 
+found in source 
+AndroidManifest.xml: 
+C:\Users\amitk\AppDat
+a\Local\Pub\Cache\hos
+ted\pub.dev\flutterco
+ntactpicker-4.7.0\and
+roid\src\main\Android
+Manifest.xml.
+At line:1 char:33
++ ...  flutter pub 
+get; flutter build 
+apk --debug > 
+build_output_9.txt 
+2>&1
++                    
+   ~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~
+    + CategoryInfo   
+           : NotS    
+pecified: (Inco    
+rrect packa...i    
+dManifest.xml.:    
+String) [], Rem    
+oteException
+    + FullyQualifie  
+  dErrorId : Nati    
+veCommandError
+ 
+Setting the 
+namespace via the 
+package attribute in 
+the source 
+AndroidManifest.xml 
+is no longer 
+supported.
+Recommendation: 
+remove package="com.e
+xample.fluttercontact
+picker" from the 
+source 
+AndroidManifest.xml: 
+C:\Users\amitk\AppDat
+a\Local\Pub\Cache\hos
+ted\pub.dev\flutterco
+ntactpicker-4.7.0\and
+roid\src\main\Android
+Manifest.xml.
+
+FAILURE: Build 
+failed with an 
+exception.
+
+* What went wrong:
+Execution failed for 
+task ':fluttercontact
+picker:processDebugMa
+nifest'.
+> A failure occurred 
+while executing com.a
+ndroid.build.gradle.t
+asks.ProcessLibraryMa
+nifest$ProcessLibWork
+Action
+   > Incorrect packag
+e="com.example.flutte
+rcontactpicker" 
+found in source 
+AndroidManifest.xml: 
+C:\Users\amitk\AppDat
+a\Local\Pub\Cache\hos
+ted\pub.dev\flutterco
+ntactpicker-4.7.0\and
+roid\src\main\Android
+Manifest.xml.
+     Setting the 
+namespace via the 
+package attribute in 
+the source 
+AndroidManifest.xml 
+is no longer 
+supported.
+     Recommendation: 
+remove package="com.e
+xample.fluttercontact
+picker" from the 
+source 
+AndroidManifest.xml: 
+C:\Users\amitk\AppDat
+a\Local\Pub\Cache\hos
+ted\pub.dev\flutterco
+ntactpicker-4.7.0\and
+roid\src\main\Android
+Manifest.xml.
+
+* Try:
+> Run with 
+--stacktrace option 
+to get the stack 
+trace.
+> Run with --info or 
+--debug option to 
+get more log output.
+> Run with --scan to 
+get full insights.
+> Get more help at ht
+tps://help.gradle.org
+.
+
+BUILD FAILED in 5m 
+35s
+Running Gradle task 'assembleDebug'...                            336.1s
+Gradle task 
+assembleDebug failed 
+with exit code 1

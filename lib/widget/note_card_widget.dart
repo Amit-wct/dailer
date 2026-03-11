@@ -1,9 +1,10 @@
-import 'package:Dialer/screens/main_dialer.dart';
+import 'package:dialer/model/note.dart';
+
 import './player2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:intl/intl.dart';
-import 'package:Dialer/model/note.dart';
+
 import 'package:motion_toast/motion_toast.dart';
 import 'package:motion_toast/resources/arrays.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -186,8 +187,7 @@ class NoteCardWidget extends StatelessWidget {
                         'Please check your internet connection',
                         style: TextStyle(fontSize: 12),
                       ),
-                      layoutOrientation: ToastOrientation.ltr,
-                      animationType: AnimationType.fromRight,
+                      animationType: AnimationType.slideInFromRight,
                       dismissable: true,
                     );
                     toast.show(context);

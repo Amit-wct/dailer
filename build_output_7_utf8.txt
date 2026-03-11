@@ -1,0 +1,294 @@
+﻿Running Gradle task 'assembleDebug'...                          
+flutter : Warning: 
+Flutter support for 
+your project's 
+Gradle version 
+(8.5.0) will soon be 
+dropped. Please 
+upgrade your Gradle 
+version to a version 
+of at least 8.7.0 
+soon.
+At line:1 char:33
++ ...  flutter pub 
+get; flutter build 
+apk --debug > 
+build_output_7.txt 
+2>&1
++                    
+   ~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~
+    + CategoryInfo   
+           : NotSpe  
+  cified: (Warning   
+ : Flutte...ast 8    
+.7.0 soon.:Strin    
+g) [], RemoteExc    
+eption
+    + FullyQualified 
+   ErrorId : Native  
+  CommandError
+ 
+Alternatively, use 
+the flag "--android-s
+kip-build-dependency-
+validation" to 
+bypass this check.
+
+Potential fix: Your 
+project's gradle 
+version is typically 
+defined in the 
+gradle wrapper file. 
+By default, this can 
+be found at I:\WFH\Da
+iler\android/gradle/w
+rapper/gradle-wrapper
+.properties. 
+For more 
+information, see http
+s://docs.gradle.org/c
+urrent/userguide/grad
+le_wrapper.html.
+
+Warning: Flutter 
+support for your 
+project's Android 
+Gradle Plugin 
+version (Android 
+Gradle Plugin 
+version 8.2.1) will 
+soon be dropped. 
+Please upgrade your 
+Android Gradle 
+Plugin version to a 
+version of at least 
+Android Gradle 
+Plugin version 8.6.0 
+soon.
+Alternatively, use 
+the flag "--android-s
+kip-build-dependency-
+validation" to 
+bypass this check.
+
+Potential fix: Your 
+project's AGP 
+version is typically 
+defined in the 
+plugins block of the 
+`settings.gradle` 
+file (I:\WFH\Dailer\a
+ndroid/settings.gradl
+e), by a plugin with 
+the id of com.android
+.application. 
+If you don't see a 
+plugins block, your 
+project was likely 
+created with an 
+older template 
+version. In this 
+case it is most 
+likely defined in 
+the top-level 
+build.gradle file (I:
+\WFH\Dailer\android/b
+uild.gradle) by the 
+following line in 
+the dependencies 
+block of the 
+buildscript: 
+"classpath 'com.andro
+id.tools.build:gradle
+:<version>'".
+
+Warning: Flutter 
+support for your 
+project's Kotlin 
+version (1.9.22) 
+will soon be 
+dropped. Please 
+upgrade your Kotlin 
+version to a version 
+of at least 2.1.0 
+soon.
+Alternatively, use 
+the flag "--android-s
+kip-build-dependency-
+validation" to 
+bypass this check.
+
+Potential fix: Your 
+project's KGP 
+version is typically 
+defined in the 
+plugins block of the 
+`settings.gradle` 
+file (I:\WFH\Dailer\a
+ndroid/settings.gradl
+e), by a plugin with 
+the id of org.jetbrai
+ns.kotlin.android. 
+If you don't see a 
+plugins block, your 
+project was likely 
+created with an 
+older template 
+version, in which 
+case it is most 
+likely defined in 
+the top-level 
+build.gradle file (I:
+\WFH\Dailer\android/b
+uild.gradle) by the 
+ext.kotlin_version 
+property.
+
+Warning: The plugin url_launcher_android requires Android SDK version 36 or higher.
+For more information about build configuration, see https://flutter.dev/to/review-gradle-config.
+Your project is 
+configured to 
+compile against 
+Android SDK 34, but 
+the following 
+plugin(s) require to 
+be compiled against 
+a higher Android SDK 
+version:
+- 
+url_launcher_android 
+compiles against 
+Android SDK 36
+Fix this issue by 
+compiling against 
+the highest Android 
+SDK version (they 
+are backward 
+compatible).
+Add the following to 
+I:\WFH\Dailer\android
+\app\build.gradle:
+
+    android {
+        compileSdk = 
+36
+        ...
+    }
+Checking the license for package Android SDK Platform 28 in C:\Users\amitk\AppData\Local\Android\sdk\licenses
+License for package Android SDK Platform 28 accepted.
+Preparing "Install Android SDK Platform 28 (revision 6)".
+"Install Android SDK Platform 28 (revision 6)" ready.
+Installing Android SDK Platform 28 in C:\Users\amitk\AppData\Local\Android\sdk\platforms\android-28
+"Install Android SDK Platform 28 (revision 6)" complete.
+"Install Android SDK Platform 28 (revision 6)" finished.
+Checking the license for package Android SDK Platform 32 in C:\Users\amitk\AppData\Local\Android\sdk\licenses
+License for package Android SDK Platform 32 accepted.
+Preparing "Install Android SDK Platform 32 (revision 1)".
+"Install Android SDK Platform 32 (revision 1)" ready.
+Installing Android SDK Platform 32 in C:\Users\amitk\AppData\Local\Android\sdk\platforms\android-32
+"Install Android SDK Platform 32 (revision 1)" complete.
+"Install Android SDK Platform 32 (revision 1)" finished.
+/C:/Users/amitk/AppDa
+ta/Local/Pub/Cache/ho
+sted/pub.dev/win32-4.
+1.4/lib/src/guid.dart
+:31:9: Error: Type 'U
+nmodifiableUint8ListV
+iew' not found.
+  final UnmodifiableU
+int8ListView bytes;
+        ^^^^^^^^^^^^^
+^^^^^^^^^^^^
+/C:/Users/amitk/AppDa
+ta/Local/Pub/Cache/ho
+sted/pub.dev/win32-4.
+1.4/lib/src/guid.dart
+:31:9: Error: 'Unmodi
+fiableUint8ListView' 
+isn't a type.
+  final UnmodifiableU
+int8ListView bytes;
+        ^^^^^^^^^^^^^
+^^^^^^^^^^^^
+/C:/Users/amitk/AppDa
+ta/Local/Pub/Cache/ho
+sted/pub.dev/win32-4.
+1.4/lib/src/guid.dart
+:51:17: Error: 
+Method not found: 'Un
+modifiableUint8ListVi
+ew'.
+    return Guid(Unmod
+ifiableUint8ListView(
+guid));
+                ^^^^^
+^^^^^^^^^^^^^^^^^^^^
+/C:/Users/amitk/AppDa
+ta/Local/Pub/Cache/ho
+sted/pub.dev/win32-4.
+1.4/lib/src/guid.dart
+:55:31: Error: 
+Method not found: 'Un
+modifiableUint8ListVi
+ew'.
+  factory 
+Guid.zero() => Guid(U
+nmodifiableUint8ListV
+iew(Uint8List(16)));
+                     
+         ^^^^^^^^^^^^
+^^^^^^^^^^^^^
+/C:/Users/amitk/AppDa
+ta/Local/Pub/Cache/ho
+sted/pub.dev/win32-4.
+1.4/lib/src/guid.dart
+:99:17: Error: 
+Method not found: 'Un
+modifiableUint8ListVi
+ew'.
+    return Guid(Unmod
+ifiableUint8ListView(
+Uint8List.fromList(gu
+idAsBytes)));
+                ^^^^^
+^^^^^^^^^^^^^^^^^^^^
+Target kernel_snapsho
+t_program failed: 
+Exception
+
+
+FAILURE: Build 
+failed with an 
+exception.
+
+* What went wrong:
+Execution failed for 
+task ':app:compileFlu
+tterBuildDebug'.
+> Process 'command 'C
+:\dev\flutter\bin\flu
+tter.bat'' finished 
+with non-zero exit 
+value 1
+
+* Try:
+> Run with 
+--stacktrace option 
+to get the stack 
+trace.
+> Run with --info or 
+--debug option to 
+get more log output.
+> Run with --scan to 
+get full insights.
+> Get more help at ht
+tps://help.gradle.org
+.
+
+BUILD FAILED in 2m 4s
+Running Gradle task 'assembleDebug'...                            125.6s
+Gradle task 
+assembleDebug failed 
+with exit code 1

@@ -197,10 +197,10 @@ class _SettingsWidget extends State<SettingsWidget> {
         '$msg',
         style: TextStyle(fontSize: 12),
       ),
-      layoutOrientation: ToastOrientation.ltr,
-      animationType: AnimationType.fromRight,
+      layoutOrientation: TextDirection.ltr,
+      animationType: AnimationType.slideInFromRight,
       dismissable: true,
-      position: MotionToastPosition.bottom,
+      toastAlignment: Alignment.bottomCenter,
     );
     toast.show(context);
   }

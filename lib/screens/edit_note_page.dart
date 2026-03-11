@@ -1,7 +1,8 @@
+import 'package:dialer/db/notes_database.dart';
+import 'package:dialer/model/note.dart';
+import 'package:dialer/widget/note_form_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:Dialer/db/notes_database.dart';
-import 'package:Dialer/model/note.dart';
-import 'package:Dialer/widget/note_form_widget.dart';
+
 import 'package:http/http.dart' as http;
 import 'package:motion_toast/motion_toast.dart';
 import 'package:motion_toast/resources/arrays.dart';
@@ -141,8 +142,8 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
           'Please check your internet connection',
           style: TextStyle(fontSize: 12),
         ),
-        layoutOrientation: ToastOrientation.ltr,
-        animationType: AnimationType.fromRight,
+        layoutOrientation: TextDirection.ltr,
+        animationType: AnimationType.slideInFromRight,
         dismissable: true,
       );
       toast.show(context);

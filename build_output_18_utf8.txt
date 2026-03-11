@@ -1,0 +1,53 @@
+﻿Resolving dependencies...
+flutter : Because 
+flutter_dialpad 
+1.0.5 depends on 
+flutter_dtmf ^2.0.2 
+and no versions of 
+flutter_dialpad 
+match >1.0.5 <2.0.0, 
+flutter_dialpad 
+^1.0.5 requires 
+flutter_dtmf ^2.0.2.
+At line:1 char:18
++ flutter pub get; 
+flutter build apk 
+--debug > 
+build_output_18.txt 
+2>&1
++                  ~~
+~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~
+    + CategoryInfo   
+           : NotSpe  
+  cified: (Because   
+  flutter...er_dt    
+mf ^2.0.2.:Strin    
+g) [], RemoteExc    
+eption
+    + FullyQualified 
+   ErrorId : Native  
+  CommandError
+ 
+So, because dialer 
+depends on both 
+flutter_dialpad 
+^1.0.5 and 
+flutter_dtmf ^3.0.0, 
+version solving 
+failed.
+
+
+You can try the 
+following suggestion 
+to make the pubspec 
+resolve:
+* Consider 
+downgrading your 
+constraint on 
+flutter_dtmf: 
+flutter pub add 
+flutter_dtmf:^2.0.2
+Failed to update 
+packages.

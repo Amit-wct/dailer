@@ -65,13 +65,13 @@ class _PlayerState extends State<Player> {
   void toastMsg(String msg) {
     MotionToast toast = MotionToast.success(
       description: Text(
-        msg,
-        style: const TextStyle(fontSize: 12),
+        '$msg',
+        style: TextStyle(fontSize: 12),
       ),
-      layoutOrientation: ToastOrientation.ltr,
-      animationType: AnimationType.fromRight,
+      layoutOrientation: TextDirection.ltr,
+      animationType: AnimationType.slideInFromRight,
       dismissable: true,
-      position: MotionToastPosition.bottom,
+      toastAlignment: Alignment.bottomCenter,
     );
     toast.show(context);
   }
@@ -144,14 +144,15 @@ class _PlayerState extends State<Player> {
           lastPausedPosition = position;
         });
       } else {
+        await player.setUrl(widget.url);
         if (lastPausedPosition < duration) {
           // Only seek to the last paused position if it's within the duration
           await player.seek(lastPausedPosition);
         }
-        await player.setUrl(widget.url);
         await player.play();
       }
-    } catch (e, stackTrace) {
+    } catch (e) {
+      if (!mounted) return;
       showDialog(
         context: context,
         builder: (BuildContext context) {

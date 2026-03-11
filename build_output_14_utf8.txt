@@ -1,0 +1,2405 @@
+﻿Running Gradle task 'assembleDebug'...                          
+flutter : e: file://
+/C:/Users/amitk/AppD
+ata/Local/Pub/Cache/
+hosted/pub.dev/flutt
+er_dtmf-2.0.2/androi
+d/src/main/kotlin/co
+m/eopeter/flutter_dt
+mf/DtmfPlugin.kt:11:
+48 Unresolved 
+reference 
+'Registrar'.
+At line:1 char:33
++ ... flutter pub 
+get; flutter build 
+apk --debug > 
+build_output_14.txt 
+2>&1
++                   
+   ~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
+    + CategoryInfo  
+            : NotS  
+  pecified: (e: f   
+ ile:///C:/U...c    
+e 'Registrar'.:    
+String) [], Rem    
+oteException
+    + FullyQualifie 
+   dErrorId : Nati  
+  veCommandError
+ 
+e: file:///C:/Users/
+amitk/AppData/Local/
+Pub/Cache/hosted/pub
+.dev/flutter_dtmf-2.
+0.2/android/src/main
+/kotlin/com/eopeter/
+flutter_dtmf/DtmfPlu
+gin.kt:25:33 
+Unresolved 
+reference 
+'Registrar'.
+e: file:///C:/Users/
+amitk/AppData/Local/
+Pub/Cache/hosted/pub
+.dev/flutter_dtmf-2.
+0.2/android/src/main
+/kotlin/com/eopeter/
+flutter_dtmf/DtmfPlu
+gin.kt:26:31 
+Unresolved 
+reference 
+'messenger'.
+e: Daemon 
+compilation failed: 
+null
+java.lang.Exception
+	at org.jetbrains.ko
+tlin.daemon.common.C
+ompileService$CallRe
+sult$Error.get(Compi
+leService.kt:69)
+	at org.jetbrains.ko
+tlin.daemon.common.C
+ompileService$CallRe
+sult$Error.get(Compi
+leService.kt:65)
+	at org.jetbrains.ko
+tlin.compilerRunner.
+GradleKotlinCompiler
+Work.compileWithDaem
+on(GradleKotlinCompi
+lerWork.kt:240)
+	at org.jetbrains.ko
+tlin.compilerRunner.
+GradleKotlinCompiler
+Work.compileWithDaem
+onOrFallbackImpl(Gra
+dleKotlinCompilerWor
+k.kt:159)
+	at org.jetbrains.ko
+tlin.compilerRunner.
+GradleKotlinCompiler
+Work.run(GradleKotli
+nCompilerWork.kt:111
+)
+	at org.jetbrains.ko
+tlin.compilerRunner.
+GradleCompilerRunner
+WithWorkers$GradleKo
+tlinCompilerWorkActi
+on.execute(GradleCom
+pilerRunnerWithWorke
+rs.kt:76)
+	at org.gradle.worke
+rs.internal.DefaultW
+orkerServer.execute(
+DefaultWorkerServer.
+java:63)
+	at org.gradle.worke
+rs.internal.NoIsolat
+ionWorkerFactory$1$1
+.create(NoIsolationW
+orkerFactory.java:66
+)
+	at org.gradle.worke
+rs.internal.NoIsolat
+ionWorkerFactory$1$1
+.create(NoIsolationW
+orkerFactory.java:62
+)
+	at org.gradle.inter
+nal.classloader.Clas
+sLoaderUtils.execute
+InClassloader(ClassL
+oaderUtils.java:100)
+	at org.gradle.worke
+rs.internal.NoIsolat
+ionWorkerFactory$1.l
+ambda$execute$0(NoIs
+olationWorkerFactory
+.java:62)
+	at org.gradle.worke
+rs.internal.Abstract
+Worker$1.call(Abstra
+ctWorker.java:44)
+	at org.gradle.worke
+rs.internal.Abstract
+Worker$1.call(Abstra
+ctWorker.java:41)
+	at org.gradle.inter
+nal.operations.Defau
+ltBuildOperationRunn
+er$CallableBuildOper
+ationWorker.execute(
+DefaultBuildOperatio
+nRunner.java:209)
+	at org.gradle.inter
+nal.operations.Defau
+ltBuildOperationRunn
+er$CallableBuildOper
+ationWorker.execute(
+DefaultBuildOperatio
+nRunner.java:204)
+	at org.gradle.inter
+nal.operations.Defau
+ltBuildOperationRunn
+er$2.execute(Default
+BuildOperationRunner
+.java:66)
+	at org.gradle.inter
+nal.operations.Defau
+ltBuildOperationRunn
+er$2.execute(Default
+BuildOperationRunner
+.java:59)
+	at org.gradle.inter
+nal.operations.Defau
+ltBuildOperationRunn
+er.execute(DefaultBu
+ildOperationRunner.j
+ava:166)
+	at org.gradle.inter
+nal.operations.Defau
+ltBuildOperationRunn
+er.execute(DefaultBu
+ildOperationRunner.j
+ava:59)
+	at org.gradle.inter
+nal.operations.Defau
+ltBuildOperationRunn
+er.call(DefaultBuild
+OperationRunner.java
+:53)
+	at org.gradle.worke
+rs.internal.Abstract
+Worker.executeWrappe
+dInBuildOperation(Ab
+stractWorker.java:41
+)
+	at org.gradle.worke
+rs.internal.NoIsolat
+ionWorkerFactory$1.e
+xecute(NoIsolationWo
+rkerFactory.java:59)
+	at org.gradle.worke
+rs.internal.DefaultW
+orkerExecutor.lambda
+$submitWork$0(Defaul
+tWorkerExecutor.java
+:174)
+	at java.base/java.u
+til.concurrent.Futur
+eTask.run(FutureTask
+.java:264)
+	at org.gradle.inter
+nal.work.DefaultCond
+itionalExecutionQueu
+e$ExecutionRunner.ru
+nExecution(DefaultCo
+nditionalExecutionQu
+eue.java:194)
+	at org.gradle.inter
+nal.work.DefaultCond
+itionalExecutionQueu
+e$ExecutionRunner.ac
+cess$700(DefaultCond
+itionalExecutionQueu
+e.java:127)
+	at org.gradle.inter
+nal.work.DefaultCond
+itionalExecutionQueu
+e$ExecutionRunner$1.
+run(DefaultCondition
+alExecutionQueue.jav
+a:169)
+	at org.gradle.inter
+nal.Factories$1.crea
+te(Factories.java:31
+)
+	at org.gradle.inter
+nal.work.DefaultWork
+erLeaseService.withL
+ocks(DefaultWorkerLe
+aseService.java:263)
+	at org.gradle.inter
+nal.work.DefaultWork
+erLeaseService.runAs
+WorkerThread(Default
+WorkerLeaseService.j
+ava:127)
+	at org.gradle.inter
+nal.work.DefaultWork
+erLeaseService.runAs
+WorkerThread(Default
+WorkerLeaseService.j
+ava:132)
+	at org.gradle.inter
+nal.work.DefaultCond
+itionalExecutionQueu
+e$ExecutionRunner.ru
+nBatch(DefaultCondit
+ionalExecutionQueue.
+java:164)
+	at org.gradle.inter
+nal.work.DefaultCond
+itionalExecutionQueu
+e$ExecutionRunner.ru
+n(DefaultConditional
+ExecutionQueue.java:
+133)
+	at java.base/java.u
+til.concurrent.Execu
+tors$RunnableAdapter
+.call(Executors.java
+:539)
+	at java.base/java.u
+til.concurrent.Futur
+eTask.run(FutureTask
+.java:264)
+	at org.gradle.inter
+nal.concurrent.Execu
+torPolicy$CatchAndRe
+cordFailures.onExecu
+te(ExecutorPolicy.ja
+va:64)
+	at org.gradle.inter
+nal.concurrent.Abstr
+actManagedExecutor$1
+.run(AbstractManaged
+Executor.java:48)
+	at java.base/java.u
+til.concurrent.Threa
+dPoolExecutor.runWor
+ker(ThreadPoolExecut
+or.java:1136)
+	at java.base/java.u
+til.concurrent.Threa
+dPoolExecutor$Worker
+.run(ThreadPoolExecu
+tor.java:635)
+	at java.base/java.l
+ang.Thread.run(Threa
+d.java:833)
+Caused by: java.lang
+.AssertionError: jav
+a.lang.Exception: 
+Could not close 
+incremental caches 
+in I:\WFH\Dailer\bui
+ld\flutter_phone_dir
+ect_caller\kotlin\co
+mpileDebugKotlin\cac
+heable\caches-jvm\jv
+m\kotlin: class-fq-n
+ame-to-source.tab, s
+ource-to-classes.tab
+, internal-name-to-s
+ource.tab
+	at org.jetbrains.ko
+tlin.com.google.comm
+on.io.Closer.close(C
+loser.java:236)
+	at org.jetbrains.ko
+tlin.incremental.Inc
+rementalCachesManage
+r.close(IncrementalC
+achesManager.kt:55)
+	at kotlin.io.Closea
+bleKt.closeFinally(C
+loseable.kt:56)
+	at org.jetbrains.ko
+tlin.incremental.Inc
+rementalCompilerRunn
+er.compileNonIncreme
+ntally(IncrementalCo
+mpilerRunner.kt:293)
+	at org.jetbrains.ko
+tlin.incremental.Inc
+rementalCompilerRunn
+er.compile(Increment
+alCompilerRunner.kt:
+129)
+	at org.jetbrains.ko
+tlin.daemon.CompileS
+erviceImplBase.execI
+ncrementalCompiler(C
+ompileServiceImpl.kt
+:674)
+	at org.jetbrains.ko
+tlin.daemon.CompileS
+erviceImplBase.acces
+s$execIncrementalCom
+piler(CompileService
+Impl.kt:91)
+	at org.jetbrains.ko
+tlin.daemon.CompileS
+erviceImpl.compile(C
+ompileServiceImpl.kt
+:1659)
+	at java.base/jdk.in
+ternal.reflect.Nativ
+eMethodAccessorImpl.
+invoke0(Native 
+Method)
+	at java.base/jdk.in
+ternal.reflect.Nativ
+eMethodAccessorImpl.
+invoke(NativeMethodA
+ccessorImpl.java:77)
+	at java.base/jdk.in
+ternal.reflect.Deleg
+atingMethodAccessorI
+mpl.invoke(Delegatin
+gMethodAccessorImpl.
+java:43)
+	at java.base/java.l
+ang.reflect.Method.i
+nvoke(Method.java:56
+8)
+	at java.rmi/sun.rmi
+.server.UnicastServe
+rRef.dispatch(Unicas
+tServerRef.java:360)
+	at java.rmi/sun.rmi
+.transport.Transport
+$1.run(Transport.jav
+a:200)
+	at java.rmi/sun.rmi
+.transport.Transport
+$1.run(Transport.jav
+a:197)
+	at java.base/java.s
+ecurity.AccessContro
+ller.doPrivileged(Ac
+cessController.java:
+712)
+	at java.rmi/sun.rmi
+.transport.Transport
+.serviceCall(Transpo
+rt.java:196)
+	at java.rmi/sun.rmi
+.transport.tcp.TCPTr
+ansport.handleMessag
+es(TCPTransport.java
+:587)
+	at java.rmi/sun.rmi
+.transport.tcp.TCPTr
+ansport$ConnectionHa
+ndler.run0(TCPTransp
+ort.java:828)
+	at java.rmi/sun.rmi
+.transport.tcp.TCPTr
+ansport$ConnectionHa
+ndler.lambda$run$0(T
+CPTransport.java:705
+)
+	at java.base/java.s
+ecurity.AccessContro
+ller.doPrivileged(Ac
+cessController.java:
+399)
+	at java.rmi/sun.rmi
+.transport.tcp.TCPTr
+ansport$ConnectionHa
+ndler.run(TCPTranspo
+rt.java:704)
+	... 3 more
+Caused by: java.lang
+.Exception: Could 
+not close 
+incremental caches 
+in I:\WFH\Dailer\bui
+ld\flutter_phone_dir
+ect_caller\kotlin\co
+mpileDebugKotlin\cac
+heable\caches-jvm\jv
+m\kotlin: class-fq-n
+ame-to-source.tab, s
+ource-to-classes.tab
+, internal-name-to-s
+ource.tab
+	at org.jetbrains.ko
+tlin.incremental.sto
+rage.BasicMapsOwner.
+forEachMapSafe(Basic
+MapsOwner.kt:95)
+	at org.jetbrains.ko
+tlin.incremental.sto
+rage.BasicMapsOwner.
+close(BasicMapsOwner
+.kt:53)
+	at org.jetbrains.ko
+tlin.com.google.comm
+on.io.Closer.close(C
+loser.java:223)
+	... 24 more
+	Suppressed: java.la
+ng.IllegalArgumentEx
+ception: this and 
+base files have 
+different roots: C:\
+Users\amitk\AppData\
+Local\Pub\Cache\host
+ed\pub.dev\flutter_p
+hone_direct_caller-2
+.1.1\android\src\mai
+n\kotlin\com\yanisal
+fian\flutterphonedir
+ectcaller\FlutterPho
+neDirectCallerPlugin
+.kt and I:\WFH\Daile
+r\android.
+		at kotlin.io.Files
+Kt__UtilsKt.toRelati
+veString(Utils.kt:11
+7)
+		at kotlin.io.Files
+Kt__UtilsKt.relative
+To(Utils.kt:128)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.RelocatableFil
+eToPathConverter.toP
+ath(RelocatableFileT
+oPathConverter.kt:24
+)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.FileDescriptor
+.save(FileToPathConv
+erter.kt:33)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.FileDescriptor
+.save(FileToPathConv
+erter.kt:30)
+		at org.jetbrains.k
+otlin.com.intellij.u
+til.io.PersistentMap
+Impl.doPut(Persisten
+tMapImpl.java:443)
+		at org.jetbrains.k
+otlin.com.intellij.u
+til.io.PersistentMap
+Impl.put(PersistentM
+apImpl.java:422)
+		at org.jetbrains.k
+otlin.com.intellij.u
+til.io.PersistentHas
+hMap.put(PersistentH
+ashMap.java:105)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.LazyStorage.se
+t(LazyStorage.kt:80)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.InMemoryStorag
+e.applyChanges(InMem
+oryStorage.kt:108)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.InMemoryStorag
+e.close(InMemoryStor
+age.kt:136)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.PersistentStor
+ageWrapper.close(Per
+sistentStorage.kt:12
+4)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.BasicMapsOwner
+$close$1.invoke(Basi
+cMapsOwner.kt:53)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.BasicMapsOwner
+$close$1.invoke(Basi
+cMapsOwner.kt:53)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.BasicMapsOwner
+.forEachMapSafe(Basi
+cMapsOwner.kt:87)
+		... 26 more
+	Suppressed: java.la
+ng.IllegalArgumentEx
+ception: this and 
+base files have 
+different roots: C:\
+Users\amitk\AppData\
+Local\Pub\Cache\host
+ed\pub.dev\flutter_p
+hone_direct_caller-2
+.1.1\android\src\mai
+n\kotlin\com\yanisal
+fian\flutterphonedir
+ectcaller\FlutterPho
+neDirectCallerPlugin
+.kt and I:\WFH\Daile
+r\android.
+		at kotlin.io.Files
+Kt__UtilsKt.toRelati
+veString(Utils.kt:11
+7)
+		at kotlin.io.Files
+Kt__UtilsKt.relative
+To(Utils.kt:128)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.RelocatableFil
+eToPathConverter.toP
+ath(RelocatableFileT
+oPathConverter.kt:24
+)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.FileDescriptor
+.getHashCode(FileToP
+athConverter.kt:50)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.FileDescriptor
+.getHashCode(FileToP
+athConverter.kt:30)
+		at org.jetbrains.k
+otlin.com.intellij.u
+til.containers.Linke
+dCustomHashMap.hashK
+ey(LinkedCustomHashM
+ap.java:109)
+		at org.jetbrains.k
+otlin.com.intellij.u
+til.containers.Linke
+dCustomHashMap.remov
+e(LinkedCustomHashMa
+p.java:153)
+		at org.jetbrains.k
+otlin.com.intellij.u
+til.containers.SLRUM
+ap.remove(SLRUMap.ja
+va:89)
+		at org.jetbrains.k
+otlin.com.intellij.u
+til.io.PersistentMap
+Impl.flushAppendCach
+e(PersistentMapImpl.
+java:999)
+		at org.jetbrains.k
+otlin.com.intellij.u
+til.io.PersistentMap
+Impl.doPut(Persisten
+tMapImpl.java:451)
+		at org.jetbrains.k
+otlin.com.intellij.u
+til.io.PersistentMap
+Impl.put(PersistentM
+apImpl.java:422)
+		at org.jetbrains.k
+otlin.com.intellij.u
+til.io.PersistentHas
+hMap.put(PersistentH
+ashMap.java:105)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.LazyStorage.se
+t(LazyStorage.kt:80)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.InMemoryStorag
+e.applyChanges(InMem
+oryStorage.kt:108)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.AppendableInMe
+moryStorage.applyCha
+nges(InMemoryStorage
+.kt:179)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.InMemoryStorag
+e.close(InMemoryStor
+age.kt:136)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.AppendableSetB
+asicMap.close(BasicM
+ap.kt:157)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.BasicMapsOwner
+$close$1.invoke(Basi
+cMapsOwner.kt:53)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.BasicMapsOwner
+$close$1.invoke(Basi
+cMapsOwner.kt:53)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.BasicMapsOwner
+.forEachMapSafe(Basi
+cMapsOwner.kt:87)
+		... 26 more
+	Suppressed: java.la
+ng.IllegalArgumentEx
+ception: this and 
+base files have 
+different roots: C:\
+Users\amitk\AppData\
+Local\Pub\Cache\host
+ed\pub.dev\flutter_p
+hone_direct_caller-2
+.1.1\android\src\mai
+n\kotlin\com\yanisal
+fian\flutterphonedir
+ectcaller\FlutterPho
+neDirectCallerPlugin
+.kt and I:\WFH\Daile
+r\android.
+		at kotlin.io.Files
+Kt__UtilsKt.toRelati
+veString(Utils.kt:11
+7)
+		at kotlin.io.Files
+Kt__UtilsKt.relative
+To(Utils.kt:128)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.RelocatableFil
+eToPathConverter.toP
+ath(RelocatableFileT
+oPathConverter.kt:24
+)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.FileDescriptor
+.save(FileToPathConv
+erter.kt:33)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.FileDescriptor
+.save(FileToPathConv
+erter.kt:30)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.AppendableColl
+ectionExternalizer.s
+ave(LazyStorage.kt:1
+51)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.AppendableColl
+ectionExternalizer.s
+ave(LazyStorage.kt:1
+42)
+		at org.jetbrains.k
+otlin.com.intellij.u
+til.io.PersistentMap
+Impl.doPut(Persisten
+tMapImpl.java:443)
+		at org.jetbrains.k
+otlin.com.intellij.u
+til.io.PersistentMap
+Impl.put(PersistentM
+apImpl.java:422)
+		at org.jetbrains.k
+otlin.com.intellij.u
+til.io.PersistentHas
+hMap.put(PersistentH
+ashMap.java:105)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.LazyStorage.se
+t(LazyStorage.kt:80)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.InMemoryStorag
+e.applyChanges(InMem
+oryStorage.kt:108)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.AppendableInMe
+moryStorage.applyCha
+nges(InMemoryStorage
+.kt:179)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.InMemoryStorag
+e.close(InMemoryStor
+age.kt:136)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.PersistentStor
+ageWrapper.close(Per
+sistentStorage.kt:12
+4)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.BasicMapsOwner
+$close$1.invoke(Basi
+cMapsOwner.kt:53)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.BasicMapsOwner
+$close$1.invoke(Basi
+cMapsOwner.kt:53)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.BasicMapsOwner
+.forEachMapSafe(Basi
+cMapsOwner.kt:87)
+		... 26 more
+	Suppressed: java.la
+ng.Exception: Could 
+not close 
+incremental caches 
+in I:\WFH\Dailer\bui
+ld\flutter_phone_dir
+ect_caller\kotlin\co
+mpileDebugKotlin\cac
+heable\caches-jvm\lo
+okups: 
+id-to-file.tab, 
+file-to-id.tab
+		at org.jetbrains.k
+otlin.incremental.st
+orage.BasicMapsOwner
+.forEachMapSafe(Basi
+cMapsOwner.kt:95)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.BasicMapsOwner
+.close(BasicMapsOwne
+r.kt:53)
+		at org.jetbrains.k
+otlin.incremental.Lo
+okupStorage.close(Lo
+okupStorage.kt:155)
+		... 25 more
+		Suppressed: java.l
+ang.IllegalArgumentE
+xception: this and 
+base files have 
+different roots: C:\
+Users\amitk\AppData\
+Local\Pub\Cache\host
+ed\pub.dev\flutter_p
+hone_direct_caller-2
+.1.1\android\src\mai
+n\kotlin\com\yanisal
+fian\flutterphonedir
+ectcaller\FlutterPho
+neDirectCallerPlugin
+.kt and I:\WFH\Daile
+r\android.
+			at kotlin.io.File
+sKt__UtilsKt.toRelat
+iveString(Utils.kt:1
+17)
+			at kotlin.io.File
+sKt__UtilsKt.relativ
+eTo(Utils.kt:128)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.RelocatableFi
+leToPathConverter.to
+Path(RelocatableFile
+ToPathConverter.kt:2
+4)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.LegacyFileExt
+ernalizer.save(IdToF
+ileMap.kt:51)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.LegacyFileExt
+ernalizer.save(IdToF
+ileMap.kt:48)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.io.PersistentMa
+pImpl.doPut(Persiste
+ntMapImpl.java:443)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.io.PersistentMa
+pImpl.put(Persistent
+MapImpl.java:422)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.io.PersistentHa
+shMap.put(Persistent
+HashMap.java:105)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.LazyStorage.s
+et(LazyStorage.kt:80
+)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.InMemoryStora
+ge.applyChanges(InMe
+moryStorage.kt:108)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.InMemoryStora
+ge.close(InMemorySto
+rage.kt:136)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.PersistentSto
+rageWrapper.close(Pe
+rsistentStorage.kt:1
+24)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.BasicMapsOwne
+r$close$1.invoke(Bas
+icMapsOwner.kt:53)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.BasicMapsOwne
+r$close$1.invoke(Bas
+icMapsOwner.kt:53)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.BasicMapsOwne
+r.forEachMapSafe(Bas
+icMapsOwner.kt:87)
+			... 27 more
+		Suppressed: java.l
+ang.IllegalArgumentE
+xception: this and 
+base files have 
+different roots: C:\
+Users\amitk\AppData\
+Local\Pub\Cache\host
+ed\pub.dev\flutter_p
+hone_direct_caller-2
+.1.1\android\src\mai
+n\kotlin\com\yanisal
+fian\flutterphonedir
+ectcaller\FlutterPho
+neDirectCallerPlugin
+.kt and I:\WFH\Daile
+r\android.
+			at kotlin.io.File
+sKt__UtilsKt.toRelat
+iveString(Utils.kt:1
+17)
+			at kotlin.io.File
+sKt__UtilsKt.relativ
+eTo(Utils.kt:128)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.RelocatableFi
+leToPathConverter.to
+Path(RelocatableFile
+ToPathConverter.kt:2
+4)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.FileDescripto
+r.getHashCode(FileTo
+PathConverter.kt:50)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.FileDescripto
+r.getHashCode(FileTo
+PathConverter.kt:30)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.containers.Link
+edCustomHashMap.hash
+Key(LinkedCustomHash
+Map.java:109)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.containers.Link
+edCustomHashMap.remo
+ve(LinkedCustomHashM
+ap.java:153)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.containers.SLRU
+Map.remove(SLRUMap.j
+ava:89)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.io.PersistentMa
+pImpl.flushAppendCac
+he(PersistentMapImpl
+.java:999)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.io.PersistentMa
+pImpl.doPut(Persiste
+ntMapImpl.java:451)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.io.PersistentMa
+pImpl.put(Persistent
+MapImpl.java:422)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.io.PersistentHa
+shMap.put(Persistent
+HashMap.java:105)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.LazyStorage.s
+et(LazyStorage.kt:80
+)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.InMemoryStora
+ge.applyChanges(InMe
+moryStorage.kt:108)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.InMemoryStora
+ge.close(InMemorySto
+rage.kt:136)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.PersistentSto
+rageWrapper.close(Pe
+rsistentStorage.kt:1
+24)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.BasicMapsOwne
+r$close$1.invoke(Bas
+icMapsOwner.kt:53)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.BasicMapsOwne
+r$close$1.invoke(Bas
+icMapsOwner.kt:53)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.BasicMapsOwne
+r.forEachMapSafe(Bas
+icMapsOwner.kt:87)
+			... 27 more
+	Suppressed: java.la
+ng.Exception: Could 
+not close 
+incremental caches 
+in I:\WFH\Dailer\bui
+ld\flutter_phone_dir
+ect_caller\kotlin\co
+mpileDebugKotlin\cac
+heable\caches-jvm\in
+puts: 
+source-to-output.tab
+		... 27 more
+		Suppressed: java.l
+ang.IllegalArgumentE
+xception: this and 
+base files have 
+different roots: C:\
+Users\amitk\AppData\
+Local\Pub\Cache\host
+ed\pub.dev\flutter_p
+hone_direct_caller-2
+.1.1\android\src\mai
+n\kotlin\com\yanisal
+fian\flutterphonedir
+ectcaller\FlutterPho
+neDirectCallerPlugin
+.kt and I:\WFH\Daile
+r\android.
+			at kotlin.io.File
+sKt__UtilsKt.toRelat
+iveString(Utils.kt:1
+17)
+			at kotlin.io.File
+sKt__UtilsKt.relativ
+eTo(Utils.kt:128)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.RelocatableFi
+leToPathConverter.to
+Path(RelocatableFile
+ToPathConverter.kt:2
+4)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.FileDescripto
+r.getHashCode(FileTo
+PathConverter.kt:50)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.FileDescripto
+r.getHashCode(FileTo
+PathConverter.kt:30)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.containers.Link
+edCustomHashMap.hash
+Key(LinkedCustomHash
+Map.java:109)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.containers.Link
+edCustomHashMap.remo
+ve(LinkedCustomHashM
+ap.java:153)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.containers.SLRU
+Map.remove(SLRUMap.j
+ava:89)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.io.PersistentMa
+pImpl.flushAppendCac
+he(PersistentMapImpl
+.java:999)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.io.PersistentMa
+pImpl.doPut(Persiste
+ntMapImpl.java:451)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.io.PersistentMa
+pImpl.put(Persistent
+MapImpl.java:422)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.io.PersistentHa
+shMap.put(Persistent
+HashMap.java:105)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.LazyStorage.s
+et(LazyStorage.kt:80
+)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.InMemoryStora
+ge.applyChanges(InMe
+moryStorage.kt:108)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.AppendableInM
+emoryStorage.applyCh
+anges(InMemoryStorag
+e.kt:179)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.InMemoryStora
+ge.close(InMemorySto
+rage.kt:136)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.AppendableSet
+BasicMap.close(Basic
+Map.kt:157)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.BasicMapsOwne
+r$close$1.invoke(Bas
+icMapsOwner.kt:53)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.BasicMapsOwne
+r$close$1.invoke(Bas
+icMapsOwner.kt:53)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.BasicMapsOwne
+r.forEachMapSafe(Bas
+icMapsOwner.kt:87)
+			... 26 more
+
+e: file:///C:/Users/
+amitk/AppData/Local/
+Pub/Cache/hosted/pub
+.dev/fluttercontactp
+icker-4.7.0/android/
+src/main/kotlin/me/s
+chlaubi/flutterconta
+ctpicker/FlutterCont
+actPickerPlugin.kt:4
+5:52 Unresolved 
+reference 
+'Registrar'.
+e: file:///C:/Users/
+amitk/AppData/Local/
+Pub/Cache/hosted/pub
+.dev/fluttercontactp
+icker-4.7.0/android/
+src/main/kotlin/me/s
+chlaubi/flutterconta
+ctpicker/LegacyFlutt
+erContactPickerPlugi
+n.kt:8:78 
+Unresolved 
+reference 
+'Registrar'.
+e: file:///C:/Users/
+amitk/AppData/Local/
+Pub/Cache/hosted/pub
+.dev/fluttercontactp
+icker-4.7.0/android/
+src/main/kotlin/me/s
+chlaubi/flutterconta
+ctpicker/LegacyFlutt
+erContactPickerPlugi
+n.kt:13:19 
+Unresolved 
+reference 'addReques
+tPermissionsResultLi
+stener'.
+e: file:///C:/Users/
+amitk/AppData/Local/
+Pub/Cache/hosted/pub
+.dev/fluttercontactp
+icker-4.7.0/android/
+src/main/kotlin/me/s
+chlaubi/flutterconta
+ctpicker/LegacyFlutt
+erContactPickerPlugi
+n.kt:14:19 
+Unresolved 
+reference 'addActivi
+tyResultListener'.
+e: file:///C:/Users/
+amitk/AppData/Local/
+Pub/Cache/hosted/pub
+.dev/fluttercontactp
+icker-4.7.0/android/
+src/main/kotlin/me/s
+chlaubi/flutterconta
+ctpicker/LegacyFlutt
+erContactPickerPlugi
+n.kt:15:35 
+Unresolved 
+reference 
+'messenger'.
+e: file:///C:/Users/
+amitk/AppData/Local/
+Pub/Cache/hosted/pub
+.dev/fluttercontactp
+icker-4.7.0/android/
+src/main/kotlin/me/s
+chlaubi/flutterconta
+ctpicker/LegacyFlutt
+erContactPickerPlugi
+n.kt:20:31 
+Unresolved 
+reference 
+'activity'.
+e: file:///C:/Users/
+amitk/AppData/Local/
+Pub/Cache/hosted/pub
+.dev/fluttercontactp
+icker-4.7.0/android/
+src/main/kotlin/me/s
+chlaubi/flutterconta
+ctpicker/LegacyFlutt
+erContactPickerPlugi
+n.kt:22:31 
+Unresolved 
+reference 'context'.
+e: Daemon 
+compilation failed: 
+null
+java.lang.Exception
+	at org.jetbrains.ko
+tlin.daemon.common.C
+ompileService$CallRe
+sult$Error.get(Compi
+leService.kt:69)
+	at org.jetbrains.ko
+tlin.daemon.common.C
+ompileService$CallRe
+sult$Error.get(Compi
+leService.kt:65)
+	at org.jetbrains.ko
+tlin.compilerRunner.
+GradleKotlinCompiler
+Work.compileWithDaem
+on(GradleKotlinCompi
+lerWork.kt:240)
+	at org.jetbrains.ko
+tlin.compilerRunner.
+GradleKotlinCompiler
+Work.compileWithDaem
+onOrFallbackImpl(Gra
+dleKotlinCompilerWor
+k.kt:159)
+	at org.jetbrains.ko
+tlin.compilerRunner.
+GradleKotlinCompiler
+Work.run(GradleKotli
+nCompilerWork.kt:111
+)
+	at org.jetbrains.ko
+tlin.compilerRunner.
+GradleCompilerRunner
+WithWorkers$GradleKo
+tlinCompilerWorkActi
+on.execute(GradleCom
+pilerRunnerWithWorke
+rs.kt:76)
+	at org.gradle.worke
+rs.internal.DefaultW
+orkerServer.execute(
+DefaultWorkerServer.
+java:63)
+	at org.gradle.worke
+rs.internal.NoIsolat
+ionWorkerFactory$1$1
+.create(NoIsolationW
+orkerFactory.java:66
+)
+	at org.gradle.worke
+rs.internal.NoIsolat
+ionWorkerFactory$1$1
+.create(NoIsolationW
+orkerFactory.java:62
+)
+	at org.gradle.inter
+nal.classloader.Clas
+sLoaderUtils.execute
+InClassloader(ClassL
+oaderUtils.java:100)
+	at org.gradle.worke
+rs.internal.NoIsolat
+ionWorkerFactory$1.l
+ambda$execute$0(NoIs
+olationWorkerFactory
+.java:62)
+	at org.gradle.worke
+rs.internal.Abstract
+Worker$1.call(Abstra
+ctWorker.java:44)
+	at org.gradle.worke
+rs.internal.Abstract
+Worker$1.call(Abstra
+ctWorker.java:41)
+	at org.gradle.inter
+nal.operations.Defau
+ltBuildOperationRunn
+er$CallableBuildOper
+ationWorker.execute(
+DefaultBuildOperatio
+nRunner.java:209)
+	at org.gradle.inter
+nal.operations.Defau
+ltBuildOperationRunn
+er$CallableBuildOper
+ationWorker.execute(
+DefaultBuildOperatio
+nRunner.java:204)
+	at org.gradle.inter
+nal.operations.Defau
+ltBuildOperationRunn
+er$2.execute(Default
+BuildOperationRunner
+.java:66)
+	at org.gradle.inter
+nal.operations.Defau
+ltBuildOperationRunn
+er$2.execute(Default
+BuildOperationRunner
+.java:59)
+	at org.gradle.inter
+nal.operations.Defau
+ltBuildOperationRunn
+er.execute(DefaultBu
+ildOperationRunner.j
+ava:166)
+	at org.gradle.inter
+nal.operations.Defau
+ltBuildOperationRunn
+er.execute(DefaultBu
+ildOperationRunner.j
+ava:59)
+	at org.gradle.inter
+nal.operations.Defau
+ltBuildOperationRunn
+er.call(DefaultBuild
+OperationRunner.java
+:53)
+	at org.gradle.worke
+rs.internal.Abstract
+Worker.executeWrappe
+dInBuildOperation(Ab
+stractWorker.java:41
+)
+	at org.gradle.worke
+rs.internal.NoIsolat
+ionWorkerFactory$1.e
+xecute(NoIsolationWo
+rkerFactory.java:59)
+	at org.gradle.worke
+rs.internal.DefaultW
+orkerExecutor.lambda
+$submitWork$0(Defaul
+tWorkerExecutor.java
+:174)
+	at java.base/java.u
+til.concurrent.Futur
+eTask.run(FutureTask
+.java:264)
+	at org.gradle.inter
+nal.work.DefaultCond
+itionalExecutionQueu
+e$ExecutionRunner.ru
+nExecution(DefaultCo
+nditionalExecutionQu
+eue.java:194)
+	at org.gradle.inter
+nal.work.DefaultCond
+itionalExecutionQueu
+e$ExecutionRunner.ac
+cess$700(DefaultCond
+itionalExecutionQueu
+e.java:127)
+	at org.gradle.inter
+nal.work.DefaultCond
+itionalExecutionQueu
+e$ExecutionRunner$1.
+run(DefaultCondition
+alExecutionQueue.jav
+a:169)
+	at org.gradle.inter
+nal.Factories$1.crea
+te(Factories.java:31
+)
+	at org.gradle.inter
+nal.work.DefaultWork
+erLeaseService.withL
+ocks(DefaultWorkerLe
+aseService.java:263)
+	at org.gradle.inter
+nal.work.DefaultWork
+erLeaseService.runAs
+WorkerThread(Default
+WorkerLeaseService.j
+ava:127)
+	at org.gradle.inter
+nal.work.DefaultWork
+erLeaseService.runAs
+WorkerThread(Default
+WorkerLeaseService.j
+ava:132)
+	at org.gradle.inter
+nal.work.DefaultCond
+itionalExecutionQueu
+e$ExecutionRunner.ru
+nBatch(DefaultCondit
+ionalExecutionQueue.
+java:164)
+	at org.gradle.inter
+nal.work.DefaultCond
+itionalExecutionQueu
+e$ExecutionRunner.ru
+n(DefaultConditional
+ExecutionQueue.java:
+133)
+	at java.base/java.u
+til.concurrent.Execu
+tors$RunnableAdapter
+.call(Executors.java
+:539)
+	at java.base/java.u
+til.concurrent.Futur
+eTask.run(FutureTask
+.java:264)
+	at org.gradle.inter
+nal.concurrent.Execu
+torPolicy$CatchAndRe
+cordFailures.onExecu
+te(ExecutorPolicy.ja
+va:64)
+	at org.gradle.inter
+nal.concurrent.Abstr
+actManagedExecutor$1
+.run(AbstractManaged
+Executor.java:48)
+	at java.base/java.u
+til.concurrent.Threa
+dPoolExecutor.runWor
+ker(ThreadPoolExecut
+or.java:1136)
+	at java.base/java.u
+til.concurrent.Threa
+dPoolExecutor$Worker
+.run(ThreadPoolExecu
+tor.java:635)
+	at java.base/java.l
+ang.Thread.run(Threa
+d.java:833)
+Caused by: java.lang
+.AssertionError: jav
+a.lang.Exception: 
+Could not close 
+incremental caches 
+in I:\WFH\Dailer\bui
+ld\audioplayers_andr
+oid\kotlin\compileDe
+bugKotlin\cacheable\
+caches-jvm\jvm\kotli
+n: class-fq-name-to-
+source.tab, source-t
+o-classes.tab, inter
+nal-name-to-source.t
+ab
+	at org.jetbrains.ko
+tlin.com.google.comm
+on.io.Closer.close(C
+loser.java:236)
+	at org.jetbrains.ko
+tlin.incremental.Inc
+rementalCachesManage
+r.close(IncrementalC
+achesManager.kt:55)
+	at kotlin.io.Closea
+bleKt.closeFinally(C
+loseable.kt:56)
+	at org.jetbrains.ko
+tlin.incremental.Inc
+rementalCompilerRunn
+er.compileNonIncreme
+ntally(IncrementalCo
+mpilerRunner.kt:293)
+	at org.jetbrains.ko
+tlin.incremental.Inc
+rementalCompilerRunn
+er.compile(Increment
+alCompilerRunner.kt:
+129)
+	at org.jetbrains.ko
+tlin.daemon.CompileS
+erviceImplBase.execI
+ncrementalCompiler(C
+ompileServiceImpl.kt
+:674)
+	at org.jetbrains.ko
+tlin.daemon.CompileS
+erviceImplBase.acces
+s$execIncrementalCom
+piler(CompileService
+Impl.kt:91)
+	at org.jetbrains.ko
+tlin.daemon.CompileS
+erviceImpl.compile(C
+ompileServiceImpl.kt
+:1659)
+	at java.base/jdk.in
+ternal.reflect.Nativ
+eMethodAccessorImpl.
+invoke0(Native 
+Method)
+	at java.base/jdk.in
+ternal.reflect.Nativ
+eMethodAccessorImpl.
+invoke(NativeMethodA
+ccessorImpl.java:77)
+	at java.base/jdk.in
+ternal.reflect.Deleg
+atingMethodAccessorI
+mpl.invoke(Delegatin
+gMethodAccessorImpl.
+java:43)
+	at java.base/java.l
+ang.reflect.Method.i
+nvoke(Method.java:56
+8)
+	at java.rmi/sun.rmi
+.server.UnicastServe
+rRef.dispatch(Unicas
+tServerRef.java:360)
+	at java.rmi/sun.rmi
+.transport.Transport
+$1.run(Transport.jav
+a:200)
+	at java.rmi/sun.rmi
+.transport.Transport
+$1.run(Transport.jav
+a:197)
+	at java.base/java.s
+ecurity.AccessContro
+ller.doPrivileged(Ac
+cessController.java:
+712)
+	at java.rmi/sun.rmi
+.transport.Transport
+.serviceCall(Transpo
+rt.java:196)
+	at java.rmi/sun.rmi
+.transport.tcp.TCPTr
+ansport.handleMessag
+es(TCPTransport.java
+:587)
+	at java.rmi/sun.rmi
+.transport.tcp.TCPTr
+ansport$ConnectionHa
+ndler.run0(TCPTransp
+ort.java:828)
+	at java.rmi/sun.rmi
+.transport.tcp.TCPTr
+ansport$ConnectionHa
+ndler.lambda$run$0(T
+CPTransport.java:705
+)
+	at java.base/java.s
+ecurity.AccessContro
+ller.doPrivileged(Ac
+cessController.java:
+399)
+	at java.rmi/sun.rmi
+.transport.tcp.TCPTr
+ansport$ConnectionHa
+ndler.run(TCPTranspo
+rt.java:704)
+	... 3 more
+Caused by: java.lang
+.Exception: Could 
+not close 
+incremental caches 
+in I:\WFH\Dailer\bui
+ld\audioplayers_andr
+oid\kotlin\compileDe
+bugKotlin\cacheable\
+caches-jvm\jvm\kotli
+n: class-fq-name-to-
+source.tab, source-t
+o-classes.tab, inter
+nal-name-to-source.t
+ab
+	at org.jetbrains.ko
+tlin.incremental.sto
+rage.BasicMapsOwner.
+forEachMapSafe(Basic
+MapsOwner.kt:95)
+	at org.jetbrains.ko
+tlin.incremental.sto
+rage.BasicMapsOwner.
+close(BasicMapsOwner
+.kt:53)
+	at org.jetbrains.ko
+tlin.com.google.comm
+on.io.Closer.close(C
+loser.java:223)
+	... 24 more
+	Suppressed: java.la
+ng.IllegalArgumentEx
+ception: this and 
+base files have 
+different roots: C:\
+Users\amitk\AppData\
+Local\Pub\Cache\host
+ed\pub.dev\audioplay
+ers_android-3.0.2\an
+droid\src\main\kotli
+n\xyz\luan\audioplay
+ers\AudioContext.kt 
+and I:\WFH\Dailer\an
+droid.
+		at kotlin.io.Files
+Kt__UtilsKt.toRelati
+veString(Utils.kt:11
+7)
+		at kotlin.io.Files
+Kt__UtilsKt.relative
+To(Utils.kt:128)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.RelocatableFil
+eToPathConverter.toP
+ath(RelocatableFileT
+oPathConverter.kt:24
+)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.FileDescriptor
+.save(FileToPathConv
+erter.kt:33)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.FileDescriptor
+.save(FileToPathConv
+erter.kt:30)
+		at org.jetbrains.k
+otlin.com.intellij.u
+til.io.PersistentMap
+Impl.doPut(Persisten
+tMapImpl.java:443)
+		at org.jetbrains.k
+otlin.com.intellij.u
+til.io.PersistentMap
+Impl.put(PersistentM
+apImpl.java:422)
+		at org.jetbrains.k
+otlin.com.intellij.u
+til.io.PersistentHas
+hMap.put(PersistentH
+ashMap.java:105)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.LazyStorage.se
+t(LazyStorage.kt:80)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.InMemoryStorag
+e.applyChanges(InMem
+oryStorage.kt:108)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.InMemoryStorag
+e.close(InMemoryStor
+age.kt:136)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.PersistentStor
+ageWrapper.close(Per
+sistentStorage.kt:12
+4)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.BasicMapsOwner
+$close$1.invoke(Basi
+cMapsOwner.kt:53)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.BasicMapsOwner
+$close$1.invoke(Basi
+cMapsOwner.kt:53)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.BasicMapsOwner
+.forEachMapSafe(Basi
+cMapsOwner.kt:87)
+		... 26 more
+	Suppressed: java.la
+ng.IllegalArgumentEx
+ception: this and 
+base files have 
+different roots: C:\
+Users\amitk\AppData\
+Local\Pub\Cache\host
+ed\pub.dev\audioplay
+ers_android-3.0.2\an
+droid\src\main\kotli
+n\xyz\luan\audioplay
+ers\AudioContext.kt 
+and I:\WFH\Dailer\an
+droid.
+		at kotlin.io.Files
+Kt__UtilsKt.toRelati
+veString(Utils.kt:11
+7)
+		at kotlin.io.Files
+Kt__UtilsKt.relative
+To(Utils.kt:128)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.RelocatableFil
+eToPathConverter.toP
+ath(RelocatableFileT
+oPathConverter.kt:24
+)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.FileDescriptor
+.getHashCode(FileToP
+athConverter.kt:50)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.FileDescriptor
+.getHashCode(FileToP
+athConverter.kt:30)
+		at org.jetbrains.k
+otlin.com.intellij.u
+til.containers.Linke
+dCustomHashMap.hashK
+ey(LinkedCustomHashM
+ap.java:109)
+		at org.jetbrains.k
+otlin.com.intellij.u
+til.containers.Linke
+dCustomHashMap.remov
+e(LinkedCustomHashMa
+p.java:153)
+		at org.jetbrains.k
+otlin.com.intellij.u
+til.containers.SLRUM
+ap.remove(SLRUMap.ja
+va:89)
+		at org.jetbrains.k
+otlin.com.intellij.u
+til.io.PersistentMap
+Impl.flushAppendCach
+e(PersistentMapImpl.
+java:999)
+		at org.jetbrains.k
+otlin.com.intellij.u
+til.io.PersistentMap
+Impl.doPut(Persisten
+tMapImpl.java:451)
+		at org.jetbrains.k
+otlin.com.intellij.u
+til.io.PersistentMap
+Impl.put(PersistentM
+apImpl.java:422)
+		at org.jetbrains.k
+otlin.com.intellij.u
+til.io.PersistentHas
+hMap.put(PersistentH
+ashMap.java:105)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.LazyStorage.se
+t(LazyStorage.kt:80)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.InMemoryStorag
+e.applyChanges(InMem
+oryStorage.kt:108)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.AppendableInMe
+moryStorage.applyCha
+nges(InMemoryStorage
+.kt:179)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.InMemoryStorag
+e.close(InMemoryStor
+age.kt:136)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.AppendableSetB
+asicMap.close(BasicM
+ap.kt:157)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.BasicMapsOwner
+$close$1.invoke(Basi
+cMapsOwner.kt:53)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.BasicMapsOwner
+$close$1.invoke(Basi
+cMapsOwner.kt:53)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.BasicMapsOwner
+.forEachMapSafe(Basi
+cMapsOwner.kt:87)
+		... 26 more
+	Suppressed: java.la
+ng.IllegalArgumentEx
+ception: this and 
+base files have 
+different roots: C:\
+Users\amitk\AppData\
+Local\Pub\Cache\host
+ed\pub.dev\audioplay
+ers_android-3.0.2\an
+droid\src\main\kotli
+n\xyz\luan\audioplay
+ers\AudioContext.kt 
+and I:\WFH\Dailer\an
+droid.
+		at kotlin.io.Files
+Kt__UtilsKt.toRelati
+veString(Utils.kt:11
+7)
+		at kotlin.io.Files
+Kt__UtilsKt.relative
+To(Utils.kt:128)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.RelocatableFil
+eToPathConverter.toP
+ath(RelocatableFileT
+oPathConverter.kt:24
+)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.FileDescriptor
+.save(FileToPathConv
+erter.kt:33)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.FileDescriptor
+.save(FileToPathConv
+erter.kt:30)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.AppendableColl
+ectionExternalizer.s
+ave(LazyStorage.kt:1
+51)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.AppendableColl
+ectionExternalizer.s
+ave(LazyStorage.kt:1
+42)
+		at org.jetbrains.k
+otlin.com.intellij.u
+til.io.PersistentMap
+Impl.doPut(Persisten
+tMapImpl.java:443)
+		at org.jetbrains.k
+otlin.com.intellij.u
+til.io.PersistentMap
+Impl.put(PersistentM
+apImpl.java:422)
+		at org.jetbrains.k
+otlin.com.intellij.u
+til.io.PersistentHas
+hMap.put(PersistentH
+ashMap.java:105)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.LazyStorage.se
+t(LazyStorage.kt:80)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.InMemoryStorag
+e.applyChanges(InMem
+oryStorage.kt:108)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.AppendableInMe
+moryStorage.applyCha
+nges(InMemoryStorage
+.kt:179)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.InMemoryStorag
+e.close(InMemoryStor
+age.kt:136)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.PersistentStor
+ageWrapper.close(Per
+sistentStorage.kt:12
+4)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.BasicMapsOwner
+$close$1.invoke(Basi
+cMapsOwner.kt:53)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.BasicMapsOwner
+$close$1.invoke(Basi
+cMapsOwner.kt:53)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.BasicMapsOwner
+.forEachMapSafe(Basi
+cMapsOwner.kt:87)
+		... 26 more
+	Suppressed: java.la
+ng.Exception: Could 
+not close 
+incremental caches 
+in I:\WFH\Dailer\bui
+ld\audioplayers_andr
+oid\kotlin\compileDe
+bugKotlin\cacheable\
+caches-jvm\lookups: 
+id-to-file.tab, 
+file-to-id.tab
+		at org.jetbrains.k
+otlin.incremental.st
+orage.BasicMapsOwner
+.forEachMapSafe(Basi
+cMapsOwner.kt:95)
+		at org.jetbrains.k
+otlin.incremental.st
+orage.BasicMapsOwner
+.close(BasicMapsOwne
+r.kt:53)
+		at org.jetbrains.k
+otlin.incremental.Lo
+okupStorage.close(Lo
+okupStorage.kt:155)
+		... 25 more
+		Suppressed: java.l
+ang.IllegalArgumentE
+xception: this and 
+base files have 
+different roots: C:\
+Users\amitk\AppData\
+Local\Pub\Cache\host
+ed\pub.dev\audioplay
+ers_android-3.0.2\an
+droid\src\main\kotli
+n\xyz\luan\audioplay
+ers\AudioContext.kt 
+and I:\WFH\Dailer\an
+droid.
+			at kotlin.io.File
+sKt__UtilsKt.toRelat
+iveString(Utils.kt:1
+17)
+			at kotlin.io.File
+sKt__UtilsKt.relativ
+eTo(Utils.kt:128)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.RelocatableFi
+leToPathConverter.to
+Path(RelocatableFile
+ToPathConverter.kt:2
+4)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.LegacyFileExt
+ernalizer.save(IdToF
+ileMap.kt:51)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.LegacyFileExt
+ernalizer.save(IdToF
+ileMap.kt:48)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.io.PersistentMa
+pImpl.doPut(Persiste
+ntMapImpl.java:443)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.io.PersistentMa
+pImpl.put(Persistent
+MapImpl.java:422)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.io.PersistentHa
+shMap.put(Persistent
+HashMap.java:105)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.LazyStorage.s
+et(LazyStorage.kt:80
+)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.InMemoryStora
+ge.applyChanges(InMe
+moryStorage.kt:108)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.InMemoryStora
+ge.close(InMemorySto
+rage.kt:136)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.PersistentSto
+rageWrapper.close(Pe
+rsistentStorage.kt:1
+24)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.BasicMapsOwne
+r$close$1.invoke(Bas
+icMapsOwner.kt:53)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.BasicMapsOwne
+r$close$1.invoke(Bas
+icMapsOwner.kt:53)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.BasicMapsOwne
+r.forEachMapSafe(Bas
+icMapsOwner.kt:87)
+			... 27 more
+		Suppressed: java.l
+ang.IllegalArgumentE
+xception: this and 
+base files have 
+different roots: C:\
+Users\amitk\AppData\
+Local\Pub\Cache\host
+ed\pub.dev\audioplay
+ers_android-3.0.2\an
+droid\src\main\kotli
+n\xyz\luan\audioplay
+ers\AudioContext.kt 
+and I:\WFH\Dailer\an
+droid.
+			at kotlin.io.File
+sKt__UtilsKt.toRelat
+iveString(Utils.kt:1
+17)
+			at kotlin.io.File
+sKt__UtilsKt.relativ
+eTo(Utils.kt:128)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.RelocatableFi
+leToPathConverter.to
+Path(RelocatableFile
+ToPathConverter.kt:2
+4)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.FileDescripto
+r.getHashCode(FileTo
+PathConverter.kt:50)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.FileDescripto
+r.getHashCode(FileTo
+PathConverter.kt:30)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.containers.Link
+edCustomHashMap.hash
+Key(LinkedCustomHash
+Map.java:109)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.containers.Link
+edCustomHashMap.remo
+ve(LinkedCustomHashM
+ap.java:153)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.containers.SLRU
+Map.remove(SLRUMap.j
+ava:89)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.io.PersistentMa
+pImpl.flushAppendCac
+he(PersistentMapImpl
+.java:999)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.io.PersistentMa
+pImpl.doPut(Persiste
+ntMapImpl.java:451)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.io.PersistentMa
+pImpl.put(Persistent
+MapImpl.java:422)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.io.PersistentHa
+shMap.put(Persistent
+HashMap.java:105)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.LazyStorage.s
+et(LazyStorage.kt:80
+)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.InMemoryStora
+ge.applyChanges(InMe
+moryStorage.kt:108)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.InMemoryStora
+ge.close(InMemorySto
+rage.kt:136)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.PersistentSto
+rageWrapper.close(Pe
+rsistentStorage.kt:1
+24)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.BasicMapsOwne
+r$close$1.invoke(Bas
+icMapsOwner.kt:53)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.BasicMapsOwne
+r$close$1.invoke(Bas
+icMapsOwner.kt:53)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.BasicMapsOwne
+r.forEachMapSafe(Bas
+icMapsOwner.kt:87)
+			... 27 more
+	Suppressed: java.la
+ng.Exception: Could 
+not close 
+incremental caches 
+in I:\WFH\Dailer\bui
+ld\audioplayers_andr
+oid\kotlin\compileDe
+bugKotlin\cacheable\
+caches-jvm\inputs: 
+source-to-output.tab
+		... 27 more
+		Suppressed: java.l
+ang.IllegalArgumentE
+xception: this and 
+base files have 
+different roots: C:\
+Users\amitk\AppData\
+Local\Pub\Cache\host
+ed\pub.dev\audioplay
+ers_android-3.0.2\an
+droid\src\main\kotli
+n\xyz\luan\audioplay
+ers\AudioContext.kt 
+and I:\WFH\Dailer\an
+droid.
+			at kotlin.io.File
+sKt__UtilsKt.toRelat
+iveString(Utils.kt:1
+17)
+			at kotlin.io.File
+sKt__UtilsKt.relativ
+eTo(Utils.kt:128)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.RelocatableFi
+leToPathConverter.to
+Path(RelocatableFile
+ToPathConverter.kt:2
+4)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.FileDescripto
+r.getHashCode(FileTo
+PathConverter.kt:50)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.FileDescripto
+r.getHashCode(FileTo
+PathConverter.kt:30)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.containers.Link
+edCustomHashMap.hash
+Key(LinkedCustomHash
+Map.java:109)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.containers.Link
+edCustomHashMap.remo
+ve(LinkedCustomHashM
+ap.java:153)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.containers.SLRU
+Map.remove(SLRUMap.j
+ava:89)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.io.PersistentMa
+pImpl.flushAppendCac
+he(PersistentMapImpl
+.java:999)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.io.PersistentMa
+pImpl.doPut(Persiste
+ntMapImpl.java:451)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.io.PersistentMa
+pImpl.put(Persistent
+MapImpl.java:422)
+			at org.jetbrains.
+kotlin.com.intellij.
+util.io.PersistentHa
+shMap.put(Persistent
+HashMap.java:105)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.LazyStorage.s
+et(LazyStorage.kt:80
+)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.InMemoryStora
+ge.applyChanges(InMe
+moryStorage.kt:108)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.AppendableInM
+emoryStorage.applyCh
+anges(InMemoryStorag
+e.kt:179)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.InMemoryStora
+ge.close(InMemorySto
+rage.kt:136)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.AppendableSet
+BasicMap.close(Basic
+Map.kt:157)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.BasicMapsOwne
+r$close$1.invoke(Bas
+icMapsOwner.kt:53)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.BasicMapsOwne
+r$close$1.invoke(Bas
+icMapsOwner.kt:53)
+			at org.jetbrains.
+kotlin.incremental.s
+torage.BasicMapsOwne
+r.forEachMapSafe(Bas
+icMapsOwner.kt:87)
+			... 26 more
+
+exception: c:\Users\
+amitk\AppData\Local\
+Pub\Cache\hosted\pub
+.dev\audioplayers_an
+droid-3.0.2\android\
+src\main\kotlin\xyz\
+luan\audioplayers\Au
+dioplayersPlugin.kt:
+87:30: warning: 
+'var 
+isSpeakerphoneOn: 
+Boolean' is 
+deprecated. 
+Deprecated in Java.
+exception:          
+       audioManager.
+isSpeakerphoneOn = d
+efaultAudioContext.i
+sSpeakerphoneOn
+exception:          
+                    
+^^^^^^^^^^^^^^^^
+exception: c:\Users\
+amitk\AppData\Local\
+Pub\Cache\hosted\pub
+.dev\audioplayers_an
+droid-3.0.2\android\
+src\main\kotlin\xyz\
+luan\audioplayers\pl
+ayer\WrappedPlayer.k
+t:147:22: warning: 
+'var 
+isSpeakerphoneOn: 
+Boolean' is 
+deprecated. 
+Deprecated in Java.
+exception:         a
+udioManager.isSpeake
+rphoneOn = context.i
+sSpeakerphoneOn
+exception:          
+            
+^^^^^^^^^^^^^^^^
+
+FAILURE: Build 
+completed with 2 
+failures.
+
+1: Task failed with 
+an exception.
+-----------
+* What went wrong:
+Execution failed 
+for task ':flutter_d
+tmf:compileDebugKotl
+in'.
+> A failure 
+occurred while 
+executing org.jetbra
+ins.kotlin.compilerR
+unner.GradleCompiler
+RunnerWithWorkers$Gr
+adleKotlinCompilerWo
+rkAction
+   > Compilation 
+error. See log for 
+more details
+
+* Try:
+> Run with 
+--stacktrace option 
+to get the stack 
+trace.
+> Run with --info 
+or --debug option 
+to get more log 
+output.
+> Run with --scan 
+to get full 
+insights.
+> Get more help at h
+ttps://help.gradle.o
+rg.
+====================
+====================
+====================
+==================
+
+2: Task failed with 
+an exception.
+-----------
+* What went wrong:
+Execution failed 
+for task ':flutterco
+ntactpicker:compileD
+ebugKotlin'.
+> A failure 
+occurred while 
+executing org.jetbra
+ins.kotlin.compilerR
+unner.GradleCompiler
+RunnerWithWorkers$Gr
+adleKotlinCompilerWo
+rkAction
+   > Compilation 
+error. See log for 
+more details
+
+* Try:
+> Run with 
+--stacktrace option 
+to get the stack 
+trace.
+> Run with --info 
+or --debug option 
+to get more log 
+output.
+> Run with --scan 
+to get full 
+insights.
+> Get more help at h
+ttps://help.gradle.o
+rg.
+====================
+====================
+====================
+==================
+
+BUILD FAILED in 57s
+Running Gradle task 'assembleDebug'...                             58.0s
+Gradle task 
+assembleDebug 
+failed with exit 
+code 1

@@ -1,0 +1,41 @@
+﻿Resolving dependencies...
+flutter : Because 
+dialer depends on 
+flutter_dtmf 2.2.0 
+which doesn't match 
+any versions, 
+version solving 
+failed.
+At line:1 char:1
++ flutter pub get > 
+pub_get_error.txt 
+2>&1; Get-Content 
+pub_get_error.t ...
++ ~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
+~~
+    + CategoryInfo  
+            : NotS  
+  pecified: (Beca   
+ use dialer ...s    
+olving failed.:    
+String) [], Rem    
+oteException
+    + FullyQualifie 
+   dErrorId : Nati  
+  veCommandError
+ 
+
+
+You can try the 
+following 
+suggestion to make 
+the pubspec resolve:
+* Consider 
+downgrading your 
+constraint on 
+flutter_dtmf: 
+flutter pub add 
+flutter_dtmf:^2.0.2
+Failed to update 
+packages.

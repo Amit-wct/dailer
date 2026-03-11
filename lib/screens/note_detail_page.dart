@@ -1,10 +1,11 @@
 import 'dart:convert';
+import 'package:dialer/db/notes_database.dart';
+import 'package:dialer/model/note.dart';
+import 'package:dialer/screens/edit_note_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/intl.dart';
-import 'package:Dialer/db/notes_database.dart';
-import 'package:Dialer/model/note.dart';
-import 'package:Dialer/screens/edit_note_page.dart';
+
 import 'package:http/http.dart' as http;
 import './login.dart';
 import 'package:motion_toast/motion_toast.dart';
@@ -205,8 +206,7 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
         'Please check your internet connection',
         style: TextStyle(fontSize: 12),
       ),
-      layoutOrientation: ToastOrientation.ltr,
-      animationType: AnimationType.fromRight,
+      animationType: AnimationType.slideInFromRight,
       dismissable: true,
     );
     toast.show(context);
@@ -282,8 +282,7 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
                     'call back scheduled for the number ${note.call_type == "Outgoing" ? note.phone.toString() : note.caller.toString()} at ${callbackDateTime[1]}',
                     style: TextStyle(fontSize: 12),
                   ),
-                  layoutOrientation: ToastOrientation.ltr,
-                  animationType: AnimationType.fromRight,
+                  animationType: AnimationType.slideInFromRight,
                   dismissable: true,
                 );
                 toast.show(context);
